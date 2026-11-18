@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450" fill="none">
+  <defs>
+    <linearGradient id="blueCatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B3B6F"/>
+      <stop offset="60%" stop-color="#142850"/>
+      <stop offset="100%" stop-color="#0D1B2A"/>
+    </linearGradient>
+    <linearGradient id="blueAcc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="50%" stop-color="#3A7BD5"/>
+      <stop offset="100%" stop-color="#1B3B6F"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#blueCatGrad)"/>
+  <rect x="25" y="25" width="550" height="400" rx="16" stroke="url(#blueAcc)" stroke-width="1.5" opacity="0.6"/>
+  
+  <g stroke="#3A7BD5" stroke-width="2" fill="none" opacity="0.8">
+    <circle cx="300" cy="180" r="65"/>
+    <path d="M 260,180 L 340,180"/>
+    <path d="M 300,140 L 300,220"/>
+    <circle cx="300" cy="180" r="30" stroke-dasharray="3 3"/>
+  </g>
+  
+  <text x="300" y="335" font-family="'Cormorant Garamond', Georgia, serif" font-size="28" font-weight="600" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">BODY CARE & POLISHES</text>
+  <text x="300" y="370" font-family="'Montserrat', sans-serif" font-size="12" font-weight="500" fill="#3A7BD5" text-anchor="middle" letter-spacing="3">CATEGORY</text>
+</svg>

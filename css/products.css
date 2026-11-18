@@ -1,0 +1,1279 @@
+/* ==========================================================================
+   Riha Mirror Magic - Products Section Stylesheet
+   Theme: Blue & White Luxury
+     - Sapphire Deep Blue:   #1B3B6F
+     - Royal Accent Blue:    #2B6CB0
+     - Sky/Active Blue:      #3A7BD5
+     - Ice Light Blue:       #F0F5FA
+     - Soft Border Blue:     #D4E4F4
+     - White:                #FFFFFF
+     - Text Dark Charcoal:   #1A2332
+     - Text Muted Slate:     #4A5568
+
+   Typography:
+     - Headings: Cormorant Garamond
+     - Body, Nav, Forms, Search, Sort & Buttons: Montserrat
+
+   Strict Rules:
+     - NO animations, NO moving cards, NO hover movement/scaling.
+     - Desktop: 3 product cards per row; Mobile: 2 product cards per row.
+     - Details: Area 1 & Area 2 exact equal height on desktop.
+     - Completely excludes Expiry and Usage Period.
+   ========================================================================== */
+
+:root {
+  --blue-primary: #1B3B6F;
+  --blue-dark: #12284C;
+  --blue-accent: #2B6CB0;
+  --blue-sky: #3A7BD5;
+  --blue-ice: #F0F5FA;
+  --blue-ice-card: #F8FAFC;
+  --blue-border: #CBDDEE;
+  --blue-border-active: #1B3B6F;
+  --white: #FFFFFF;
+  --prod-text-dark: #1A2332;
+  --prod-text-muted: #5A6A80;
+  --prod-text-light: #FFFFFF;
+
+  --prod-font-heading: 'Cormorant Garamond', Garamond, Georgia, serif;
+  --prod-font-body: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Products Page Body Background */
+body.products-theme {
+  background-color: var(--white);
+  color: var(--prod-text-dark);
+  font-family: var(--prod-font-body);
+}
+
+/* Strictly enforce NO animations or transitions anywhere in Products */
+body.products-theme,
+body.products-theme * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Container */
+.products-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Common Section Heading for Products */
+.products-hero-header {
+  background-color: var(--blue-ice);
+  padding: 3.5rem 0 2.5rem 0;
+  border-bottom: 2px solid var(--blue-accent);
+  text-align: center;
+}
+
+.products-page-title {
+  font-family: var(--prod-font-heading);
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  font-weight: 600;
+  color: var(--blue-primary);
+  letter-spacing: 0.04em;
+  margin: 0 0 0.5rem 0;
+}
+
+.products-page-subtitle {
+  font-family: var(--prod-font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--prod-text-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Breadcrumbs (Individual Product Details) */
+.breadcrumbs-bar-blue {
+  background-color: var(--blue-ice);
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--blue-border);
+}
+
+.breadcrumbs-list-blue {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--prod-text-muted);
+}
+
+.breadcrumb-link-blue {
+  color: var(--blue-primary);
+  text-decoration: none;
+}
+
+.breadcrumb-link-blue:hover {
+  color: var(--blue-accent);
+  text-decoration: underline;
+}
+
+.breadcrumb-separator-blue {
+  color: var(--blue-accent);
+  font-size: 0.85rem;
+}
+
+.breadcrumb-current-blue {
+  color: var(--prod-text-dark);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   SEARCH & SORT ROW (On BOTH Overview & Details Pages)
+   Search Products on LEFT, Sort on RIGHT in the same horizontal row.
+   ========================================================================== */
+.prod-search-sort-bar {
+  background-color: var(--white);
+  padding: 1.75rem 0 1.25rem 0;
+  border-bottom: 1px solid var(--blue-border);
+  position: relative;
+  z-index: 100;
+}
+
+.prod-search-sort-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  position: relative;
+}
+
+/* Search Box on the LEFT */
+.prod-search-wrapper {
+  position: relative;
+  flex: 1;
+  max-width: 480px;
+}
+
+.prod-search-input-box {
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: var(--white);
+  border: 1.5px solid var(--blue-accent);
+  border-radius: 6px;
+}
+
+.prod-search-icon-symbol {
+  position: absolute;
+  left: 14px;
+  width: 18px;
+  height: 18px;
+  color: var(--blue-primary);
+  pointer-events: none;
+}
+
+.prod-search-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 40px 0 42px;
+  font-family: var(--prod-font-body);
+  font-size: 0.925rem;
+  color: var(--prod-text-dark);
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.prod-search-input::placeholder {
+  color: var(--prod-text-muted);
+  opacity: 0.75;
+}
+
+.prod-search-clear-btn {
+  position: absolute;
+  right: 12px;
+  width: 20px;
+  height: 20px;
+  background: none;
+  border: none;
+  color: var(--prod-text-muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: none;
+}
+
+.prod-search-clear-btn.visible {
+  display: block;
+}
+
+/* Search Autocomplete Suggestions Dropdown */
+.prod-search-autocomplete-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  background-color: var(--white);
+  border: 1.5px solid var(--blue-accent);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(27, 59, 111, 0.15);
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 500;
+  display: none;
+}
+
+.prod-search-autocomplete-dropdown.active {
+  display: block;
+}
+
+.prod-suggestion-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--blue-ice);
+  color: var(--prod-text-dark);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.prod-suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.prod-suggestion-item:hover,
+.prod-suggestion-item:focus {
+  background-color: var(--blue-ice);
+  outline: none;
+}
+
+.prod-suggestion-name {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--blue-primary);
+}
+
+.prod-suggestion-cat {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--blue-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.prod-search-no-results {
+  padding: 1.25rem;
+  text-align: center;
+  color: var(--prod-text-muted);
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+/* Sort Dropdown on the RIGHT */
+.prod-sort-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.prod-sort-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  height: 44px;
+  padding: 0 1.25rem;
+  background-color: var(--blue-ice);
+  border: 1.5px solid var(--blue-accent);
+  border-radius: 6px;
+  color: var(--blue-primary);
+  font-family: var(--prod-font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.prod-sort-toggle-btn:hover {
+  background-color: #E2EDF8;
+}
+
+.prod-sort-chevron {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  fill: none;
+}
+
+/* Sort Menu Container */
+.prod-sort-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 240px;
+  background-color: var(--white);
+  border: 1.5px solid var(--blue-accent);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(27, 59, 111, 0.2);
+  z-index: 500;
+  display: none;
+  padding: 0.5rem 0;
+}
+
+.prod-sort-menu.open {
+  display: block;
+}
+
+/* Sort Category Rows: Exactly Price, Ratings, Quantity */
+.prod-sort-cat-group {
+  border-bottom: 1px solid var(--blue-ice);
+}
+
+.prod-sort-cat-group:last-child {
+  border-bottom: none;
+}
+
+.prod-sort-cat-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.15rem;
+  font-family: var(--prod-font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--prod-text-dark);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.prod-sort-cat-header:hover {
+  background-color: var(--blue-ice);
+  color: var(--blue-primary);
+}
+
+.prod-sort-cat-chevron {
+  width: 12px;
+  height: 12px;
+  stroke: var(--blue-primary);
+  stroke-width: 2.2;
+  fill: none;
+}
+
+.prod-sort-cat-group.open .prod-sort-cat-chevron {
+  transform: rotate(180deg);
+}
+
+/* Sub-options for sorting */
+.prod-sort-options-list {
+  display: none;
+  background-color: var(--blue-ice);
+  padding: 0.25rem 0;
+}
+
+.prod-sort-cat-group.open .prod-sort-options-list {
+  display: block;
+}
+
+.prod-sort-opt-btn {
+  width: 100%;
+  padding: 0.55rem 1.75rem;
+  font-family: var(--prod-font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--prod-text-dark);
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  display: block;
+}
+
+.prod-sort-opt-btn:hover {
+  background-color: #DDEAF6;
+  color: var(--blue-primary);
+  font-weight: 600;
+}
+
+.prod-sort-opt-btn.active {
+  color: var(--blue-primary);
+  font-weight: 700;
+  background-color: #D4E4F4;
+}
+
+/* ==========================================================================
+   4. PRODUCTS OVERVIEW PAGE LAYOUT
+   Order:
+   1. Header
+   2. Products heading
+   3. Search Products and Sort row
+   4. Product category cards
+   5. Matching product cards directly below categories
+   6. Footer
+   ========================================================================== */
+
+/* Category Cards Section */
+.prod-categories-section {
+  padding: 2.5rem 0 1.5rem 0;
+  background-color: var(--white);
+}
+
+.prod-cat-header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.prod-cat-header-title {
+  font-family: var(--prod-font-heading);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--blue-primary);
+  margin: 0;
+}
+
+.btn-all-products {
+  padding: 0.5rem 1.25rem;
+  font-family: var(--prod-font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1.5px solid var(--blue-accent);
+  border-radius: 4px;
+  background-color: var(--blue-ice);
+  color: var(--blue-primary);
+  cursor: pointer;
+}
+
+.btn-all-products:hover,
+.btn-all-products.active {
+  background-color: var(--blue-primary);
+  color: var(--white);
+  border-color: var(--blue-primary);
+}
+
+.prod-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.prod-cat-card {
+  position: relative;
+  background-color: var(--blue-ice);
+  border: 2px solid var(--blue-border);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+}
+
+.prod-cat-card:hover {
+  border-color: var(--blue-accent);
+}
+
+.prod-cat-card.selected {
+  border-color: var(--blue-primary);
+  box-shadow: 0 0 0 2px var(--blue-primary);
+  background-color: #E2EDF8;
+}
+
+.prod-cat-media {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: var(--blue-dark);
+}
+
+.prod-cat-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.prod-cat-name {
+  font-family: var(--prod-font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--blue-primary);
+  padding: 0.85rem 0.5rem;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* Product Cards Section (Directly Below Categories) */
+.prod-cards-section {
+  padding: 1.5rem 0 4.5rem 0;
+  background-color: var(--white);
+}
+
+.prod-active-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--blue-ice);
+}
+
+.prod-view-title {
+  font-family: var(--prod-font-heading);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--blue-primary);
+  margin: 0;
+}
+
+.prod-count-badge {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--prod-text-muted);
+}
+
+/* Grid requirements: Exactly 3 product cards per row on desktop, 2 on mobile */
+.prod-items-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+/* Individual Product Card */
+.prod-overview-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white);
+  border: 1.5px solid var(--blue-border);
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--prod-text-dark);
+}
+
+.prod-overview-card:hover {
+  border-color: var(--blue-primary);
+  box-shadow: 0 6px 18px rgba(27, 59, 111, 0.12);
+}
+
+.prod-card-media {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: var(--blue-dark);
+  position: relative;
+}
+
+.prod-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.prod-card-quantity-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--blue-primary);
+  color: var(--white);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+.prod-card-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 1.25rem;
+}
+
+.prod-card-title {
+  font-family: var(--prod-font-heading);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--blue-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+}
+
+.prod-card-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.85rem;
+  font-size: 0.85rem;
+  color: var(--prod-text-muted);
+}
+
+.prod-card-rating .rating-text {
+  font-weight: 600;
+  color: var(--prod-text-dark);
+}
+
+.prod-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--blue-ice);
+}
+
+.prod-card-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--blue-primary);
+}
+
+.prod-card-size {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--prod-text-muted);
+  background-color: var(--blue-ice);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.prod-card-btn-wrap {
+  margin-top: 1rem;
+}
+
+.prod-card-details-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0.65rem 0;
+  background-color: var(--blue-primary);
+  color: var(--white);
+  font-family: var(--prod-font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 4px;
+}
+
+.prod-overview-card:hover .prod-card-details-btn {
+  background-color: var(--blue-dark);
+}
+
+/* Empty search result box */
+.prod-no-items-box {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 1.5rem;
+  background-color: var(--blue-ice);
+  border: 1.5px solid var(--blue-border);
+  border-radius: 8px;
+}
+
+.prod-no-items-title {
+  font-family: var(--prod-font-heading);
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--blue-primary);
+  margin-bottom: 0.5rem;
+}
+
+.prod-no-items-desc {
+  font-size: 0.95rem;
+  color: var(--prod-text-muted);
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================================================
+   5. INDIVIDUAL PRODUCT DETAILS PAGE
+   Two balanced areas side by side on desktop.
+   Area 1 (Left): One large clear product image.
+   Area 2 (Right): One complete product information box.
+   Rendered height of Area 2 must be EXACTLY equal to Area 1's height on desktop.
+   Align both areas at top and bottom edges.
+   ========================================================================== */
+
+.prod-details-main-section {
+  padding: 3rem 0 5rem 0;
+  background-color: var(--white);
+}
+
+.prod-details-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: stretch; /* Enforces EXACT equal height for Area 1 and Area 2 on desktop */
+}
+
+/* Area 1: Left Product Image */
+.prod-area-1-image-box {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--blue-border);
+  background-color: var(--blue-dark);
+}
+
+.prod-details-large-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Area 2: Right Product Information Box */
+.prod-area-2-info-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Aligns top row to bottom Order Product button */
+  padding: 2.25rem;
+  background-color: var(--blue-ice);
+  border: 2px solid var(--blue-border);
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+/* Top Row: Left (Product Name, rating stars, numerical average)
+            Right (Comment icon, Rate & Review label underneath) */
+.prod-details-top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1.5px solid var(--blue-border);
+}
+
+.prod-top-left {
+  flex: 1;
+}
+
+.prod-details-title {
+  font-family: var(--prod-font-heading);
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  font-weight: 600;
+  color: var(--blue-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.15;
+}
+
+.prod-rating-block {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.prod-stars-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.prod-stars-wrap .star-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.prod-rating-number {
+  font-family: var(--prod-font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--prod-text-dark);
+}
+
+/* Top Row Right: Rate & Review icon + label */
+.prod-top-right {
+  flex-shrink: 0;
+}
+
+.btn-prod-rate-review-trigger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1.5px solid var(--blue-accent);
+  border-radius: 6px;
+  padding: 0.55rem 0.9rem;
+  color: var(--blue-primary);
+  cursor: pointer;
+  background-color: var(--white);
+}
+
+.btn-prod-rate-review-trigger:hover {
+  background-color: #E2EDF8;
+  border-color: var(--blue-primary);
+}
+
+.prod-rate-review-comment-icon {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  margin-bottom: 2px;
+}
+
+.prod-rate-review-trigger-label {
+  font-family: var(--prod-font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blue-primary);
+}
+
+/* Below Top Row (Strict Order):
+   1. Product Price
+   2. Product Quantity (e.g. 100 ml or 50 g)
+   3. Product Description
+   4. Benefits
+   5. How to Use
+*/
+.prod-details-middle-content {
+  flex-grow: 1;
+  padding: 1.5rem 0;
+}
+
+.prod-pricing-qty-row {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--blue-border);
+}
+
+.prod-spec-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.prod-spec-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--prod-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.prod-spec-val-price {
+  font-family: var(--prod-font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--blue-primary);
+  line-height: 1;
+}
+
+.prod-spec-val-qty {
+  font-family: var(--prod-font-body);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--prod-text-dark);
+  line-height: 1;
+}
+
+.prod-details-block {
+  margin-bottom: 1.25rem;
+}
+
+.prod-details-block:last-child {
+  margin-bottom: 0;
+}
+
+.prod-block-heading {
+  font-family: var(--prod-font-heading);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--blue-primary);
+  margin: 0 0 0.4rem 0;
+}
+
+.prod-description-body {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--prod-text-dark);
+  margin: 0;
+}
+
+.prod-benefits-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.prod-benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.9rem;
+  color: var(--prod-text-dark);
+  line-height: 1.5;
+}
+
+.prod-bullet-blue {
+  color: var(--blue-accent);
+  font-size: 1.1rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.prod-how-to-use-text {
+  font-size: 0.925rem;
+  line-height: 1.7;
+  color: var(--prod-text-dark);
+  margin: 0;
+}
+
+/* Bottom: Order Product Button */
+.prod-details-bottom-bar {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--blue-border);
+}
+
+.btn-order-product-main {
+  width: 100%;
+  padding: 1rem 0;
+  background-color: var(--blue-primary);
+  color: var(--white);
+  font-family: var(--prod-font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1.5px solid var(--blue-dark);
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-order-product-main:hover {
+  background-color: var(--blue-dark);
+}
+
+/* ==========================================================================
+   6. RATE & REVIEW FORM MODAL (Products)
+   Contains ONLY:
+   1. Five selectable rating stars
+   2. Comment text field
+   3. Submit button
+   ========================================================================== */
+.prod-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(18, 40, 76, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 1.5rem;
+}
+
+.prod-modal-card {
+  width: 100%;
+  max-width: 480px;
+  background-color: var(--white);
+  border: 2px solid var(--blue-accent);
+  border-radius: 10px;
+  padding: 2.25rem;
+  position: relative;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+.prod-modal-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--blue-primary);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.prod-modal-title {
+  font-family: var(--prod-font-heading);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--blue-primary);
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+}
+
+/* 1. Five Selectable Rating Stars */
+.prod-star-select-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.prod-star-select-btn {
+  background: none;
+  border: none;
+  font-size: 2.2rem;
+  color: #CCCCCC;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 0.15rem;
+}
+
+.prod-star-select-btn.selected,
+.prod-star-select-btn.hovered {
+  color: var(--blue-primary);
+}
+
+.prod-rating-error-msg {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #C53030;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: none;
+}
+
+.prod-rating-error-msg.visible {
+  display: block;
+}
+
+/* 2. Comment Text Field */
+.prod-review-textarea {
+  width: 100%;
+  height: 110px;
+  padding: 0.85rem;
+  font-family: var(--prod-font-body);
+  font-size: 0.95rem;
+  color: var(--prod-text-dark);
+  background-color: var(--blue-ice);
+  border: 1.5px solid var(--blue-border);
+  border-radius: 6px;
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+  margin-bottom: 1.5rem;
+}
+
+.prod-review-textarea:focus {
+  border-color: var(--blue-accent);
+  background-color: var(--white);
+}
+
+/* 3. Submit Button */
+.btn-submit-prod-review {
+  width: 100%;
+  padding: 0.85rem 0;
+  background-color: var(--blue-primary);
+  color: var(--white);
+  font-family: var(--prod-font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-submit-prod-review:hover {
+  background-color: var(--blue-dark);
+}
+
+/* ==========================================================================
+   7. ORDER PRODUCT MODAL / CONFIRMATION
+   Connects to shopping bag and ordering workflow.
+   ========================================================================== */
+.order-info-card {
+  width: 100%;
+  max-width: 520px;
+  background-color: var(--white);
+  border: 2px solid var(--blue-accent);
+  border-radius: 10px;
+  padding: 2.25rem;
+  position: relative;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+.order-info-title {
+  font-family: var(--prod-font-heading);
+  font-size: 1.85rem;
+  font-weight: 600;
+  color: var(--blue-primary);
+  margin: 0 0 1rem 0;
+}
+
+.order-item-summary {
+  background-color: var(--blue-ice);
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--blue-border);
+}
+
+.order-item-name {
+  color: var(--blue-primary);
+  font-size: 1.15rem;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.order-item-meta {
+  font-weight: 600;
+  color: var(--prod-text-dark);
+}
+
+.order-note-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--prod-text-dark);
+  margin-bottom: 1.5rem;
+}
+
+.order-contact-box {
+  background-color: var(--blue-ice);
+  padding: 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--prod-text-dark);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.order-contact-box strong {
+  color: var(--blue-primary);
+}
+
+/* ==========================================================================
+   9. RESPONSIVE DESIGN
+   - Desktop: 3 product cards per row; details Area 1 & 2 side by side at exact equal height.
+   - Tablet: Adapt to screen width.
+   - Mobile: 2 product cards per row; details Area 1 & 2 stacked vertically.
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .prod-categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .prod-details-layout {
+    gap: 2rem;
+  }
+
+  .prod-area-2-info-box {
+    padding: 1.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .products-hero-header {
+    padding: 2.5rem 0 1.75rem 0;
+  }
+
+  .prod-search-sort-flex {
+    flex-direction: row;
+    gap: 0.75rem;
+  }
+
+  .prod-search-wrapper {
+    max-width: none;
+  }
+
+  .prod-search-input {
+    height: 40px;
+    font-size: 0.85rem;
+    padding: 0 32px 0 36px;
+  }
+
+  .prod-search-icon-symbol {
+    left: 10px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .prod-sort-toggle-btn {
+    height: 40px;
+    padding: 0 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  .prod-sort-menu {
+    width: 200px;
+  }
+
+  .prod-categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+  }
+
+  .prod-cat-name {
+    font-size: 0.95rem;
+    padding: 0.6rem 0.25rem;
+  }
+
+  /* Exact Requirement: Mobile - exactly 2 product cards per row */
+  .prod-items-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .prod-card-body {
+    padding: 0.85rem;
+  }
+
+  .prod-card-title {
+    font-size: 1.05rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .prod-card-price {
+    font-size: 1rem;
+  }
+
+  .prod-card-size {
+    font-size: 0.75rem;
+    padding: 2px 5px;
+  }
+
+  .prod-card-details-btn {
+    font-size: 0.75rem;
+    padding: 0.5rem 0;
+  }
+
+  /* Details Page Mobile: Stack Area 1 & Area 2 vertically */
+  .prod-details-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .prod-area-1-image-box {
+    aspect-ratio: 4 / 3;
+    height: auto;
+  }
+
+  .prod-area-2-info-box {
+    height: auto;
+    padding: 1.5rem;
+  }
+
+  .prod-pricing-qty-row {
+    gap: 1.5rem;
+  }
+
+  .prod-spec-val-price {
+    font-size: 1.6rem;
+  }
+}

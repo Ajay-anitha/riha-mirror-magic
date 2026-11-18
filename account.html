@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Account | Riha Mirror Magic</title>
+  
+  <!-- Fonts: Cormorant Garamond for Headings, Montserrat for Body & Navigation -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Customer Account Stylesheet (Elegant Teal & Mist Theme, Zero Animations) -->
+  <link rel="stylesheet" href="css/account.css">
+</head>
+<body class="account-theme">
+
+  <!-- Mobile Top Bar (Responsive Drawer Toggle) -->
+  <div class="mobile-account-bar">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <img src="assets/images/logo-placeholder.svg" alt="Riha Mirror Magic Logo" class="sidebar-logo-img">
+      <span class="sidebar-brand-name" style="font-size: 1.15rem;">Riha Mirror Magic</span>
+    </div>
+    <button type="button" class="mobile-sidebar-toggle-btn" id="mobileSidebarToggle" aria-label="Toggle navigation menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+      <span>Menu</span>
+    </button>
+  </div>
+
+  <div class="account-layout">
+    <!-- ========================================================================
+         LEFT SIDEBAR NAVIGATION
+         Contains EXACTLY the seven required items in this order:
+         1. Dashboard
+         2. My Profile
+         3. My Appointments
+         4. My Orders
+         5. My Reviews
+         6. Account Settings
+         7. Logout
+         ======================================================================== -->
+    <aside class="account-sidebar" id="customerSidebar" aria-label="Customer Account Navigation">
+      <a href="index.html" class="account-sidebar-brand" title="Return to Riha Mirror Magic Home">
+        <img src="assets/images/logo-placeholder.svg" alt="Riha Mirror Magic Logo" class="sidebar-logo-img">
+        <div>
+          <div class="sidebar-brand-name">Riha Mirror Magic</div>
+          <span class="sidebar-customer-badge">Customer Account</span>
+        </div>
+      </a>
+
+      <nav class="sidebar-nav-menu">
+        <!-- 1. Dashboard -->
+        <button type="button" class="sidebar-nav-item active" data-tab="dashboard" id="nav-dashboard">
+          <svg class="sidebar-item-icon" viewBox="0 0 24 24">
+            <rect width="7" height="9" x="3" y="3" rx="1"/>
+            <rect width="7" height="5" x="14" y="3" rx="1"/>
+            <rect width="7" height="9" x="14" y="12" rx="1"/>
+            <rect width="7" height="5" x="3" y="16" rx="1"/>
+          </svg>
+          <span>Dashboard</span>
+        </button>
+
+        <!-- 2. My Profile -->
+        <button type="button" class="sidebar-nav-item" data-tab="profile" id="nav-profile">
+          <svg class="sidebar-item-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="5"/>
+            <path d="M20 21a8 8 0 0 0-16 0"/>
+          </svg>
+          <span>My Profile</span>
+        </button>
+
+        <!-- 3. My Appointments -->
+        <button type="button" class="sidebar-nav-item" data-tab="appointments" id="nav-appointments">
+          <svg class="sidebar-item-icon" viewBox="0 0 24 24">
+            <rect width="18" height="18" x="3" y="4" rx="2"/>
+            <path d="M16 2v4"/>
+            <path d="M8 2v4"/>
+            <path d="M3 10h18"/>
+            <path d="M8 14h.01"/>
+            <path d="M12 14h.01"/>
+            <path d="M16 14h.01"/>
+            <path d="M8 18h.01"/>
+            <path d="M12 18h.01"/>
+            <path d="M16 18h.01"/>
+          </svg>
+          <span>My Appointments</span>
+        </button>
+
+        <!-- 4. My Orders -->
+        <button type="button" class="sidebar-nav-item" data-tab="orders" id="nav-orders">
+          <svg class="sidebar-item-icon" viewBox="0 0 24 24">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+            <path d="M3 6h18"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span>My Orders</span>
+        </button>
+
+        <!-- 5. My Reviews -->
+        <button type="button" class="sidebar-nav-item" data-tab="reviews" id="nav-reviews">
+          <svg class="sidebar-item-icon" viewBox="0 0 24 24">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+          <span>My Reviews</span>
+        </button>
+
+        <!-- 6. Account Settings -->
+        <button type="button" class="sidebar-nav-item" data-tab="settings" id="nav-settings">
+          <svg class="sidebar-item-icon" viewBox="0 0 24 24">
+            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+          <span>Account Settings</span>
+        </button>
+
+        <!-- 7. Logout -->
+        <button type="button" class="sidebar-nav-item sidebar-logout-item" id="nav-logout">
+          <svg class="sidebar-item-icon" viewBox="0 0 24 24">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" x2="9" y1="12" y2="12"/>
+          </svg>
+          <span>Logout</span>
+        </button>
+      </nav>
+    </aside>
+
+    <!-- ========================================================================
+         MAIN ACCOUNT CONTENT AREA
+         ======================================================================== -->
+    <main class="account-main-content">
+      
+      <!-- Top Dynamic Header -->
+      <header class="account-page-header">
+        <div>
+          <h1 class="account-welcome-title" id="accountWelcomeHeading">Welcome</h1>
+          <p class="account-welcome-subtitle" id="accountWelcomeSub">Riha Mirror Magic Customer Account Portal</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <a href="services.html" class="btn-teal-outline" style="font-size: 0.825rem; padding: 0.5rem 1rem;">
+            Explore Services
+          </a>
+          <a href="products.html" class="btn-teal-primary" style="font-size: 0.825rem; padding: 0.5rem 1rem;">
+            Shop Products
+          </a>
+        </div>
+      </header>
+
+      <!-- VIEW 1: DASHBOARD (HOME) -->
+      <section class="account-view-section" id="view-dashboard">
+        <!-- Exactly 3 Clickable Cards (Appointments, Orders, Reviews)
+             Circular icon background, whole card clickable, navigates to corresponding tab. -->
+        <div class="dashboard-cards-grid">
+          <!-- Card 1: My Appointments -->
+          <div class="dash-summary-card" data-tab="appointments" role="button" tabindex="0" aria-label="Navigate to My Appointments">
+            <div class="dash-card-icon-circle">
+              <svg viewBox="0 0 24 24">
+                <rect width="18" height="18" x="3" y="4" rx="2"/>
+                <path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/>
+                <path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/>
+              </svg>
+            </div>
+            <h2 class="dash-card-title">My Appointments</h2>
+            <p class="dash-card-info-text">
+              <strong id="dashApptCount" style="color: var(--teal-deep); font-size: 1.15rem;">0</strong> scheduled bookings
+            </p>
+          </div>
+
+          <!-- Card 2: My Orders -->
+          <div class="dash-summary-card" data-tab="orders" role="button" tabindex="0" aria-label="Navigate to My Orders">
+            <div class="dash-card-icon-circle">
+              <svg viewBox="0 0 24 24">
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+                <path d="M3 6h18"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+            </div>
+            <h2 class="dash-card-title">My Orders</h2>
+            <p class="dash-card-info-text">
+              <strong id="dashOrderCount" style="color: var(--teal-deep); font-size: 1.15rem;">0</strong> product purchases
+            </p>
+          </div>
+
+          <!-- Card 3: My Reviews -->
+          <div class="dash-summary-card" data-tab="reviews" role="button" tabindex="0" aria-label="Navigate to My Reviews">
+            <div class="dash-card-icon-circle">
+              <svg viewBox="0 0 24 24">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+            <h2 class="dash-card-title">My Reviews</h2>
+            <p class="dash-card-info-text">
+              <strong id="dashReviewCount" style="color: var(--teal-deep); font-size: 1.15rem;">0</strong> ratings submitted
+            </p>
+          </div>
+        </div>
+
+        <!-- Dashboard Welcome Notice -->
+        <div class="dashboard-welcome-banner">
+          <h2 class="welcome-banner-title">Riha Mirror Magic Customer Privileges</h2>
+          <p class="welcome-banner-text">
+            Welcome to your dedicated beauty account. Here you can schedule and check upcoming salon visits, track genuine beauty product purchases, share feedback on treatments, and maintain your contact details with complete privacy.
+          </p>
+        </div>
+      </section>
+
+      <!-- VIEW 2: MY PROFILE -->
+      <section class="account-view-section" id="view-profile" style="display: none;">
+        <div class="account-card-panel">
+          <h2 class="panel-header-title">My Profile</h2>
+          
+          <div id="profileStatusMsg" class="status-msg-box" role="alert"></div>
+
+          <form id="profileForm" novalidate>
+            <div class="form-grid-2col">
+              <div class="form-group-item">
+                <label for="profFullName" class="form-label-title">Full Name</label>
+                <input type="text" id="profFullName" class="form-input-control" required autocomplete="name">
+              </div>
+
+              <div class="form-group-item">
+                <label for="profMemberSince" class="form-label-title">Member Since</label>
+                <input type="text" id="profMemberSince" class="form-input-control" readonly disabled>
+              </div>
+
+              <div class="form-group-item">
+                <label for="profMobile" class="form-label-title">Mobile Number</label>
+                <input type="tel" id="profMobile" class="form-input-control" required autocomplete="tel">
+                <span style="font-size: 0.78rem; color: var(--teal-slate); margin-top: 4px;">Used for appointment SMS alerts and booking confirmations</span>
+              </div>
+
+              <div class="form-group-item">
+                <label for="profEmail" class="form-label-title">Email Address</label>
+                <input type="email" id="profEmail" class="form-input-control" required autocomplete="email">
+                <span style="font-size: 0.78rem; color: var(--teal-slate); margin-top: 4px;">Used for digital invoices, beauty recommendations and account security</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.75rem; display: flex; gap: 1rem; align-items: center;">
+              <button type="submit" class="btn-teal-primary" id="btnSaveProfile">
+                Save Profile Changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- VIEW 3: MY APPOINTMENTS -->
+      <section class="account-view-section" id="view-appointments" style="display: none;">
+        <div class="account-card-panel">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <h2 class="panel-header-title" style="margin-bottom: 0.25rem; border: none; padding: 0;">My Appointments</h2>
+              <p style="font-size: 0.9rem; color: var(--teal-slate); margin: 0;">All your booked salon appointments at Riha Mirror Magic</p>
+            </div>
+            <a href="services.html" class="btn-teal-primary" style="font-size: 0.85rem; padding: 0.6rem 1.2rem;">
+              Book New Appointment
+            </a>
+          </div>
+
+          <!-- Appointments List Container -->
+          <div class="account-records-list" id="appointmentsListContainer">
+            <!-- Dynamically populated or empty state -->
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 4: MY ORDERS -->
+      <section class="account-view-section" id="view-orders" style="display: none;">
+        <div class="account-card-panel">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <h2 class="panel-header-title" style="margin-bottom: 0.25rem; border: none; padding: 0;">My Orders</h2>
+              <p style="font-size: 0.9rem; color: var(--teal-slate); margin: 0;">Your purchased beauty items and order delivery status</p>
+            </div>
+            <a href="products.html" class="btn-teal-primary" style="font-size: 0.85rem; padding: 0.6rem 1.2rem;">
+              Shop Products
+            </a>
+          </div>
+
+          <!-- Orders List Container -->
+          <div class="account-records-list" id="ordersListContainer">
+            <!-- Dynamically populated or empty state -->
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 5: MY REVIEWS -->
+      <section class="account-view-section" id="view-reviews" style="display: none;">
+        <div class="account-card-panel">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <h2 class="panel-header-title" style="margin-bottom: 0.25rem; border: none; padding: 0;">My Reviews</h2>
+              <p style="font-size: 0.9rem; color: var(--teal-slate); margin: 0;">Ratings and reviews you have provided for services and products</p>
+            </div>
+          </div>
+
+          <div id="reviewActionStatusMsg" class="status-msg-box" role="alert"></div>
+
+          <!-- Reviews List Container -->
+          <div class="account-records-list" id="reviewsListContainer">
+            <!-- Dynamically populated or empty state -->
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 6: ACCOUNT SETTINGS -->
+      <section class="account-view-section" id="view-settings" style="display: none;">
+        <!-- Panel 1: Change Password -->
+        <div class="account-card-panel">
+          <h2 class="panel-header-title">Change Password</h2>
+          
+          <div id="passwordStatusMsg" class="status-msg-box" role="alert"></div>
+
+          <form id="passwordForm" novalidate style="max-width: 520px;">
+            <div class="form-group-item">
+              <label for="currPassword" class="form-label-title">Current Password</label>
+              <div class="password-input-wrapper">
+                <input type="password" id="currPassword" class="form-input-control" required autocomplete="current-password">
+                <button type="button" class="toggle-password-btn" data-target="currPassword" aria-label="Toggle current password visibility">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group-item">
+              <label for="newPassword" class="form-label-title">New Password (minimum 8 characters)</label>
+              <div class="password-input-wrapper">
+                <input type="password" id="newPassword" class="form-input-control" required minlength="8" autocomplete="new-password">
+                <button type="button" class="toggle-password-btn" data-target="newPassword" aria-label="Toggle new password visibility">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group-item">
+              <label for="confirmNewPassword" class="form-label-title">Confirm New Password</label>
+              <div class="password-input-wrapper">
+                <input type="password" id="confirmNewPassword" class="form-input-control" required minlength="8" autocomplete="new-password">
+                <button type="button" class="toggle-password-btn" data-target="confirmNewPassword" aria-label="Toggle confirm new password visibility">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.5rem;">
+              <button type="submit" class="btn-teal-primary" id="btnUpdatePassword">
+                Update Password
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Panel 2: Account Preferences -->
+        <div class="account-card-panel">
+          <h2 class="panel-header-title">Notification Preferences</h2>
+          
+          <div id="preferencesStatusMsg" class="status-msg-box" role="alert"></div>
+
+          <form id="preferencesForm">
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
+              <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
+                <input type="checkbox" id="prefSmsReminders" checked style="margin-top: 3px; accent-color: var(--teal-deep);">
+                <div>
+                  <strong style="color: var(--teal-charcoal); font-size: 0.95rem; display: block;">SMS Appointment Reminders</strong>
+                  <span style="font-size: 0.85rem; color: var(--teal-slate);">Receive prompt SMS reminders 24 hours prior to scheduled salon visits.</span>
+                </div>
+              </label>
+
+              <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
+                <input type="checkbox" id="prefEmailReceipts" checked style="margin-top: 3px; accent-color: var(--teal-deep);">
+                <div>
+                  <strong style="color: var(--teal-charcoal); font-size: 0.95rem; display: block;">Email Order Updates & Receipts</strong>
+                  <span style="font-size: 0.85rem; color: var(--teal-slate);">Get instant email confirmations when product orders or appointments are processed.</span>
+                </div>
+              </label>
+
+              <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
+                <input type="checkbox" id="prefPromotions" style="margin-top: 3px; accent-color: var(--teal-deep);">
+                <div>
+                  <strong style="color: var(--teal-charcoal); font-size: 0.95rem; display: block;">Exclusive Beauty Privileges & Offers</strong>
+                  <span style="font-size: 0.85rem; color: var(--teal-slate);">Receive private notices about seasonal packages and new salon arrivals.</span>
+                </div>
+              </label>
+            </div>
+
+            <button type="submit" class="btn-teal-primary" id="btnSavePreferences">
+              Save Preferences
+            </button>
+          </form>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Review Edit Modal (Hidden by default) -->
+  <div id="editReviewModal" style="display: none; position: fixed; inset: 0; background-color: rgba(22, 78, 86, 0.6); z-index: 9999; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div style="background-color: var(--teal-white); border-radius: 12px; border: 1.5px solid var(--teal-silver); max-width: 480px; width: 100%; padding: 2rem; box-sizing: border-box;">
+      <h3 style="font-family: var(--acc-font-heading); font-size: 1.6rem; color: var(--teal-deep); margin: 0 0 1rem 0;" id="editReviewItemTitle">Edit Review</h3>
+      
+      <input type="hidden" id="editReviewId">
+      
+      <div class="form-group-item">
+        <label for="editReviewRating" class="form-label-title">Rating (1 to 5 Stars)</label>
+        <select id="editReviewRating" class="form-input-control">
+          <option value="5">★★★★★ (5 Stars - Exceptional)</option>
+          <option value="4">★★★★☆ (4 Stars - Very Good)</option>
+          <option value="3">★★★☆☆ (3 Stars - Average)</option>
+          <option value="2">★★☆☆☆ (2 Stars - Needs Improvement)</option>
+          <option value="1">★☆☆☆☆ (1 Star - Poor)</option>
+        </select>
+      </div>
+
+      <div class="form-group-item">
+        <label for="editReviewComment" class="form-label-title">Your Comments</label>
+        <textarea id="editReviewComment" class="form-input-control" rows="4" style="height: auto; padding: 0.75rem 1rem;" required></textarea>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+        <button type="button" class="btn-teal-outline" id="btnCancelEditReview" style="padding: 0.6rem 1.2rem;">Cancel</button>
+        <button type="button" class="btn-teal-primary" id="btnSaveEditedReview" style="padding: 0.6rem 1.2rem;">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/auth.js"></script>
+  <script src="js/account.js"></script>
+</body>
+</html>

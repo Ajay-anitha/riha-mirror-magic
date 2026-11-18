@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Riha Mirror Magic</title>
+  <meta name="description" content="Discover the story, parlour ambiance, and bespoke beauty approach behind Riha Mirror Magic. Luxury beauty parlour dedicated to elegance and personalized care.">
+
+  <!-- Google Fonts: Cormorant Garamond for Headings, Montserrat for Body & Navigation -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Common Website Stylesheet (Royal Violet Theme) -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Dedicated About Us Stylesheet (Royal Violet Palette, Zero Animations) -->
+  <link rel="stylesheet" href="css/about.css">
+</head>
+<body class="about-page">
+
+  <!-- ========================================================================
+       SECTION 1 – COMMON WEBSITE HEADER
+       Desktop: ONE SINGLE HORIZONTAL LINE
+       Order: Logo + Name | Home | Services | Products | Gallery | About | Search | Account | Bag
+       ======================================================================== -->
+  <header class="site-header" id="top-header">
+    <div class="header-container">
+      
+      <!-- Brand: Original Visiting-Card Logo Symbol Placeholder + Riha Mirror Magic Name -->
+      <a href="index.html" class="header-brand" aria-label="Riha Mirror Magic Homepage">
+        <!-- 
+          Preserve the original logo artwork.
+          Replaceable placeholder below: Replace src with your visiting-card logo artwork file when ready.
+        -->
+        <div class="logo-wrapper">
+          <img src="assets/images/logo-placeholder.svg" alt="Riha Mirror Magic Logo Symbol" class="logo-img" id="header-logo-image">
+        </div>
+        <span class="brand-name">Riha Mirror Magic</span>
+      </a>
+
+      <!-- Desktop Navigation (All 5 items with icons and visible names) -->
+      <nav class="desktop-nav" aria-label="Primary Navigation">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link">
+              <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="services.html" class="nav-link">
+              <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2l2.4 7.2L22 10.5l-6 4.8 1.8 7.7L12 18.5l-5.8 4.5L8 15.3 2 10.5l7.6-1.3L12 2z"></path>
+              </svg>
+              <span>Services</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="products.html" class="nav-link">
+              <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+              <span>Products</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="gallery.html" class="nav-link">
+              <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+              <span>Gallery</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="about.html" class="nav-link active">
+              <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+              <span>About</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Utility Icons: Search icon | Customer Account icon | Shopping Bag icon -->
+      <div class="header-utilities">
+        <button class="util-btn" aria-label="Search icon" title="Search">
+          <svg class="util-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
+        <button class="util-btn" aria-label="Customer Account icon" title="Customer Account">
+          <svg class="util-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+
+        <button class="util-btn" aria-label="Shopping Bag icon" title="Shopping Bag">
+          <svg class="util-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="bag-badge">0</span>
+        </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Open mobile navigation menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Backdrop -->
+  <div class="drawer-backdrop" id="mobile-backdrop"></div>
+
+  <!-- Mobile Navigation Drawer -->
+  <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation">
+    <div class="drawer-header">
+      <div class="drawer-brand">
+        <div class="logo-wrapper">
+          <img src="assets/images/logo-placeholder.svg" alt="Riha Mirror Magic Logo" class="logo-img">
+        </div>
+        <span class="brand-name">Riha Mirror Magic</span>
+      </div>
+      <button class="drawer-close" id="drawer-close" aria-label="Close navigation menu">&times;</button>
+    </div>
+
+    <nav class="drawer-nav">
+      <ul class="mobile-nav-list">
+        <li>
+          <a href="index.html" class="mobile-nav-link">
+            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Home</span>
+          </a>
+        </li>
+        <li>
+          <a href="services.html" class="mobile-nav-link">
+            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2l2.4 7.2L22 10.5l-6 4.8 1.8 7.7L12 18.5l-5.8 4.5L8 15.3 2 10.5l7.6-1.3L12 2z"></path>
+            </svg>
+            <span>Services</span>
+          </a>
+        </li>
+        <li>
+          <a href="products.html" class="mobile-nav-link">
+            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span>Products</span>
+          </a>
+        </li>
+        <li>
+          <a href="gallery.html" class="mobile-nav-link">
+            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+            <span>Gallery</span>
+          </a>
+        </li>
+        <li>
+          <a href="about.html" class="mobile-nav-link active">
+            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span>About</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- ========================================================================
+       SECTION 2 – ABOUT HERO
+       Large beauty parlour photograph, main heading, genuine business introduction
+       ======================================================================== -->
+  <section class="about-hero-section" id="about-hero">
+    <div class="container">
+      <div class="about-hero-grid">
+        
+        <!-- Heading & Introduction Text -->
+        <div class="about-hero-content">
+          <div class="about-hero-badge">Luxury Beauty Sanctuary</div>
+          <h1 class="about-hero-heading">About Riha Mirror Magic</h1>
+          
+          <div class="about-hero-intro-box">
+            <p class="about-hero-intro">
+              Welcome to Riha Mirror Magic, where luxury beauty meets personalized care. Dedicated to bringing out your unique radiance through an exquisite blend of artistry, premium products, and timeless style.
+            </p>
+            <p class="about-hero-intro">
+              Every reflection tells a story of elegance and grace, crafted to illuminate your individuality with perfection and modern sophistication.
+            </p>
+          </div>
+        </div>
+
+        <!-- Large Beauty Parlour Photograph -->
+        <div class="about-hero-image-wrap">
+          <img 
+            src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=80" 
+            alt="Riha Mirror Magic Beauty Parlour" 
+            class="about-hero-img"
+            onerror="this.onerror=null; this.src='assets/images/about/about-hero.jpg';"
+          >
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION 3 – OUR STORY
+       Image on LEFT, text on RIGHT.
+       Background: White
+       ======================================================================== -->
+  <section class="about-story-section" id="our-story">
+    <div class="container">
+      <div class="story-grid">
+
+        <!-- Image on LEFT (Mobile: Image first) -->
+        <div class="story-image-wrap">
+          <img 
+            src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1000&q=80" 
+            alt="Our Story - Riha Mirror Magic" 
+            class="story-img"
+            onerror="this.onerror=null; this.src='assets/images/about/our-story.jpg';"
+          >
+        </div>
+
+        <!-- Text content on RIGHT (Mobile: Text below image) -->
+        <div class="story-content">
+          <div class="section-label-tag">Our Heritage &amp; Inspiration</div>
+          <h2 class="story-heading">Our Story</h2>
+          
+          <p class="story-body-text">
+            Riha Mirror Magic was founded with a singular aspiration: to create a welcoming beauty haven where each client experiences the artistry and attention they deserve. The mirror is our muse—a symbol of personal confidence, authentic grace, and self-expression.
+          </p>
+          <p class="story-body-text">
+            From our very beginning, we have dedicated ourselves to mastering modern hair styling, restorative skin rituals, and flawless makeup. Rather than imposing fleeting trends, we tailor every treatment to harmonize with your natural features, enhancing the beauty you already possess.
+          </p>
+          <p class="story-body-text">
+            Our journey continues with an enduring passion for excellence, continuous training in premier styling techniques, and an unwavering commitment to your satisfaction.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION 4 – ABOUT THE PARLOUR
+       Alternating layout: Text on LEFT, image on RIGHT.
+       Background: Very Light Lavender (#F4EFF5)
+       ======================================================================== -->
+  <section class="about-parlour-section" id="about-the-parlour">
+    <div class="container">
+      <div class="parlour-grid">
+
+        <!-- Text on LEFT -->
+        <div class="parlour-content">
+          <div class="section-label-tag">A Welcoming Atmosphere</div>
+          <h2 class="parlour-heading">About the Parlour</h2>
+
+          <p class="parlour-body-text">
+            Step into a serene environment thoughtfully designed to offer respite from the everyday bustle. Our studio reflects modern aesthetics, balanced lighting, and soothing tones that invite you to unwind from the moment you arrive.
+          </p>
+          <p class="parlour-body-text">
+            We hold cleanliness and comfort to the highest standards. Every station is meticulously sanitized, and our tools undergo thorough sterilization before every service. Whether you visit for a brief refresh or an extensive pampering session, our dedicated spaces ensure your total comfort and privacy.
+          </p>
+          <p class="parlour-body-text">
+            Every detail—from comfortable ergonomic seating to soft ambient music—has been carefully curated so your time with us feels restorative, indulgent, and truly memorable.
+          </p>
+        </div>
+
+        <!-- Image on RIGHT -->
+        <div class="parlour-image-wrap">
+          <img 
+            src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=1000&q=80" 
+            alt="Riha Mirror Magic Parlour Interior" 
+            class="parlour-img"
+            onerror="this.onerror=null; this.src='assets/images/about/parlour-interior.jpg';"
+          >
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION 5 – OUR SERVICES & APPROACH
+       Image on LEFT, text on RIGHT with "Explore Our Services" button.
+       Background: White
+       ======================================================================== -->
+  <section class="about-services-approach-section" id="services-and-approach">
+    <div class="container">
+      <div class="approach-grid">
+
+        <!-- Relevant Beauty Parlour Photograph on LEFT -->
+        <div class="approach-image-wrap">
+          <img 
+            src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1000&q=80" 
+            alt="Our Services and Approach" 
+            class="approach-img"
+            onerror="this.onerror=null; this.src='assets/images/about/services-approach.jpg';"
+          >
+        </div>
+
+        <!-- Content on RIGHT -->
+        <div class="approach-content">
+          <div class="section-label-tag">Craftsmanship &amp; Consultation</div>
+          <h2 class="approach-heading">Our Services &amp; Approach</h2>
+
+          <p class="approach-body-text">
+            Our approach begins with listening. We believe that exceptional beauty care starts with understanding your preferences, lifestyle, and individual hair and skin requirements through thoughtful consultations.
+          </p>
+          <p class="approach-body-text">
+            We use only genuine, dermatologically sound products and precision techniques across our comprehensive menu of hair treatments, customized facials, bridal makeovers, and nail artistry. We never rush a procedure; each session is given the undivided care and patience it requires.
+          </p>
+          <p class="approach-body-text">
+            Experience beauty care designed entirely around you, delivered with genuine warmth and professional expertise.
+          </p>
+
+          <!-- Explore Our Services Button -->
+          <a href="services.html" class="btn-about-action" aria-label="Explore Our Services">
+            <span>Explore Our Services</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION 6 – OUR WORK
+       Three-image layout in one row on desktop, "View Our Gallery" button.
+       Background: Very Light Lavender (#F4EFF5)
+       ======================================================================== -->
+  <section class="about-work-section" id="our-work">
+    <div class="container">
+      
+      <div class="work-header-wrap">
+        <div class="section-label-tag" style="justify-content: center;">Portfolio Preview</div>
+        <h2 class="work-heading">Our Work</h2>
+        <p class="work-intro-text">
+          A glimpse into the artistry, precision, and transformations created daily at Riha Mirror Magic.
+        </p>
+      </div>
+
+      <!-- Three-Image Row on Desktop -->
+      <div class="work-gallery-grid">
+        
+        <!-- Work Card 1 -->
+        <div class="work-card-frame">
+          <div class="work-card-img-wrap">
+            <img 
+              src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=800&q=80" 
+              alt="Hair Styling and Color Transformations" 
+              class="work-card-img"
+              onerror="this.onerror=null; this.src='assets/images/about/our-work-1.jpg';"
+            >
+          </div>
+          <div class="work-card-caption">Bridal &amp; Occasion Styling</div>
+        </div>
+
+        <!-- Work Card 2 -->
+        <div class="work-card-frame">
+          <div class="work-card-img-wrap">
+            <img 
+              src="https://images.unsplash.com/photo-1512290900672-1f55b9ff8e7c?auto=format&fit=crop&w=800&q=80" 
+              alt="Radiant Skin and Facial Care" 
+              class="work-card-img"
+              onerror="this.onerror=null; this.src='assets/images/about/our-work-2.jpg';"
+            >
+          </div>
+          <div class="work-card-caption">Skin Rejuvenation &amp; Glow</div>
+        </div>
+
+        <!-- Work Card 3 -->
+        <div class="work-card-frame">
+          <div class="work-card-img-wrap">
+            <img 
+              src="https://images.unsplash.com/photo-1632345031435-8727f6897d53?auto=format&fit=crop&w=800&q=80" 
+              alt="Delicate Nail Artistry and Care" 
+              class="work-card-img"
+              onerror="this.onerror=null; this.src='assets/images/about/our-work-3.jpg';"
+            >
+          </div>
+          <div class="work-card-caption">Nail Artistry &amp; Care</div>
+        </div>
+
+      </div>
+
+      <!-- View Our Gallery Button -->
+      <div class="work-action-wrap">
+        <a href="gallery.html" class="btn-about-action" aria-label="View Our Gallery">
+          <span>View Our Gallery</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION 7 – CONTACT & LOCATION
+       Desktop: Contact info on LEFT, Google Maps on RIGHT.
+       Background: White
+       ======================================================================== -->
+  <section class="about-contact-section" id="contact-and-location">
+    <div class="container">
+      <div class="contact-layout-grid">
+
+        <!-- Contact Information (Left) -->
+        <div class="contact-info-col">
+          <div class="section-label-tag">Visit &amp; Connect</div>
+          <h2 class="contact-heading">Contact &amp; Location</h2>
+          
+          <p class="contact-intro-text">
+            We welcome you to visit Riha Mirror Magic. Connect with us directly for appointment inquiries, personalized consultations, or directions to our parlour.
+          </p>
+
+          <div class="contact-details-list">
+            
+            <!-- 1. Business Phone -->
+            <div class="contact-detail-card">
+              <div class="contact-icon-bubble" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-card-label">Business Phone</div>
+                <a href="tel:+1234567890" class="contact-card-value" title="Call Riha Mirror Magic">
+                  +1 (234) 567-890
+                </a>
+              </div>
+            </div>
+
+            <!-- 2. Email Address -->
+            <div class="contact-detail-card">
+              <div class="contact-icon-bubble" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-card-label">Email Address</div>
+                <a href="mailto:info@rihamirrormagic.com" class="contact-card-value" title="Send Email to Riha Mirror Magic">
+                  info@rihamirrormagic.com
+                </a>
+              </div>
+            </div>
+
+            <!-- 3. Business Address -->
+            <div class="contact-detail-card">
+              <div class="contact-icon-bubble" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-card-label">Business Address</div>
+                <a href="https://maps.google.com/?q=Luxury+Beauty+Studio,+Suite+100" target="_blank" rel="noopener noreferrer" class="contact-card-value" title="Open in Google Maps">
+                  Luxury Beauty Studio, Suite 100
+                </a>
+              </div>
+            </div>
+
+            <!-- 4. Opening Hours -->
+            <div class="contact-detail-card">
+              <div class="contact-icon-bubble" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-card-label">Opening Hours</div>
+                <div class="contact-card-value" style="color: var(--royal-violet);">
+                  Mon – Sat: 9:00 AM – 7:00 PM<br>
+                  <span style="font-size: 0.85rem; color: var(--soft-violet); font-weight: 500;">Sunday: By Special Appointment</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Google Maps Location (Right) -->
+        <div class="contact-map-col">
+          <div class="map-frame-box" aria-label="Google Maps Location">
+            <!-- Replaceable Google Maps embed iframe -->
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.8122394018266!2d72.825833!3d19.071944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA0JzE5LjAiTiA3MsKwNDknMzMuMCJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Riha Mirror Magic Parlour Location Map"
+            ></iframe>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION 8 – COMMON WEBSITE FOOTER
+       Desktop: FOUR COLUMNS IN ONE SINGLE HORIZONTAL ROW
+       Column 1 – Explore: Home, Services, Products, Gallery
+       Column 2 – Information: About Us, Contact Us, Privacy Policy, Terms & Conditions
+       Column 3 – Contact Us: Phone, Email, Business Address, Opening Hours
+       Column 4 – Follow Us: Instagram, Facebook, WhatsApp, YouTube with authentic brand logos
+       Centered copyright below all four columns:
+       © 2026 Riha Mirror Magic. All Rights Reserved.
+       ======================================================================== -->
+  <footer class="site-footer" id="footer">
+    <div class="container">
+      
+      <!-- Four columns in one single horizontal row on desktop -->
+      <div class="footer-row">
+
+        <!-- Column 1 – Explore -->
+        <div class="footer-column">
+          <h4 class="footer-heading">Explore</h4>
+          <ul class="footer-nav">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="services.html" class="footer-link">Services</a></li>
+            <li><a href="products.html" class="footer-link">Products</a></li>
+            <li><a href="gallery.html" class="footer-link">Gallery</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 2 – Information -->
+        <div class="footer-column">
+          <h4 class="footer-heading">Information</h4>
+          <ul class="footer-nav">
+            <li><a href="about.html" class="footer-link">About Us</a></li>
+            <li><a href="#contact-and-location" class="footer-link">Contact Us</a></li>
+            <li><a href="#" class="footer-link">Privacy Policy</a></li>
+            <li><a href="#" class="footer-link">Terms &amp; Conditions</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3 – Contact Us -->
+        <div class="footer-column">
+          <h4 class="footer-heading">Contact Us</h4>
+          <div class="footer-contact-list">
+            <div class="contact-item">
+              <svg class="contact-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <div>
+                <span class="contact-label-title">Phone:</span>
+                <a href="tel:+1234567890" class="footer-link">+1 (234) 567-890</a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <svg class="contact-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <div>
+                <span class="contact-label-title">Email:</span>
+                <a href="mailto:info@rihamirrormagic.com" class="footer-link">info@rihamirrormagic.com</a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <svg class="contact-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <div>
+                <span class="contact-label-title">Business Address:</span>
+                <span>Luxury Beauty Studio, Suite 100</span>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <svg class="contact-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <div>
+                <span class="contact-label-title">Opening Hours:</span>
+                <span>Mon – Sat: 9:00 AM – 7:00 PM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 4 – Follow Us (Authentic brand-coloured social app logos) -->
+        <div class="footer-column">
+          <h4 class="footer-heading">Follow Us</h4>
+          <div class="footer-social-list">
+
+            <!-- Instagram -->
+            <a href="#" class="social-brand-link" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
+              <div class="social-logo-wrap">
+                <svg class="brand-svg" viewBox="0 0 24 24" aria-hidden="true">
+                  <defs>
+                    <radialGradient id="ig-grad-radial-about" cx="30%" cy="107%" r="150%">
+                      <stop offset="0%" stop-color="#ffd521"/>
+                      <stop offset="10%" stop-color="#f50000"/>
+                      <stop offset="50%" stop-color="#b900b4"/>
+                      <stop offset="100%" stop-color="#c13584"/>
+                    </radialGradient>
+                    <linearGradient id="ig-grad-linear-about" x1="0%" y1="100%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#405de6"/>
+                      <stop offset="100%" stop-color="#5851db"/>
+                    </linearGradient>
+                  </defs>
+                  <rect width="24" height="24" rx="6" fill="url(#ig-grad-linear-about)"/>
+                  <rect width="24" height="24" rx="6" fill="url(#ig-grad-radial-about)"/>
+                  <rect x="5.5" y="5.5" width="13" height="13" rx="3.5" fill="none" stroke="#FFFFFF" stroke-width="1.8"/>
+                  <circle cx="12" cy="12" r="3.2" fill="none" stroke="#FFFFFF" stroke-width="1.8"/>
+                  <circle cx="15.8" cy="8.2" r="0.8" fill="#FFFFFF"/>
+                </svg>
+              </div>
+              <span class="social-brand-label">Instagram</span>
+            </a>
+
+            <!-- Facebook -->
+            <a href="#" class="social-brand-link" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook">
+              <div class="social-logo-wrap">
+                <svg class="brand-svg" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect width="24" height="24" rx="6" fill="#1877F2"/>
+                  <path d="M15.5 12h-2.5v8h-3.3v-8H7.5V9.3h2.2V7.4c0-2.2 1.3-3.4 3.3-3.4 1 0 1.8.1 2 .1v2.4h-1.4c-1.1 0-1.3.5-1.3 1.3v1.5h2.7l-.5 2.7z" fill="#FFFFFF"/>
+                </svg>
+              </div>
+              <span class="social-brand-label">Facebook</span>
+            </a>
+
+            <!-- WhatsApp -->
+            <a href="#" class="social-brand-link" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
+              <div class="social-logo-wrap">
+                <svg class="brand-svg" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect width="24" height="24" rx="6" fill="#25D366"/>
+                  <path d="M12 4a8 8 0 0 0-6.9 12L4 20l4.2-1.1A8 8 0 1 0 12 4zm0 14.6a6.6 6.6 0 0 1-3.4-.9l-.2-.1-2.5.7.7-2.4-.2-.3A6.6 6.6 0 1 1 12 18.6zm3.6-4.9c-.2-.1-1.2-.6-1.4-.7-.2-.1-.3-.1-.4.1-.1.2-.5.7-.7.8-.1.1-.3.2-.5.1-.2-.1-.9-.3-1.8-1.1-.7-.6-1.1-1.4-1.3-1.6-.1-.2 0-.4.1-.5.1-.1.2-.2.3-.4.1-.1.1-.2.2-.3 0-.1 0-.3 0-.4s-.4-1-.6-1.4c-.2-.4-.3-.3-.4-.3h-.4c-.1 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.1 1.6 2.5 3.9 3.5.5.2 1 .4 1.3.5.6.2 1.1.2 1.5.1.5-.1 1.2-.5 1.4-1 .2-.5.2-1 .1-1.1 0-.1-.2-.2-.4-.3z" fill="#FFFFFF"/>
+                </svg>
+              </div>
+              <span class="social-brand-label">WhatsApp</span>
+            </a>
+
+            <!-- YouTube -->
+            <a href="#" class="social-brand-link" target="_blank" rel="noopener noreferrer" aria-label="Watch our videos on YouTube">
+              <div class="social-logo-wrap">
+                <svg class="brand-svg" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect width="24" height="24" rx="6" fill="#FF0000"/>
+                  <polygon points="10,8 16,12 10,16" fill="#FFFFFF"/>
+                </svg>
+              </div>
+              <span class="social-brand-label">YouTube</span>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright-text">© 2026 Riha Mirror Magic. All Rights Reserved.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

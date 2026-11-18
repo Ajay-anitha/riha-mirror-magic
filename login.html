@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Login | Riha Mirror Magic</title>
+
+  <!-- Fonts: Cormorant Garamond for Headings, Montserrat for Body & Inputs -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Customer Account Stylesheet (Elegant Teal & Mist Theme, Zero Animations) -->
+  <link rel="stylesheet" href="css/account.css">
+</head>
+<body class="account-theme">
+
+  <div class="auth-page-wrapper">
+    <div class="auth-card-box">
+      
+      <!-- Brand Header -->
+      <div class="auth-brand-header">
+        <a href="index.html" style="text-decoration: none; display: inline-block;">
+          <img src="assets/images/logo-placeholder.svg" alt="Riha Mirror Magic Logo" class="auth-brand-logo">
+          <h1 class="auth-brand-title">Riha Mirror Magic</h1>
+        </a>
+        <p class="auth-page-subtitle">Customer Account Login</p>
+      </div>
+
+      <!-- Feedback / Error Message Box -->
+      <div id="loginStatusMsg" class="status-msg-box" role="alert"></div>
+
+      <!-- Login Form -->
+      <form id="customerLoginForm" novalidate>
+        
+        <div class="form-group-item">
+          <label for="loginIdentifier" class="form-label-title">Email or Mobile Number</label>
+          <input type="text" 
+                 id="loginIdentifier" 
+                 class="form-input-control" 
+                 placeholder="e.g. customer@example.com or 9876543210" 
+                 required 
+                 autocomplete="username">
+        </div>
+
+        <div class="form-group-item">
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <label for="loginPassword" class="form-label-title">Password</label>
+            <button type="button" id="btnForgotPassword" class="forgot-password-link">Forgot Password?</button>
+          </div>
+          <div class="password-input-wrapper">
+            <input type="password" 
+                   id="loginPassword" 
+                   class="form-input-control" 
+                   placeholder="Enter your password" 
+                   required 
+                   autocomplete="current-password">
+            <button type="button" class="toggle-password-btn" data-target="loginPassword" aria-label="Toggle password visibility">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.75rem;">
+          <button type="submit" class="btn-teal-primary" id="btnLoginSubmit" style="width: 100%; height: 46px;">
+            Log In to Account
+          </button>
+        </div>
+
+      </form>
+
+      <!-- Footer Navigation Links -->
+      <div class="auth-footer-links">
+        <p style="margin-bottom: 0.75rem;">
+          Don't have a customer account? <a id="registerLink" href="register.html">Create an Account</a>
+        </p>
+        <p style="margin: 0;">
+          <a href="index.html" style="color: var(--teal-slate); text-decoration: none; font-size: 0.825rem;">
+            ← Return to Riha Mirror Magic Home
+          </a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Forgot Password Reset Modal -->
+  <div id="forgotPasswordModal" style="display: none; position: fixed; inset: 0; background-color: rgba(22, 78, 86, 0.6); z-index: 9999; align-items: center; justify-content: center; padding: 1.5rem;">
+    <div style="background-color: var(--teal-white); border-radius: 12px; border: 1.5px solid var(--teal-silver); max-width: 440px; width: 100%; padding: 2rem; box-sizing: border-box;">
+      <h3 style="font-family: var(--acc-font-heading); font-size: 1.6rem; color: var(--teal-deep); margin: 0 0 0.5rem 0;">Reset Customer Password</h3>
+      <p style="font-size: 0.85rem; color: var(--teal-slate); margin-bottom: 1.25rem;">
+        Enter your registered email address or mobile number to set a new password.
+      </p>
+
+      <div id="resetStatusMsg" class="status-msg-box" role="alert"></div>
+
+      <form id="resetPasswordForm" novalidate>
+        <div class="form-group-item">
+          <label for="resetIdentifier" class="form-label-title">Registered Email or Mobile</label>
+          <input type="text" id="resetIdentifier" class="form-input-control" required placeholder="customer@example.com">
+        </div>
+
+        <div class="form-group-item">
+          <label for="resetNewPassword" class="form-label-title">New Password (min 8 chars)</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="resetNewPassword" class="form-input-control" required minlength="8" placeholder="Enter new password">
+            <button type="button" class="toggle-password-btn" data-target="resetNewPassword" aria-label="Toggle password visibility">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+          <button type="button" class="btn-teal-outline" id="btnCancelReset" style="padding: 0.6rem 1.2rem;">Cancel</button>
+          <button type="submit" class="btn-teal-primary" id="btnSubmitReset" style="padding: 0.6rem 1.2rem;">Update Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check if already authenticated
+      const existingCustomer = getCurrentCustomer();
+      const urlParams = new URLSearchParams(window.location.search);
+      const redirectTarget = urlParams.get('redirect');
+      const serviceId = urlParams.get('serviceId');
+      const productId = urlParams.get('productId');
+
+      // Preserve query params for Register link
+      const registerLink = document.getElementById('registerLink');
+      if (registerLink && window.location.search) {
+        registerLink.href = 'register.html' + window.location.search;
+      }
+
+      function handleRedirect() {
+        if (redirectTarget === 'booking' && serviceId) {
+          window.location.href = `service-details.html?id=${encodeURIComponent(serviceId)}&action=book`;
+        } else if (redirectTarget === 'order' && productId) {
+          window.location.href = `product-details.html?id=${encodeURIComponent(productId)}&action=order`;
+        } else {
+          window.location.href = 'account.html';
+        }
+      }
+
+      if (existingCustomer) {
+        handleRedirect();
+        return;
+      }
+
+      // Password toggle buttons
+      document.querySelectorAll('.toggle-password-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.getAttribute('data-target');
+          const input = document.getElementById(targetId);
+          if (!input) return;
+
+          if (input.type === 'password') {
+            input.type = 'text';
+            btn.innerHTML = `
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            `;
+          } else {
+            input.type = 'password';
+            btn.innerHTML = `
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            `;
+          }
+        });
+      });
+
+      // Login form handler
+      const loginForm = document.getElementById('customerLoginForm');
+      const identifierInput = document.getElementById('loginIdentifier');
+      const passwordInput = document.getElementById('loginPassword');
+      const statusMsg = document.getElementById('loginStatusMsg');
+
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const idVal = identifierInput.value.trim();
+        const pwdVal = passwordInput.value;
+
+        if (!idVal || !pwdVal) {
+          showStatus('Please enter both your email/mobile and password.', 'error');
+          return;
+        }
+
+        try {
+          loginCustomer(idVal, pwdVal);
+          showStatus('Login successful! Redirecting to your account...', 'success');
+          setTimeout(() => {
+            handleRedirect();
+          }, 400);
+        } catch (err) {
+          showStatus(err.message || 'Login failed. Please check your credentials.', 'error');
+        }
+      });
+
+      function showStatus(msg, type) {
+        if (!statusMsg) return;
+        statusMsg.textContent = msg;
+        statusMsg.className = `status-msg-box ${type} visible`;
+        statusMsg.style.display = 'block';
+      }
+
+      // Forgot Password Modal
+      const btnForgotPassword = document.getElementById('btnForgotPassword');
+      const forgotPasswordModal = document.getElementById('forgotPasswordModal');
+      const btnCancelReset = document.getElementById('btnCancelReset');
+      const resetForm = document.getElementById('resetPasswordForm');
+      const resetIdentifier = document.getElementById('resetIdentifier');
+      const resetNewPassword = document.getElementById('resetNewPassword');
+      const resetStatusMsg = document.getElementById('resetStatusMsg');
+
+      if (btnForgotPassword && forgotPasswordModal) {
+        btnForgotPassword.addEventListener('click', () => {
+          forgotPasswordModal.style.display = 'flex';
+        });
+      }
+
+      if (btnCancelReset && forgotPasswordModal) {
+        btnCancelReset.addEventListener('click', () => {
+          forgotPasswordModal.style.display = 'none';
+        });
+      }
+
+      if (resetForm) {
+        resetForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const rId = resetIdentifier.value.trim().toLowerCase();
+          const rPwd = resetNewPassword.value;
+
+          if (!rId || !rPwd) {
+            showResetStatus('Please provide your registered ID and new password.', 'error');
+            return;
+          }
+
+          if (rPwd.length < 8) {
+            showResetStatus('New password must be at least 8 characters long.', 'error');
+            return;
+          }
+
+          try {
+            // Find customer in storage
+            const customers = getStorage('riha_customer_accounts', []);
+            const targetIndex = customers.findIndex(c => 
+              c.email.toLowerCase() === rId || 
+              c.mobile.replace(/\D/g, '') === rId.replace(/\D/g, '')
+            );
+
+            if (targetIndex === -1) {
+              showResetStatus('No customer account found with that email or mobile number.', 'error');
+              return;
+            }
+
+            customers[targetIndex].passwordHash = hashPassword(rPwd);
+            setStorage('riha_customer_accounts', customers);
+
+            showResetStatus('Password successfully reset! You can now log in.', 'success');
+            setTimeout(() => {
+              forgotPasswordModal.style.display = 'none';
+              resetForm.reset();
+              resetStatusMsg.style.display = 'none';
+              showStatus('Password updated successfully. Please enter your credentials to log in.', 'success');
+            }, 1200);
+          } catch (err) {
+            showResetStatus('Unable to reset password: ' + err.message, 'error');
+          }
+        });
+      }
+
+      function showResetStatus(msg, type) {
+        if (!resetStatusMsg) return;
+        resetStatusMsg.textContent = msg;
+        resetStatusMsg.className = `status-msg-box ${type} visible`;
+        resetStatusMsg.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

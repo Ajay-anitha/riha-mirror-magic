@@ -1,0 +1,577 @@
+/* ==========================================================================
+   Riha Mirror Magic - About Us Stylesheet (about.css)
+   Theme: Modern Silver Violet Luxury Palette
+     - Royal Violet:       #352044 (Headings, primary buttons, header, footer)
+     - Soft Violet:        #765783 (Secondary accents, subtle borders)
+     - Silver:             #C0C0C0 (Borders, separators)
+     - Light Silver:       #E9E9ED (Subtle lines, frames)
+     - White:              #FFFFFF (Clean content backgrounds)
+     - Very Light Lavender:#F4EFF5 (Alternating section backgrounds)
+   Fonts:
+     - Headings: Cormorant Garamond
+     - Body, Nav & Buttons: Montserrat
+
+   Strict Rules:
+     - NO animations of any kind (no hover movement, entrance effects, transitions).
+     - Strict alternating section order.
+     - Fully responsive across desktop, tablet, and mobile.
+   ========================================================================== */
+
+/* Strictly enforce zero animations across the About page */
+body.about-page,
+body.about-page * {
+  animation: none !important;
+  transition: none !important;
+}
+
+body.about-page {
+  background-color: var(--white);
+  color: #2D1E36;
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   SECTION 2: ABOUT HERO
+   Large beauty parlour photograph, clean balanced heading, genuine intro space.
+   ========================================================================== */
+.about-hero-section {
+  position: relative;
+  background-color: var(--royal-violet);
+  color: var(--white);
+  padding: 5rem 0 5.5rem 0;
+  overflow: hidden;
+  border-bottom: 2px solid var(--silver);
+}
+
+.about-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 3.5rem;
+}
+
+.about-hero-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--silver);
+  margin-bottom: 1rem;
+}
+
+.about-hero-badge::before {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 1.5px;
+  background-color: var(--silver);
+}
+
+.about-hero-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.15;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: 0.02em;
+}
+
+.about-hero-intro {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--light-silver);
+  margin: 0 0 1.5rem 0;
+}
+
+.about-hero-intro:last-child {
+  margin-bottom: 0;
+}
+
+.about-hero-image-wrap {
+  width: 100%;
+  border-radius: 12px;
+  border: 2px solid var(--silver);
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(35, 20, 46, 0.35);
+  background-color: #23142E;
+  aspect-ratio: 16 / 10;
+}
+
+.about-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ==========================================================================
+   SECTION 3: OUR STORY
+   Image on LEFT, text on RIGHT.
+   Background: White
+   ========================================================================== */
+.about-story-section {
+  background-color: var(--white);
+  padding: 5.5rem 0;
+  border-bottom: 1px solid var(--light-silver);
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+}
+
+.story-image-wrap {
+  width: 100%;
+  border-radius: 12px;
+  border: 1.5px solid var(--silver);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(53, 32, 68, 0.08);
+  aspect-ratio: 1 / 1;
+  background-color: var(--light-lavender);
+}
+
+.story-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.story-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-label-tag {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--soft-violet);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.section-label-tag::before {
+  content: '';
+  width: 24px;
+  height: 1.5px;
+  background-color: var(--soft-violet);
+}
+
+.story-heading,
+.parlour-heading,
+.approach-heading,
+.work-heading,
+.contact-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 600;
+  color: var(--royal-violet);
+  line-height: 1.2;
+  margin: 0 0 1.5rem 0;
+}
+
+.story-body-text,
+.parlour-body-text,
+.approach-body-text {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #3C2B47;
+  margin: 0 0 1.25rem 0;
+}
+
+.story-body-text:last-child,
+.parlour-body-text:last-child,
+.approach-body-text:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   SECTION 4: ABOUT THE PARLOUR
+   Alternating layout: Text on LEFT, image on RIGHT.
+   Background: Very Light Lavender (#F4EFF5)
+   ========================================================================== */
+.about-parlour-section {
+  background-color: var(--light-lavender);
+  padding: 5.5rem 0;
+  border-bottom: 1px solid var(--light-silver);
+}
+
+.parlour-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+}
+
+.parlour-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.parlour-image-wrap {
+  width: 100%;
+  border-radius: 12px;
+  border: 1.5px solid var(--silver);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(53, 32, 68, 0.08);
+  aspect-ratio: 1 / 1;
+  background-color: var(--white);
+}
+
+.parlour-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ==========================================================================
+   SECTION 5: OUR SERVICES & APPROACH
+   Image on LEFT, text on RIGHT with "Explore Our Services" button.
+   Background: White
+   ========================================================================== */
+.about-services-approach-section {
+  background-color: var(--white);
+  padding: 5.5rem 0;
+  border-bottom: 1px solid var(--light-silver);
+}
+
+.approach-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+}
+
+.approach-image-wrap {
+  width: 100%;
+  border-radius: 12px;
+  border: 1.5px solid var(--silver);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(53, 32, 68, 0.08);
+  aspect-ratio: 16 / 11;
+  background-color: var(--light-lavender);
+}
+
+.approach-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.approach-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-about-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.95rem 2rem;
+  background-color: var(--royal-violet);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 6px;
+  border: 1.5px solid var(--royal-violet);
+  margin-top: 1.75rem;
+  align-self: flex-start;
+  box-sizing: border-box;
+}
+
+.btn-about-action:hover {
+  background-color: var(--soft-violet);
+  border-color: var(--soft-violet);
+  color: var(--white);
+}
+
+.btn-about-action svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+/* ==========================================================================
+   SECTION 6: OUR WORK
+   Three-image row on desktop, "View Our Gallery" button.
+   Background: Very Light Lavender (#F4EFF5)
+   ========================================================================== */
+.about-work-section {
+  background-color: var(--light-lavender);
+  padding: 5.5rem 0;
+  border-bottom: 1px solid var(--light-silver);
+  text-align: center;
+}
+
+.work-header-wrap {
+  max-width: 680px;
+  margin: 0 auto 3rem auto;
+}
+
+.work-intro-text {
+  font-size: 1.05rem;
+  color: #523B60;
+  margin: 0.75rem 0 0 0;
+  line-height: 1.6;
+}
+
+.work-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.work-card-frame {
+  background-color: var(--white);
+  border: 1.5px solid var(--silver);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(53, 32, 68, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.work-card-img-wrap {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background-color: #23142E;
+  overflow: hidden;
+}
+
+.work-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.work-card-caption {
+  padding: 1.25rem 1rem;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--royal-violet);
+  letter-spacing: 0.03em;
+  border-top: 1px solid var(--light-lavender);
+}
+
+.work-action-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   SECTION 7: CONTACT & LOCATION
+   Desktop: Contact info on LEFT, Google Maps on RIGHT.
+   Background: White
+   ========================================================================== */
+.about-contact-section {
+  background-color: var(--white);
+  padding: 5.5rem 0;
+  border-bottom: 1px solid var(--light-silver);
+}
+
+.contact-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 4rem;
+}
+
+.contact-info-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-intro-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #4A3557;
+  margin: 0 0 2rem 0;
+}
+
+.contact-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-detail-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  background-color: var(--light-lavender);
+  border: 1.5px solid var(--silver);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  box-sizing: border-box;
+}
+
+.contact-icon-bubble {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--royal-violet);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-icon-bubble svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.contact-card-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--soft-violet);
+  margin-bottom: 0.25rem;
+}
+
+.contact-card-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--royal-violet);
+  text-decoration: none;
+  line-height: 1.5;
+  display: block;
+}
+
+.contact-card-value:hover {
+  color: var(--soft-violet);
+  text-decoration: underline;
+}
+
+/* Map Column (Right) */
+.contact-map-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.map-frame-box {
+  width: 100%;
+  height: 460px;
+  border-radius: 12px;
+  border: 1.5px solid var(--silver);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(53, 32, 68, 0.08);
+  background-color: var(--light-lavender);
+}
+
+.map-frame-box iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Tablet & Mobile)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .about-hero-grid,
+  .story-grid,
+  .parlour-grid,
+  .approach-grid,
+  .contact-layout-grid {
+    gap: 2.5rem;
+  }
+
+  .work-gallery-grid {
+    gap: 1.25rem;
+  }
+
+  .map-frame-box {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-hero-section,
+  .about-story-section,
+  .about-parlour-section,
+  .about-services-approach-section,
+  .about-work-section,
+  .about-contact-section {
+    padding: 3.5rem 0;
+  }
+
+  /* Stack All 2-Column Sections Vertically */
+  .about-hero-grid,
+  .story-grid,
+  .parlour-grid,
+  .approach-grid,
+  .contact-layout-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* Mobile Section Order Specifics:
+     - Our Story: Image first, text below it
+     - About the Parlour: Text and image stacked vertically
+  */
+  .story-grid .story-image-wrap {
+    order: 1;
+  }
+  .story-grid .story-content {
+    order: 2;
+  }
+
+  .parlour-grid .parlour-content {
+    order: 1;
+  }
+  .parlour-grid .parlour-image-wrap {
+    order: 2;
+  }
+
+  /* Our Work Grid: 2 columns on tablet/large mobile, 1 column on phone */
+  .work-gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .map-frame-box {
+    height: 320px;
+  }
+
+  .btn-about-action {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8E2635"/>
+      <stop offset="50%" stop-color="#5F1722"/>
+      <stop offset="100%" stop-color="#370C13"/>
+    </linearGradient>
+    <linearGradient id="champagneBdr" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFDFC"/>
+      <stop offset="50%" stop-color="#D8A84E"/>
+      <stop offset="100%" stop-color="#8E2635"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bgGrad)"/>
+  <rect x="30" y="30" width="740" height="540" rx="16" stroke="url(#champagneBdr)" stroke-width="1.5" opacity="0.65"/>
+  
+  <circle cx="400" cy="220" r="90" stroke="#D8A84E" stroke-width="1.5" opacity="0.5" fill="none"/>
+  <circle cx="400" cy="220" r="65" stroke="#F5E8D0" stroke-width="1" stroke-dasharray="4 3" opacity="0.6" fill="none"/>
+  <polygon points="400,165 445,220 400,275 355,220" stroke="#D8A84E" stroke-width="1.5" opacity="0.8" fill="none"/>
+  
+  <text x="400" y="370" font-family="'Montserrat', sans-serif" font-size="13" font-weight="600" fill="#D8A84E" text-anchor="middle" letter-spacing="3">BRIDAL ARTISTRY</text>
+  <text x="400" y="415" font-family="'Cormorant Garamond', Georgia, serif" font-size="28" font-weight="600" fill="#FFFDFC" text-anchor="middle" letter-spacing="1.5">SIGNATURE BRIDAL MAKEUP</text>
+  <text x="400" y="455" font-family="'Montserrat', sans-serif" font-size="14" font-weight="300" fill="#F5E8D0" text-anchor="middle" opacity="0.85">Bespoke couture bridal styling with high-definition artistry and luxury draping.</text>
+</svg>
