@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450" fill="none">
+  <defs>
+    <linearGradient id="catBridalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8E2635"/>
+      <stop offset="50%" stop-color="#641723"/>
+      <stop offset="100%" stop-color="#3A0D14"/>
+    </linearGradient>
+    <linearGradient id="goldAcc3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFDFC"/>
+      <stop offset="50%" stop-color="#D8A84E"/>
+      <stop offset="100%" stop-color="#B83A45"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#catBridalGrad)"/>
+  <rect x="25" y="25" width="550" height="400" rx="16" stroke="url(#goldAcc3)" stroke-width="1.5" opacity="0.6"/>
+  
+  <!-- Silhouette for Bridal & Makeup -->
+  <g stroke="#D8A84E" stroke-width="2" fill="none" opacity="0.75">
+    <path d="M 230,130 Q 300,90 370,130 Q 380,240 300,270 Q 220,240 230,130 Z"/>
+    <ellipse cx="300" cy="180" rx="35" ry="45"/>
+    <circle cx="300" cy="85" r="4" fill="#D8A84E"/>
+    <path d="M 270,105 L 330,105"/>
+  </g>
+  
+  <text x="300" y="340" font-family="'Cormorant Garamond', Georgia, serif" font-size="28" font-weight="600" fill="#FFFDFC" text-anchor="middle" letter-spacing="2">
+    BRIDAL &amp; ARTISTRY
+  </text>
+  <text x="300" y="375" font-family="'Montserrat', sans-serif" font-size="12" font-weight="500" fill="#D8A84E" text-anchor="middle" letter-spacing="3">
+    CATEGORY
+  </text>
+</svg>

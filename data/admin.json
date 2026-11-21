@@ -1,0 +1,9 @@
+{
+  "id": "admin_primary",
+  "email": "admin@rihamirrormagic.com",
+  "username": "admin",
+  "passwordHash": "bbb9a318155a875c6d40146e594fc63ddea0f6dc4729882756e98767643a23bd",
+  "name": "Salon Administrator",
+  "role": "admin",
+  "createdAt": "2026-11-18T17:58:20.213Z"
+}

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100" width="900" height="1100" fill="none">
+  <defs>
+    <linearGradient id="aboutGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3C244D"/>
+      <stop offset="50%" stop-color="#352044"/>
+      <stop offset="100%" stop-color="#22132C"/>
+    </linearGradient>
+    <linearGradient id="aboutSilver" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="50%" stop-color="#C0C0C0"/>
+      <stop offset="100%" stop-color="#E9E9ED"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1100" fill="url(#aboutGrad)"/>
+
+  <!-- Arch Frame -->
+  <path d="M 80,1020 L 80,450 A 370,370 0 0,1 820,450 L 820,1020 Z" fill="none" stroke="url(#aboutSilver)" stroke-width="2" opacity="0.35"/>
+  <path d="M 100,1000 L 100,460 A 350,350 0 0,1 800,460 L 800,1000 Z" fill="none" stroke="#E9E9ED" stroke-width="0.8" stroke-dasharray="5 3" opacity="0.25"/>
+
+  <!-- Aesthetic Portrait Silhouette Motif -->
+  <g opacity="0.35" stroke="url(#aboutSilver)" stroke-width="2" fill="none">
+    <ellipse cx="450" cy="510" rx="90" ry="120"/>
+    <path d="M 330,730 C 330,620 400,600 450,600 C 500,600 570,620 570,730"/>
+    <circle cx="450" cy="380" r="14" fill="#C0C0C0"/>
+  </g>
+
+  <text x="450" y="670" font-family="'Cormorant Garamond', Georgia, serif" font-size="26" font-weight="600" fill="#E9E9ED" text-anchor="middle" letter-spacing="3" opacity="0.6">
+    ABOUT RIHA
+  </text>
+  <text x="450" y="700" font-family="'Montserrat', sans-serif" font-size="12" fill="#C0C0C0" text-anchor="middle" letter-spacing="2" opacity="0.4">
+    PHOTOGRAPH PLACEHOLDER
+  </text>
+</svg>

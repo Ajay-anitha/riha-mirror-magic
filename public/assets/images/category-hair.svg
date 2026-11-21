@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450" fill="none">
+  <defs>
+    <linearGradient id="catHairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8E2635"/>
+      <stop offset="60%" stop-color="#5C1621"/>
+      <stop offset="100%" stop-color="#3A0D14"/>
+    </linearGradient>
+    <linearGradient id="goldAcc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5E8D0"/>
+      <stop offset="50%" stop-color="#D8A84E"/>
+      <stop offset="100%" stop-color="#8E2635"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#catHairGrad)"/>
+  <rect x="25" y="25" width="550" height="400" rx="16" stroke="url(#goldAcc)" stroke-width="1.5" opacity="0.6"/>
+  
+  <!-- Silhouette for Hair Styling -->
+  <g stroke="#D8A84E" stroke-width="2" fill="none" opacity="0.75">
+    <circle cx="300" cy="180" r="65"/>
+    <path d="M 240,240 Q 300,140 360,240"/>
+    <path d="M 300,115 L 300,245"/>
+    <path d="M 230,180 Q 300,160 370,180"/>
+    <path d="M 260,260 C 260,320 340,320 340,260"/>
+  </g>
+  
+  <text x="300" y="340" font-family="'Cormorant Garamond', Georgia, serif" font-size="28" font-weight="600" fill="#FFFDFC" text-anchor="middle" letter-spacing="2">
+    HAIR CARE &amp; STYLING
+  </text>
+  <text x="300" y="375" font-family="'Montserrat', sans-serif" font-size="12" font-weight="500" fill="#D8A84E" text-anchor="middle" letter-spacing="3">
+    CATEGORY
+  </text>
+</svg>

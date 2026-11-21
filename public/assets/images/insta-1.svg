@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" fill="none">
+  <defs>
+    <linearGradient id="igGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3C244D"/>
+      <stop offset="100%" stop-color="#24152F"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#igGrad1)"/>
+  <rect x="20" y="20" width="560" height="560" rx="8" stroke="#C0C0C0" stroke-width="1" opacity="0.3"/>
+  <circle cx="300" cy="270" r="70" stroke="#E9E9ED" stroke-width="1.5" opacity="0.4"/>
+  <path d="M 270,270 L 300,240 L 330,270" stroke="#C0C0C0" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <text x="300" y="370" font-family="'Cormorant Garamond', Georgia, serif" font-size="20" fill="#E9E9ED" text-anchor="middle" letter-spacing="2" opacity="0.7">HAIR ARTISTRY</text>
+  <text x="300" y="400" font-family="'Montserrat', sans-serif" font-size="11" fill="#C0C0C0" text-anchor="middle" letter-spacing="1.5" opacity="0.5">INSTAGRAM POST 1</text>
+</svg>

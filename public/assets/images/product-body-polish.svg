@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" fill="none">
+  <defs>
+    <linearGradient id="bgProdGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B3B6F"/>
+      <stop offset="50%" stop-color="#142850"/>
+      <stop offset="100%" stop-color="#0A192F"/>
+    </linearGradient>
+    <linearGradient id="blueBdr" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="50%" stop-color="#3A7BD5"/>
+      <stop offset="100%" stop-color="#1B3B6F"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bgProdGrad)"/>
+  <rect x="30" y="30" width="740" height="540" rx="16" stroke="url(#blueBdr)" stroke-width="1.5" opacity="0.65"/>
+  
+  <g stroke="#3A7BD5" stroke-width="1.5" fill="none" opacity="0.6">
+    <rect x="340" y="140" width="120" height="150" rx="12"/>
+    <rect x="375" y="100" width="50" height="40" rx="6"/>
+    <circle cx="400" cy="215" r="30"/>
+  </g>
+  
+  <text x="400" y="370" font-family="'Montserrat', sans-serif" font-size="13" font-weight="600" fill="#3A7BD5" text-anchor="middle" letter-spacing="3">BODY CARE</text>
+  <text x="400" y="415" font-family="'Cormorant Garamond', Georgia, serif" font-size="28" font-weight="600" fill="#FFFFFF" text-anchor="middle" letter-spacing="1.5">ROSE & CHAMPAGNE BODY POLISH</text>
+  <text x="400" y="455" font-family="'Montserrat', sans-serif" font-size="14" font-weight="400" fill="#DDEAF6" text-anchor="middle" opacity="0.9">200 g • Organic Sugar Exfoliant</text>
+</svg>

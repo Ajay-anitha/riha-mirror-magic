@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salon Admin Portal | Riha Mirror Magic</title>
+
+  <!-- Google Fonts: Cormorant Garamond & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Admin Stylesheet (Zero Animations, High Contrast) -->
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       SECTION 1: ADMIN LOGIN SCREEN (Shown if not logged in)
+       ======================================================================== -->
+  <div id="adminLoginSection" class="admin-login-wrapper">
+    <div class="admin-login-card">
+      <div class="admin-login-header">
+        <img src="assets/images/logo.png" alt="Riha Mirror Magic" style="width: 48px; height: 54px; object-fit: contain; margin-bottom: 0.5rem;">
+        <h1 class="admin-brand-title">Riha Mirror Magic</h1>
+        <p class="admin-brand-subtitle">Salon Administrator Portal</p>
+      </div>
+
+      <div id="adminLoginAlert" class="admin-alert error" role="alert"></div>
+
+      <form id="adminLoginForm" novalidate>
+        <div class="admin-form-group">
+          <label for="adminUserIdentifier" class="admin-label">Admin Email or Username</label>
+          <input type="text" id="adminUserIdentifier" class="admin-input" placeholder="admin@rihamirrormagic.com" required autocomplete="username">
+        </div>
+
+        <div class="admin-form-group">
+          <label for="adminUserPassword" class="admin-label">Password</label>
+          <input type="password" id="adminUserPassword" class="admin-input" placeholder="••••••••••••" required autocomplete="current-password">
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+          <button type="submit" class="btn-adm btn-adm-primary" style="width: 100%; height: 44px; justify-content: center; font-size: 0.95rem;">
+            Sign In to Admin Console
+          </button>
+        </div>
+      </form>
+
+      <div style="margin-top: 1.5rem; text-align: center; border-top: 1px solid var(--admin-border); padding-top: 1.25rem;">
+        <p style="font-size: 0.78rem; color: var(--admin-text-muted); margin: 0 0 0.5rem 0;">
+          Default Admin: <code>admin@rihamirrormagic.com</code> / <code>Admin@Riha2026</code>
+        </p>
+        <a href="index.html" class="admin-btn-link">← Return to Public Website</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       SECTION 2: ADMIN DASHBOARD (Shown when logged in)
+       ======================================================================== -->
+  <div id="adminDashboardSection" style="display: none; min-height: 100vh; flex-direction: column;">
+    
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <a href="admin.html" class="admin-topbar-brand">
+          <img src="assets/images/logo.png" alt="Riha Mirror Magic" class="admin-topbar-logo" style="width: 36px; height: 42px; object-fit: contain;">
+          <span class="admin-topbar-title">Riha Mirror Magic</span>
+        </a>
+        <span class="admin-topbar-pill">Admin Console</span>
+        <span id="dbStatusBadge" style="background-color: rgba(16, 185, 129, 0.2); color: #6EE7B7; border: 1px solid rgba(16, 185, 129, 0.4); font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">
+          Live Server Connected
+        </span>
+      </div>
+
+      <div class="admin-topbar-actions">
+        <a href="index.html" target="_blank" class="admin-btn-link">Open Public Website ↗</a>
+        <button type="button" id="btnRefreshData" class="btn-adm btn-adm-secondary" style="font-size: 0.78rem; padding: 0.35rem 0.65rem;">
+          ↻ Refresh
+        </button>
+        <span class="admin-user-info" id="adminUserDisplay">admin@rihamirrormagic.com</span>
+        <button type="button" id="btnAdminLogout" class="admin-btn-logout">Logout</button>
+      </div>
+    </header>
+
+    <!-- Tab Navigation -->
+    <nav class="admin-tab-nav" aria-label="Admin Navigation Tabs">
+      <button type="button" class="admin-tab-btn active" data-tab="appointments" id="tabBtnAppointments">
+        Salon Appointment Requests
+        <span class="admin-tab-badge" id="badgePendingAppointments">0</span>
+      </button>
+      <button type="button" class="admin-tab-btn" data-tab="orders" id="tabBtnOrders">
+        Product Order Requests
+        <span class="admin-tab-badge" id="badgePendingOrders">0</span>
+      </button>
+      <button type="button" class="admin-tab-btn" data-tab="customers" id="tabBtnCustomers">
+        Customer Accounts
+      </button>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="admin-container">
+      
+      <!-- Feedback Banner -->
+      <div id="adminGlobalAlert" class="admin-alert" role="alert"></div>
+
+      <!-- ====================================================================
+           VIEW 1: SALON APPOINTMENT REQUESTS
+           ==================================================================== -->
+      <section id="viewAppointments" style="display: block;">
+        
+        <!-- Metrics -->
+        <div class="admin-metrics-grid">
+          <div class="metric-card">
+            <h3 class="metric-card-title">Total Appointments</h3>
+            <p class="metric-card-value" id="metricApptTotal">0</p>
+          </div>
+          <div class="metric-card pending">
+            <h3 class="metric-card-title">Pending Approval</h3>
+            <p class="metric-card-value" id="metricApptPending" style="color: var(--admin-amber);">0</p>
+          </div>
+          <div class="metric-card confirmed">
+            <h3 class="metric-card-title">Confirmed Visits</h3>
+            <p class="metric-card-value" id="metricApptConfirmed" style="color: var(--admin-green);">0</p>
+          </div>
+          <div class="metric-card rejected">
+            <h3 class="metric-card-title">Declined Requests</h3>
+            <p class="metric-card-value" id="metricApptRejected" style="color: var(--admin-red);">0</p>
+          </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="admin-toolbar">
+          <div class="admin-filter-group" id="apptFilterPills">
+            <button type="button" class="admin-filter-pill active" data-filter="ALL">All Bookings</button>
+            <button type="button" class="admin-filter-pill" data-filter="PENDING">Pending (Requires Action)</button>
+            <button type="button" class="admin-filter-pill" data-filter="CONFIRMED">Confirmed</button>
+            <button type="button" class="admin-filter-pill" data-filter="COMPLETED">Completed</button>
+            <button type="button" class="admin-filter-pill" data-filter="REJECTED">Declined</button>
+          </div>
+
+          <div>
+            <input type="text" id="apptSearchInput" class="admin-search-input" placeholder="Search by customer, phone, service, or booking ref...">
+          </div>
+        </div>
+
+        <!-- Appointments Table -->
+        <div class="admin-table-container">
+          <table class="admin-table" id="appointmentsTable">
+            <thead>
+              <tr>
+                <th>Booking Ref</th>
+                <th>Customer</th>
+                <th>Requested Service</th>
+                <th>Schedule</th>
+                <th>Price &amp; Notes</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="appointmentsTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+          <div id="appointmentsEmptyState" class="admin-empty-state" style="display: none;">
+            <svg class="admin-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+              <path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path>
+            </svg>
+            <p style="font-weight: 600; margin: 0 0 0.25rem 0;">No appointment requests found matching this filter.</p>
+            <p style="font-size: 0.85rem; margin: 0;">New customer booking submissions will appear here awaiting approval.</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ====================================================================
+           VIEW 2: PRODUCT ORDER REQUESTS
+           ==================================================================== -->
+      <section id="viewOrders" style="display: none;">
+        
+        <!-- Metrics -->
+        <div class="admin-metrics-grid">
+          <div class="metric-card">
+            <h3 class="metric-card-title">Total Orders</h3>
+            <p class="metric-card-value" id="metricOrdTotal">0</p>
+          </div>
+          <div class="metric-card pending">
+            <h3 class="metric-card-title">Pending Approval</h3>
+            <p class="metric-card-value" id="metricOrdPending" style="color: var(--admin-amber);">0</p>
+          </div>
+          <div class="metric-card approved">
+            <h3 class="metric-card-title">Approved (Payment Pending)</h3>
+            <p class="metric-card-value" id="metricOrdApproved" style="color: var(--admin-purple);">0</p>
+          </div>
+          <div class="metric-card paid">
+            <h3 class="metric-card-title">Paid via UPI / Processing</h3>
+            <p class="metric-card-value" id="metricOrdPaid" style="color: var(--admin-blue);">0</p>
+          </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="admin-toolbar">
+          <div class="admin-filter-group" id="ordFilterPills">
+            <button type="button" class="admin-filter-pill active" data-filter="ALL">All Orders</button>
+            <button type="button" class="admin-filter-pill" data-filter="PENDING">Pending (Requires Action)</button>
+            <button type="button" class="admin-filter-pill" data-filter="APPROVED">Approved (Payment Pending)</button>
+            <button type="button" class="admin-filter-pill" data-filter="PROCESSING">Paid / Processing</button>
+            <button type="button" class="admin-filter-pill" data-filter="SHIPPED">Shipped</button>
+            <button type="button" class="admin-filter-pill" data-filter="DELIVERED">Delivered</button>
+            <button type="button" class="admin-filter-pill" data-filter="REJECTED">Declined</button>
+          </div>
+
+          <div>
+            <input type="text" id="ordSearchInput" class="admin-search-input" placeholder="Search by customer, phone, product, or order ref...">
+          </div>
+        </div>
+
+        <!-- Orders Table -->
+        <div class="admin-table-container">
+          <table class="admin-table" id="ordersTable">
+            <thead>
+              <tr>
+                <th>Order Ref</th>
+                <th>Customer &amp; Address</th>
+                <th>Item &amp; Total</th>
+                <th>Payment Status &amp; UPI Ref</th>
+                <th>Delivery Status</th>
+                <th>Order Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+          <div id="ordersEmptyState" class="admin-empty-state" style="display: none;">
+            <svg class="admin-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+              <path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <p style="font-weight: 600; margin: 0 0 0.25rem 0;">No product orders found matching this filter.</p>
+            <p style="font-size: 0.85rem; margin: 0;">New product orders submitted by customers will appear here.</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ====================================================================
+           VIEW 3: REGISTERED CUSTOMER ACCOUNTS
+           ==================================================================== -->
+      <section id="viewCustomers" style="display: none;">
+        <div class="admin-toolbar">
+          <div>
+            <h2 style="font-size: 1.15rem; font-weight: 700; margin: 0; color: var(--admin-slate);">Registered Client Directory</h2>
+            <p style="font-size: 0.85rem; color: var(--admin-text-muted); margin: 0.2rem 0 0 0;">Verified client profiles stored in Riha Mirror Magic database</p>
+          </div>
+          <div>
+            <input type="text" id="custSearchInput" class="admin-search-input" placeholder="Search customers by name, email, or mobile...">
+          </div>
+        </div>
+
+        <div class="admin-table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Customer ID</th>
+                <th>Full Name</th>
+                <th>Mobile Number</th>
+                <th>Email Address</th>
+                <th>Member Since</th>
+                <th>Total Bookings</th>
+                <th>Total Orders</th>
+              </tr>
+            </thead>
+            <tbody id="customersTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+          <div id="customersEmptyState" class="admin-empty-state" style="display: none;">
+            <p style="font-weight: 600; margin: 0;">No customer accounts registered yet.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ========================================================================
+       MODAL: REJECTION REASON PROMPT
+       ======================================================================== -->
+  <div id="adminRejectModal" class="admin-modal-overlay">
+    <div class="admin-modal-box">
+      <div class="admin-modal-header">
+        <h3 class="admin-modal-title" id="rejectModalHeading">Decline Request</h3>
+        <button type="button" class="admin-modal-close" id="btnCloseRejectModal">&times;</button>
+      </div>
+
+      <p style="font-size: 0.875rem; color: var(--admin-text-muted); margin-bottom: 0.75rem;">
+        You are declining <strong id="rejectTargetLabel" style="color: var(--admin-text-main);">Item</strong>. Please provide a clear reason for the customer:
+      </p>
+
+      <!-- Quick Preset Reason Chips -->
+      <div style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--admin-text-muted);">
+        Quick Select Reason:
+      </div>
+      <div class="quick-reasons-wrap" id="quickReasonsContainer">
+        <!-- Injected based on type (Appointment vs Order) -->
+      </div>
+
+      <form id="adminRejectForm">
+        <input type="hidden" id="rejectTargetId">
+        <input type="hidden" id="rejectTargetType">
+
+        <div class="admin-form-group">
+          <label for="rejectReasonTextarea" class="admin-label">Reason for Rejection *</label>
+          <textarea id="rejectReasonTextarea" class="admin-input" rows="3" placeholder="Enter reason explaining why this request cannot be accepted..." required></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.25rem;">
+          <button type="button" class="btn-adm btn-adm-secondary" id="btnCancelRejectModal">Cancel</button>
+          <button type="submit" class="btn-adm btn-adm-reject">Confirm Rejection</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
