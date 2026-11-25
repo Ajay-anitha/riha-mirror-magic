@@ -45,12 +45,11 @@ export default function HomeServices() {
               className="category-service-card compact-service-card special-service-card"
               title={`View ${service.name} Special Service`}
             >
-              {/* Mentioned as Special Service in a Box */}
-              <div className="special-service-box-tag">
-                <span>Special Service</span>
-              </div>
-
               <div className="category-card-img-wrap compact-img-wrap special-img-wrap">
+                {/* Mentioned as Special Service in a Box */}
+                <div className="special-service-box-tag">
+                  <span>Special Service</span>
+                </div>
                 <img 
                   src={service.image} 
                   alt={service.name} 
@@ -69,7 +68,8 @@ export default function HomeServices() {
         {/* View All Services Call-to-Action */}
         <div className="home-services-all-cta">
           <Link to="/services" className="btn btn-primary touch-target">
-            <span>View Full Service Menu &amp; Details &rarr;</span>
+            <span className="cta-text-desktop">View Full Service Menu &amp; Details &rarr;</span>
+            <span className="cta-text-mobile">View All Services &rarr;</span>
           </Link>
         </div>
 

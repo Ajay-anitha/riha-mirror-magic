@@ -1,24 +1,44 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" fill="none">
   <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#8E2635"/>
-      <stop offset="50%" stop-color="#5F1722"/>
-      <stop offset="100%" stop-color="#370C13"/>
+    <linearGradient id="bridalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#341A44"/>
+      <stop offset="50%" stop-color="#241030"/>
+      <stop offset="100%" stop-color="#15081E"/>
     </linearGradient>
-    <linearGradient id="champagneBdr" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FFFDFC"/>
-      <stop offset="50%" stop-color="#D8A84E"/>
-      <stop offset="100%" stop-color="#8E2635"/>
+    <linearGradient id="goldSheen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF5E5"/>
+      <stop offset="50%" stop-color="#C5A46D"/>
+      <stop offset="100%" stop-color="#8E6A34"/>
     </linearGradient>
   </defs>
-  <rect width="800" height="600" fill="url(#bgGrad)"/>
-  <rect x="30" y="30" width="740" height="540" rx="16" stroke="url(#champagneBdr)" stroke-width="1.5" opacity="0.65"/>
-  
-  <circle cx="400" cy="220" r="90" stroke="#D8A84E" stroke-width="1.5" opacity="0.5" fill="none"/>
-  <circle cx="400" cy="220" r="65" stroke="#F5E8D0" stroke-width="1" stroke-dasharray="4 3" opacity="0.6" fill="none"/>
-  <polygon points="400,165 445,220 400,275 355,220" stroke="#D8A84E" stroke-width="1.5" opacity="0.8" fill="none"/>
-  
-  <text x="400" y="370" font-family="'Montserrat', sans-serif" font-size="13" font-weight="600" fill="#D8A84E" text-anchor="middle" letter-spacing="3">BRIDAL ARTISTRY</text>
-  <text x="400" y="415" font-family="'Cormorant Garamond', Georgia, serif" font-size="28" font-weight="600" fill="#FFFDFC" text-anchor="middle" letter-spacing="1.5">SIGNATURE BRIDAL MAKEUP</text>
-  <text x="400" y="455" font-family="'Montserrat', sans-serif" font-size="14" font-weight="300" fill="#F5E8D0" text-anchor="middle" opacity="0.85">Bespoke couture bridal styling with high-definition artistry and luxury draping.</text>
+
+  <!-- Full Rectangular Background -->
+  <rect width="800" height="600" fill="url(#bridalGrad)"/>
+
+  <!-- Rectangular Luxury Borders (Strictly Zero Circles) -->
+  <rect x="25" y="25" width="750" height="550" rx="4" stroke="url(#goldSheen)" stroke-width="1.5" opacity="0.75"/>
+  <rect x="38" y="38" width="724" height="524" rx="2" stroke="#C5A46D" stroke-width="1" stroke-dasharray="6 4" opacity="0.4"/>
+
+  <!-- Corner Ornamental Rectangular Accents -->
+  <line x1="48" y1="48" x2="80" y2="48" stroke="#C5A46D" stroke-width="1.5"/>
+  <line x1="48" y1="48" x2="48" y2="80" stroke="#C5A46D" stroke-width="1.5"/>
+  <line x1="752" y1="48" x2="720" y2="48" stroke="#C5A46D" stroke-width="1.5"/>
+  <line x1="752" y1="48" x2="752" y2="80" stroke="#C5A46D" stroke-width="1.5"/>
+  <line x1="48" y1="552" x2="80" y2="552" stroke="#C5A46D" stroke-width="1.5"/>
+  <line x1="48" y1="552" x2="48" y2="520" stroke="#C5A46D" stroke-width="1.5"/>
+  <line x1="752" y1="552" x2="720" y2="552" stroke="#C5A46D" stroke-width="1.5"/>
+  <line x1="752" y1="552" x2="752" y2="520" stroke="#C5A46D" stroke-width="1.5"/>
+
+  <!-- Rectangular Diamond Geometry Artwork -->
+  <polygon points="400,120 480,200 400,280 320,200" stroke="url(#goldSheen)" stroke-width="2" fill="none" opacity="0.85"/>
+  <polygon points="400,140 460,200 400,260 340,200" stroke="#F3EDF9" stroke-width="1" stroke-dasharray="4 3" fill="none" opacity="0.65"/>
+  <rect x="375" y="175" width="50" height="50" transform="rotate(45 400 200)" stroke="#C5A46D" stroke-width="1" opacity="0.5"/>
+  <path d="M 370,200 L 430,200 M 400,170 L 400,230" stroke="#C5A46D" stroke-width="1.5" stroke-linecap="square"/>
+  <line x1="260" y1="200" x2="305" y2="200" stroke="#C5A46D" stroke-width="1.5" opacity="0.7"/>
+  <line x1="495" y1="200" x2="540" y2="200" stroke="#C5A46D" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Typography -->
+  <text x="400" y="360" font-family="'Montserrat', sans-serif" font-size="13" font-weight="700" fill="#C5A46D" text-anchor="middle" letter-spacing="4">LUXURY MAKEUP</text>
+  <text x="400" y="415" font-family="'Cormorant Garamond', Georgia, serif" font-size="34" font-weight="600" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">BRIDAL &amp; OCCASION ARTISTRY</text>
+  <text x="400" y="460" font-family="'Montserrat', sans-serif" font-size="14" font-weight="300" fill="#E6D7F2" text-anchor="middle" opacity="0.9">Flawless high-definition bridal makeovers and party glam</text>
 </svg>

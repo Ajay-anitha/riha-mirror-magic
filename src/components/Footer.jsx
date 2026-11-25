@@ -3,18 +3,11 @@ import { Link } from 'react-router-dom';
 import '../styles/footer.css';
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="site-footer horizontal-footer">
       <div className="container footer-h-container">
         {/* Main Horizontal Content */}
         <div className="footer-h-main">
-          {/* Brand */}
-          <div className="footer-h-brand">
-            <span className="footer-brand-title">Riha Mirror Magic</span>
-          </div>
-
           {/* Quick Nav Links (Horizontal Inline) */}
           <nav className="footer-h-nav" aria-label="Footer Navigation">
             <Link to="/" className="footer-h-link">Home</Link>
@@ -95,11 +88,6 @@ export default function Footer() {
               </svg>
             </a>
           </div>
-        </div>
-
-        {/* Short Bottom Copyright Bar */}
-        <div className="footer-h-bottom">
-          <p>&copy; {currentYear} Riha Mirror Magic. All Rights Reserved.</p>
         </div>
       </div>
     </footer>

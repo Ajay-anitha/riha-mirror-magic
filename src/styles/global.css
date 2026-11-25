@@ -7,12 +7,13 @@
    ========================================================================== */
 
 :root {
-  /* 70% Primary Surface & Background */
-  --bg-light-violet: #F3EDF9;
+  /* 70% Primary Surface & Background: Premium Violet in Moderate Visible Shade */
+  --bg-light-violet-base: #F3EDF9;
+  --bg-light-violet: #E5D6F2;
   --surface-white: #FFFFFF;
-  --surface-soft-violet: #EFE7F6;
+  --surface-soft-violet: #DFC8F0;
   --surface-card: #FFFFFF;
-  --border-violet-soft: #E4D7F0;
+  --border-violet-soft: #D2BCED;
   
   /* 20% Dark Silver / Typography / Contrast */
   --dark-silver: #50545C;
@@ -58,6 +59,10 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
+  background-color: #FFFFFF;
+  width: 100%;
+  max-width: 100vw;
 }
 
 body {
@@ -69,22 +74,33 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
   width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 #root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
-/* Headings */
+/* Headings & Text - Natural Wrapping and Overflow Protection */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   color: var(--dark-silver-heading);
   font-weight: 600;
   line-height: 1.25;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+p, span, a, li, label, strong, b, em {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 p {
@@ -101,9 +117,11 @@ a {
   text-decoration: none;
 }
 
-img, svg {
+img, svg, video, iframe, canvas {
   display: block;
   max-width: 100%;
+  height: auto;
+  box-sizing: border-box;
 }
 
 button {
@@ -133,6 +151,7 @@ button {
 /* Main Content Area */
 .app-content {
   flex: 1 0 auto;
+  background-color: var(--bg-light-violet);
 }
 
 /* Section Common Styling */
@@ -194,6 +213,7 @@ button {
   .section-title {
     font-size: 1.45rem;
     margin-bottom: 0.35rem;
+    text-align: center;
   }
 }
 
@@ -215,6 +235,17 @@ button {
   border-radius: var(--radius-sm);
   transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
   white-space: nowrap;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .btn {
+    white-space: normal;
+    text-align: center;
+    max-width: 100%;
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
 }
 
 .btn-primary {
@@ -251,4 +282,87 @@ button {
 .touch-target {
   min-height: 44px;
   min-width: 44px;
+}
+
+/* Screen reader only utility for SEO / Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Page Heading Row with Left Back Arrow on the Same Horizontal Line
+   Positioned at the left side, vertically centered with the page heading
+   Appears on Services, About Us and Contact pages without extra vertical gaps
+   -------------------------------------------------------------------------- */
+.page-heading-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.page-heading-back-btn,
+.page-back-arrow-btn {
+  position: absolute;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: var(--radius-full);
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--border-violet-soft);
+  color: var(--dark-silver-heading);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 6px rgba(80, 84, 92, 0.08);
+  text-decoration: none;
+  z-index: 2;
+}
+
+.page-heading-back-btn:hover,
+.page-back-arrow-btn:hover {
+  background-color: var(--champagne-gold);
+  border-color: var(--champagne-gold);
+  color: #2D2F35;
+  transform: translateY(-50%) translateX(-2px);
+  box-shadow: 0 4px 12px rgba(197, 164, 109, 0.3);
+}
+
+.page-heading-back-btn:active,
+.page-back-arrow-btn:active {
+  transform: translateY(-50%) scale(0.96);
+}
+
+@media (max-width: 600px) {
+  .page-heading-container {
+    padding-left: 42px;
+    padding-right: 42px;
+    box-sizing: border-box;
+  }
+
+  .page-heading-back-btn,
+  .page-back-arrow-btn {
+    left: 8px;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    font-size: 1.2rem;
+  }
 }

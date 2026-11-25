@@ -1,0 +1,582 @@
+/* ==========================================================================
+   SERVICE DETAIL PAGE STYLES - SEPARATE BOXES WITH STRAIGHT ALIGNMENT
+   - 70% Dominant Background: Premium Light Violet (#F3EDF9)
+   - 20% Text & Headings: Dark Silver (#50545C / #2D2F35)
+   - 10% Accents & Highlights: Champagne Gold (#C5A46D)
+   - Clean Separate Boxes with Straight Alignment (Laptop & Mobile)
+   ========================================================================== */
+
+.service-detail-page-view {
+  background-color: var(--bg-light-violet);
+  min-height: 100vh;
+  padding-bottom: 2.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.service-detail-main-section {
+  padding: 1.5rem 0 3rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Centered container with straight vertical column */
+.service-detail-main-section .container {
+  width: 100%;
+  max-width: 860px; /* Clean, perfectly centered column on laptop */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .service-detail-main-section {
+    padding: 0.85rem 0 2rem;
+  }
+  .service-detail-main-section .container {
+    padding-left: 10px;
+    padding-right: 10px;
+    max-width: 100%;
+  }
+}
+
+.service-detail-fullpage-flow,
+.service-continuous-flow {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --------------------------------------------------------------------------
+   Separate Box Cards (Straight Alignment on Laptop and Mobile)
+   -------------------------------------------------------------------------- */
+.service-box-card,
+.service-hero-overview-card,
+.service-flow-section {
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--border-violet-soft);
+  border-radius: 12px;
+  padding: 1.75rem 2rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 16px rgba(80, 84, 92, 0.05);
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-box-card:hover,
+.service-hero-overview-card:hover,
+.service-flow-section:hover {
+  border-color: rgba(197, 164, 109, 0.5);
+  box-shadow: 0 6px 20px rgba(197, 164, 109, 0.12);
+}
+
+@media (max-width: 600px) {
+  .service-box-card,
+  .service-hero-overview-card,
+  .service-flow-section {
+    border-radius: 10px;
+    padding: 1.2rem 1rem;
+    margin-bottom: 0.85rem;
+    border-width: 1px;
+    text-align: left;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Box 1 Internal Layout: Navigation, Title, Photo, Price & Duration
+   -------------------------------------------------------------------------- */
+.service-top-nav-flex.service-detail-top-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.65rem;
+  padding: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.back-to-catalogue-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  color: var(--dark-silver-heading);
+  text-decoration: none;
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--border-violet-soft);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.15s ease;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.back-to-catalogue-btn:hover {
+  color: var(--champagne-gold);
+  border-color: var(--champagne-gold);
+  transform: translateX(-2px);
+  box-shadow: var(--shadow-gold);
+}
+
+@media (max-width: 600px) {
+  .back-to-catalogue-btn {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+  }
+  .back-to-catalogue-btn svg {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+.service-category-label-wrap {
+  text-align: left;
+  margin: 0;
+}
+
+.service-category-gold-label {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--champagne-gold-hover);
+  background-color: rgba(197, 164, 109, 0.14);
+  border: 1px solid var(--champagne-gold);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+}
+
+@media (max-width: 600px) {
+  .service-category-gold-label {
+    font-size: 0.68rem;
+    padding: 0.2rem 0.6rem;
+    letter-spacing: 0.05em;
+  }
+}
+
+/* Service Title: Straight Left Alignment */
+.service-detail-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--dark-silver-heading);
+  font-family: var(--font-heading);
+  line-height: 1.2;
+  margin: 0.35rem 0 1rem 0;
+  text-align: left;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 600px) {
+  .service-detail-title {
+    font-size: 1.45rem;
+    line-height: 1.25;
+    margin: 0.25rem 0 0.85rem 0;
+    text-align: left; /* Straight alignment */
+    word-break: normal;
+    overflow-wrap: break-word;
+    max-width: 100%;
+  }
+}
+
+/* Large Rectangular Service Photo (Horizontally Centered, Balanced Size on Laptop & Mobile) */
+.service-photo-rectangular-wrap.service-large-photo-frame {
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 16 / 9;
+  max-height: 260px;
+  background-color: #FAF5FF;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto 1.25rem auto;
+  padding: 0;
+  box-sizing: border-box;
+  box-shadow: 0 2px 10px rgba(80, 84, 92, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-rectangular-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px;
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .service-photo-rectangular-wrap.service-large-photo-frame {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+    max-height: 200px;
+    margin: 0 auto 0.85rem auto;
+    border-radius: 6px;
+  }
+  .service-rectangular-photo {
+    border-radius: 6px;
+  }
+}
+
+/* Service Price and Duration: Straight Side-by-Side (Horizontally Centered Below Image) */
+.service-detail-meta-row.service-specs-side-by-side {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  margin: 0 auto;
+  text-align: left;
+  width: 100%;
+  max-width: 480px;
+  box-sizing: border-box;
+}
+
+.detail-meta-chip {
+  flex: 1 1 50%;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--champagne-gold);
+  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
+  box-shadow: 0 2px 8px rgba(197, 164, 109, 0.12);
+  box-sizing: border-box;
+}
+
+.detail-meta-chip.price-chip {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FAF5ED 100%);
+  border-color: var(--champagne-gold);
+  border-left-width: 3.5px;
+}
+
+.detail-meta-chip.duration-chip {
+  background: #FFFFFF;
+  border-color: var(--border-violet-soft);
+  border-left: 3.5px solid var(--champagne-gold);
+}
+
+.spec-chip-icon {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: var(--radius-full);
+  background-color: rgba(197, 164, 109, 0.18);
+  color: var(--champagne-gold-hover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(197, 164, 109, 0.3);
+}
+
+.spec-chip-content {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.spec-chip-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  line-height: 1.15;
+}
+
+.spec-chip-value {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: var(--dark-silver-heading);
+  line-height: 1.25;
+}
+
+.detail-meta-chip.price-chip .spec-chip-value strong {
+  color: var(--champagne-gold-hover);
+  font-size: 1.28rem;
+  font-weight: 800;
+}
+
+.price-starting-tag {
+  font-size: 0.76rem;
+  color: var(--dark-silver);
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .service-detail-meta-row.service-specs-side-by-side {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+  }
+  .detail-meta-chip {
+    flex: 1 1 calc(50% - 0.25rem);
+    min-width: 130px;
+    padding: 0.5rem 0.65rem;
+    gap: 0.45rem;
+    border-radius: 6px;
+    box-sizing: border-box;
+  }
+  .spec-chip-icon {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+  }
+  .spec-chip-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+  .spec-chip-label {
+    font-size: 0.64rem;
+  }
+  .spec-chip-value {
+    font-size: 0.95rem;
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+  .detail-meta-chip.price-chip .spec-chip-value strong {
+    font-size: 1.02rem;
+  }
+}
+
+/* Subtle Divider (preserves required class) */
+.service-subtle-divider {
+  display: none;
+  width: 100%;
+  height: 1px;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Boxes 2, 3, 4, 5: Headings, Descriptions & Checklists (Straight Alignment)
+   -------------------------------------------------------------------------- */
+.detail-section-heading {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--dark-silver-heading);
+  font-family: var(--font-heading);
+  margin: 0 0 0.85rem 0;
+  text-align: left; /* Straight alignment */
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 600px) {
+  .detail-section-heading {
+    font-size: 1.25rem;
+    margin-bottom: 0.65rem;
+    text-align: left; /* Straight alignment */
+  }
+}
+
+.detail-full-description,
+.enquiry-desc,
+.booking-desc {
+  font-size: 1.02rem;
+  color: var(--dark-silver);
+  line-height: 1.8;
+  margin: 0;
+  font-weight: 500;
+  text-align: left; /* Straight alignment */
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 600px) {
+  .detail-full-description,
+  .enquiry-desc,
+  .booking-desc {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    text-align: left; /* Straight alignment */
+  }
+}
+
+/* Highlights & Benefits Checklist: Straight Alignment */
+.detail-benefits-checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.benefit-checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  font-size: 0.98rem;
+  color: var(--dark-silver-heading);
+  line-height: 1.55;
+  font-weight: 600;
+  text-align: left;
+}
+
+.benefit-icon-badge {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border-radius: var(--radius-full);
+  background: rgba(197, 164, 109, 0.18);
+  border: 1.5px solid var(--champagne-gold);
+  color: var(--champagne-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.benefit-text {
+  flex: 1;
+  font-size: 0.98rem;
+  color: var(--dark-silver-heading);
+  font-weight: 600;
+  text-align: left;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 600px) {
+  .detail-benefits-checklist {
+    gap: 0.65rem;
+    width: 100%;
+    margin: 0;
+  }
+  .benefit-checklist-item {
+    gap: 0.65rem;
+    font-size: 0.88rem;
+    text-align: left;
+  }
+  .benefit-icon-badge {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+  }
+  .benefit-text {
+    font-size: 0.88rem;
+    text-align: left;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   CTA Buttons: Straight Left Alignment in Boxes 4 & 5
+   -------------------------------------------------------------------------- */
+.section-cta-btn-wrap {
+  margin-top: 1.25rem;
+  text-align: left;
+  display: flex;
+  justify-content: flex-start; /* Straight left alignment */
+  align-items: center;
+  width: 100%;
+}
+
+.service-cta-curved-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.75rem 1.75rem;
+  min-height: 46px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.enquiry-wa-btn {
+  background-color: #FFFFFF;
+  color: var(--dark-silver-heading);
+  border: 1.75px solid var(--champagne-gold);
+  box-shadow: 0 2px 8px rgba(197, 164, 109, 0.15);
+}
+
+.enquiry-wa-btn:hover {
+  background-color: var(--champagne-gold-soft);
+  color: var(--champagne-gold-hover);
+  border-color: var(--champagne-gold-hover);
+  transform: translateY(-1px);
+}
+
+.appointment-book-btn {
+  background-color: var(--champagne-gold);
+  color: #FFFFFF;
+  border: 1.75px solid var(--champagne-gold);
+  box-shadow: var(--shadow-gold);
+}
+
+.appointment-book-btn:hover {
+  background-color: var(--champagne-gold-hover);
+  border-color: var(--champagne-gold-hover);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  .section-cta-btn-wrap {
+    margin-top: 1rem;
+    justify-content: flex-start; /* Straight left alignment on mobile */
+  }
+
+  .service-cta-curved-btn {
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    font-size: 0.92rem;
+    min-height: 46px;
+    border-radius: 8px;
+    white-space: normal;
+    text-align: center;
+    word-break: normal;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Not Found View
+   -------------------------------------------------------------------------- */
+.not-found-view {
+  padding-top: 4rem;
+}
+
+.not-found-card {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #FFFFFF;
+  padding: 3rem 2rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-violet-soft);
+  box-shadow: var(--shadow-sm);
+}
+
+.not-found-title {
+  font-size: 1.8rem;
+  color: var(--dark-silver-heading);
+  margin-bottom: 0.5rem;
+}
+
+.not-found-desc {
+  font-size: 0.92rem;
+  color: var(--dark-silver);
+  margin-bottom: 1.5rem;
+}

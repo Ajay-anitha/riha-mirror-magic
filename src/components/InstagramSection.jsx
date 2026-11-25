@@ -11,7 +11,7 @@ const INSTA_POSTS = [
   },
   {
     id: 2,
-    title: 'Earlobe Repair & Care',
+    title: 'Earlobe Repair',
     tag: 'Speciality Care',
     type: 'video',
     image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80',
@@ -19,7 +19,7 @@ const INSTA_POSTS = [
   },
   {
     id: 3,
-    title: 'Wart & Skin Tag Removal',
+    title: 'Wart Removal',
     tag: 'Speciality Care',
     type: 'photo',
     image: 'https://images.unsplash.com/photo-1512290900672-1f55b9ff8e7c?auto=format&fit=crop&w=600&q=80',
@@ -27,7 +27,7 @@ const INSTA_POSTS = [
   },
   {
     id: 4,
-    title: 'Keratin Hair Therapy',
+    title: 'Keratin Therapy',
     tag: 'Hair Care',
     type: 'photo',
     image: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=600&q=80',
@@ -97,7 +97,8 @@ export default function InstagramSection() {
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
             </svg>
-            <span>Follow @rihas_mirrormagic</span>
+            <span className="cta-text-desktop">Follow @rihas_mirrormagic</span>
+            <span className="cta-text-mobile">Follow on Instagram</span>
           </a>
         </div>
       </div>

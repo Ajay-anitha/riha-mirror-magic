@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ServiceCard from '../components/ServiceCard';
 import { SPECIALITY_SERVICES, STANDARD_SERVICES, ALL_SERVICES, SERVICE_CATEGORIES } from '../data/servicesData';
 import '../styles/services.css';
@@ -6,6 +7,7 @@ import '../styles/services.css';
 export default function Services() {
   const [selectedCategory, setSelectedCategory] = useState('All Services');
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
 
   // Filter services dynamically based on search and category
   const filteredServices = useMemo(() => {
@@ -35,19 +37,24 @@ export default function Services() {
 
   return (
     <div className="services-page-view">
-      {/* Services Hero Header */}
-      <section className="services-hero-banner">
-        <div className="container">
-          <span className="section-tagline">Complete Service Menu</span>
-          <h1 className="services-hero-title">Our Services</h1>
-          <p className="services-hero-subtitle">
-            Explore our comprehensive menu of customized beauty rituals, couture bridal artistry, and renowned special treatments. All services are performed with personalized attention, premium formulations, and rigorous hygiene.
-          </p>
+      {/* Main Heading: Our Services with Left Back Arrow on Same Horizontal Line */}
+      <div className="services-page-header">
+        <div className="container page-heading-container">
+          <button 
+            type="button" 
+            className="page-heading-back-btn page-back-arrow-btn" 
+            onClick={() => navigate('/')}
+            aria-label="Back to Home"
+            title="Back to Home"
+          >
+            &#8592;
+          </button>
+          <h1 className="services-main-title">Our Services</h1>
         </div>
-      </section>
+      </div>
 
       {/* Full Service Catalogue with Category Filter & Search (Special Services attached directly inside) */}
-      <section className="section-padding all-services-catalogue" id="service-catalogue">
+      <section className="all-services-catalogue" id="service-catalogue">
         <div className="container">
           <div className="catalogue-controls-bar">
             {/* Search Input */}
@@ -59,7 +66,7 @@ export default function Services() {
               <input 
                 type="text"
                 className="services-search-input"
-                placeholder="Search services (e.g., Facial, Hair Spa, Mehndi, Earlobe)..."
+                placeholder="Search services (Facial, Haircut, Mehndi)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 aria-label="Search beauty services"
@@ -93,7 +100,7 @@ export default function Services() {
             </div>
           </div>
 
-          {/* Results Count & Current Filter Label */}
+          {/* Results Count & Filter Label (Small gap before services) */}
           <div className="catalogue-status-bar">
             <span className="results-count-text">
               Showing <strong>{filteredServices.length}</strong> {filteredServices.length === 1 ? 'service' : 'services'}
@@ -114,11 +121,14 @@ export default function Services() {
             )}
           </div>
 
-          {/* Services Grid */}
+          {/* Services Grid (All Services: 4 in a row, click opens as a separate big page) */}
           {filteredServices.length > 0 ? (
             <div className="services-cards-grid">
               {filteredServices.map((service) => (
-                <ServiceCard key={service.id} service={service} />
+                <ServiceCard 
+                  key={service.id} 
+                  service={service} 
+                />
               ))}
             </div>
           ) : (
@@ -141,29 +151,6 @@ export default function Services() {
               </button>
             </div>
           )}
-        </div>
-      </section>
-
-      {/* Bottom Booking Assistance Bar */}
-      <section className="services-inquiry-bar">
-        <div className="container inquiry-container">
-          <div className="inquiry-text">
-            <h3>Need a Customized Beauty Package or Consultation?</h3>
-            <p>Our experienced team is happy to assist you in English, Tamil, and Telugu.</p>
-          </div>
-          <div className="inquiry-actions">
-            <a 
-              href="https://wa.me/919994612038" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="btn btn-primary touch-target"
-            >
-              <span>Chat with Us on WhatsApp</span>
-            </a>
-            <a href="tel:+919994612038" className="btn btn-outline touch-target">
-              <span>Call: +91 99946 12038</span>
-            </a>
-          </div>
         </div>
       </section>
     </div>

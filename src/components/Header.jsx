@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import '../styles/header.css';
 
 export default function Header() {
@@ -26,25 +26,32 @@ export default function Header() {
   return (
     <header className="site-header">
       <div className="container header-container">
-        {/* Brand & Logo */}
-        <NavLink to="/" className="brand-logo-link" aria-label="Riha Mirror Magic Home">
-          <img 
-            src="/assets/images/logo.png" 
-            alt="Riha Mirror Magic Logo" 
-            className="brand-logo-img"
-            onError={(e) => {
-              e.currentTarget.onerror = null;
-              e.currentTarget.src = '/assets/images/logo.jpg';
-            }}
-          />
-          <div className="brand-text-block">
-            <span className="brand-title">Riha Mirror Magic</span>
-            <span className="brand-tagline">Your Beauty, Your Way</span>
-          </div>
-        </NavLink>
+        {/* Brand & Logo Link */}
+        <div className="header-brand-wrap">
+          <NavLink to="/" className="brand-logo-link" aria-label="Riha Mirror Magic Home">
+            <img 
+              src="/assets/images/logo-original.jpg" 
+              alt="Riha Mirror Magic Logo" 
+              className="brand-logo-img"
+              width="44"
+              height="44"
+              onError={(e) => {
+                if (e.currentTarget.src !== '/assets/images/logo.jpg') {
+                  e.currentTarget.src = '/assets/images/logo.jpg';
+                }
+              }}
+            />
+            <div className="brand-text-block">
+              <span className="brand-title">
+                <span className="brand-word-riha">Riha</span>
+                <span className="brand-word-rest"> Mirror Magic</span>
+              </span>
+            </div>
+          </NavLink>
+        </div>
 
-        {/* Desktop Navigation */}
-        <nav className="desktop-nav" aria-label="Primary Navigation">
+        {/* Primary Navigation - Visible in a single horizontal line on all screens */}
+        <nav className="desktop-nav header-main-nav" aria-label="Primary Navigation">
           <NavLink 
             to="/" 
             className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
@@ -62,7 +69,7 @@ export default function Header() {
             to="/about" 
             className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
           >
-            About Us
+            About
           </NavLink>
           <NavLink 
             to="/contact" 
@@ -72,13 +79,14 @@ export default function Header() {
           </NavLink>
         </nav>
 
-        {/* Mobile Menu Toggle Button */}
+        {/* Mobile Menu Toggle Button (Hidden: Navigation labels directly visible in a single horizontal line) */}
         <button 
           type="button"
           className="mobile-menu-btn"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-expanded={mobileMenuOpen}
           aria-label="Toggle mobile menu"
+          style={{ display: 'none' }}
         >
           {mobileMenuOpen ? (
             <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
@@ -95,60 +103,62 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile Navigation Drawer */}
-      <div className={`mobile-nav-overlay ${mobileMenuOpen ? 'open' : ''}`} onClick={() => setMobileMenuOpen(false)}>
-        <div className="mobile-nav-drawer" onClick={(e) => e.stopPropagation()}>
-          <div className="mobile-drawer-header">
-            <div className="mobile-brand-title">Riha Mirror Magic</div>
-            <button 
-              className="mobile-close-btn" 
-              onClick={() => setMobileMenuOpen(false)}
-              aria-label="Close menu"
-            >
-              &times;
-            </button>
-          </div>
-          <nav className="mobile-nav-links">
-            <NavLink 
-              to="/" 
-              className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
-              end
-            >
-              Home
-            </NavLink>
-            <NavLink 
-              to="/services" 
-              className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
-            >
-              Services
-            </NavLink>
-            <NavLink 
-              to="/about" 
-              className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
-            >
-              About Us
-            </NavLink>
-            <NavLink 
-              to="/contact" 
-              className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
-            >
-              Contact
-            </NavLink>
-          </nav>
+      {/* Mobile Navigation Drawer - Only rendered when mobile menu is open to eliminate unwanted background layers */}
+      {mobileMenuOpen && (
+        <div className="mobile-nav-overlay open" onClick={() => setMobileMenuOpen(false)}>
+          <div className="mobile-nav-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="mobile-drawer-header">
+              <div className="mobile-brand-title">Riha Mirror Magic</div>
+              <button 
+                className="mobile-close-btn" 
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                &times;
+              </button>
+            </div>
+            <nav className="mobile-nav-links">
+              <NavLink 
+                to="/" 
+                className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
+                end
+              >
+                Home
+              </NavLink>
+              <NavLink 
+                to="/services" 
+                className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
+              >
+                Services
+              </NavLink>
+              <NavLink 
+                to="/about" 
+                className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
+              >
+                About
+              </NavLink>
+              <NavLink 
+                to="/contact" 
+                className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
+              >
+                Contact
+              </NavLink>
+            </nav>
 
-          <div className="mobile-drawer-footer">
-            <a 
-              href="https://wa.me/919994612038" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="btn btn-primary mobile-wa-btn"
-            >
-              <span>WhatsApp Inquiry</span>
-            </a>
-            <p className="mobile-contact-note">Call: +91 99946 12038</p>
+            <div className="mobile-drawer-footer">
+              <a 
+                href="https://wa.me/919994612038" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn btn-primary mobile-wa-btn"
+              >
+                <span>WhatsApp Inquiry</span>
+              </a>
+              <p className="mobile-contact-note">Call: +91 99946 12038</p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }

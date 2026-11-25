@@ -1,32 +1,44 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" fill="none">
   <defs>
-    <linearGradient id="catHairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#8E2635"/>
-      <stop offset="60%" stop-color="#5C1621"/>
-      <stop offset="100%" stop-color="#3A0D14"/>
+    <linearGradient id="hairGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D1A3F"/>
+      <stop offset="50%" stop-color="#1E0E2C"/>
+      <stop offset="100%" stop-color="#12051C"/>
     </linearGradient>
-    <linearGradient id="goldAcc" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#F5E8D0"/>
-      <stop offset="50%" stop-color="#D8A84E"/>
-      <stop offset="100%" stop-color="#8E2635"/>
+    <linearGradient id="goldSheen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF5E5"/>
+      <stop offset="50%" stop-color="#C5A46D"/>
+      <stop offset="100%" stop-color="#8E6A34"/>
     </linearGradient>
   </defs>
-  <rect width="600" height="450" fill="url(#catHairGrad)"/>
-  <rect x="25" y="25" width="550" height="400" rx="16" stroke="url(#goldAcc)" stroke-width="1.5" opacity="0.6"/>
-  
-  <!-- Silhouette for Hair Styling -->
-  <g stroke="#D8A84E" stroke-width="2" fill="none" opacity="0.75">
-    <circle cx="300" cy="180" r="65"/>
-    <path d="M 240,240 Q 300,140 360,240"/>
-    <path d="M 300,115 L 300,245"/>
-    <path d="M 230,180 Q 300,160 370,180"/>
-    <path d="M 260,260 C 260,320 340,320 340,260"/>
-  </g>
-  
-  <text x="300" y="340" font-family="'Cormorant Garamond', Georgia, serif" font-size="28" font-weight="600" fill="#FFFDFC" text-anchor="middle" letter-spacing="2">
-    HAIR CARE &amp; STYLING
-  </text>
-  <text x="300" y="375" font-family="'Montserrat', sans-serif" font-size="12" font-weight="500" fill="#D8A84E" text-anchor="middle" letter-spacing="3">
-    CATEGORY
-  </text>
+
+  <!-- Full Rectangular Background -->
+  <rect width="800" height="600" fill="url(#hairGrad)"/>
+
+  <!-- Rectangular Luxury Borders (Strictly Zero Circles) -->
+  <rect x="25" y="25" width="750" height="550" rx="4" stroke="url(#goldSheen)" stroke-width="1.5" opacity="0.75"/>
+  <rect x="38" y="38" width="724" height="524" rx="2" stroke="#C5A46D" stroke-width="1" stroke-dasharray="6 4" opacity="0.4"/>
+
+  <!-- Corner Ornamental Rectangular Accents -->
+  <line x1="48" y1="48" x2="80" y2="48" stroke="#C5A46D" stroke-width="1.5"/>
+  <line x1="48" y1="48" x2="48" y2="80" stroke="#C5A46D" stroke-width="1.5"/>
+  <line x1="752" y1="48" x2="720" y2="48" stroke="#C5A46D" stroke-width="1.5"/>
+  <line x1="752" y1="48" x2="752" y2="80" stroke="#C5A46D" stroke-width="1.5"/>
+  <line x1="48" y1="552" x2="80" y2="552" stroke="#C5A46D" stroke-width="1.5"/>
+  <line x1="48" y1="552" x2="48" y2="520" stroke="#C5A46D" stroke-width="1.5"/>
+  <line x1="752" y1="552" x2="720" y2="552" stroke="#C5A46D" stroke-width="1.5"/>
+  <line x1="752" y1="552" x2="752" y2="520" stroke="#C5A46D" stroke-width="1.5"/>
+
+  <!-- Precision Hair Styling Shears / Rectangular Diamond Art -->
+  <polygon points="400,120 475,195 400,270 325,195" stroke="url(#goldSheen)" stroke-width="2" fill="none" opacity="0.85"/>
+  <path d="M 360,165 L 440,225" stroke="#C5A46D" stroke-width="2" stroke-linecap="square"/>
+  <path d="M 440,165 L 360,225" stroke="#C5A46D" stroke-width="2" stroke-linecap="square"/>
+  <rect x="390" y="185" width="20" height="20" transform="rotate(45 400 195)" stroke="#FFFFFF" stroke-width="1.5" fill="#C5A46D"/>
+  <line x1="260" y1="195" x2="310" y2="195" stroke="#C5A46D" stroke-width="1.5" opacity="0.7"/>
+  <line x1="490" y1="195" x2="540" y2="195" stroke="#C5A46D" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Typography -->
+  <text x="400" y="360" font-family="'Montserrat', sans-serif" font-size="13" font-weight="700" fill="#C5A46D" text-anchor="middle" letter-spacing="4">HAIR COUTURE</text>
+  <text x="400" y="415" font-family="'Cormorant Garamond', Georgia, serif" font-size="34" font-weight="600" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">HAIRCUT &amp; STYLING</text>
+  <text x="400" y="460" font-family="'Montserrat', sans-serif" font-size="14" font-weight="300" fill="#E6D7F2" text-anchor="middle" opacity="0.9">Trendsetting precision cuts, layer shaping and blow-dry styling</text>
 </svg>

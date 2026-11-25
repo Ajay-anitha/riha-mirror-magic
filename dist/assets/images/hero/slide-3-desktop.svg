@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 650" width="1920" height="650" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1524"/>
+      <stop offset="40%" stop-color="#2B1A36"/>
+      <stop offset="75%" stop-color="#3A2449"/>
+      <stop offset="100%" stop-color="#160D1C"/>
+    </linearGradient>
+    <radialGradient id="goldGlow" cx="75%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#FFD54F" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#2B1A36" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.6"/>
+    </radialGradient>
+    <linearGradient id="goldLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C5A46D" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#DFC79B" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#C5A46D" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Base -->
+  <rect width="1920" height="650" fill="url(#bgGrad)"/>
+  <rect width="1920" height="650" fill="url(#goldGlow)"/>
+
+  <!-- Decorative geometric luxury lines -->
+  <g opacity="0.22">
+    <circle cx="1450" cy="325" r="260" stroke="#C5A46D" stroke-width="1.5" fill="none"/>
+    <circle cx="1450" cy="325" r="200" stroke="#FFFFFF" stroke-width="0.8" stroke-dasharray="6 4" fill="none"/>
+    <circle cx="1450" cy="325" r="140" stroke="#DFC79B" stroke-width="1" fill="none"/>
+    <polygon points="1450,110 1660,325 1450,540 1240,325" stroke="#C5A46D" stroke-width="0.8" fill="none"/>
+  </g>
+
+  <!-- Soft light beam / atmospheric arch -->
+  <path d="M 1250,650 L 1250,220 A 200,200 0 0,1 1650,220 L 1650,650 Z" fill="#3A2449" opacity="0.28" stroke="url(#goldLine)" stroke-width="1.5"/>
+  <circle cx="1450" cy="220" r="85" fill="none" stroke="#C5A46D" stroke-width="1.2" opacity="0.35"/>
+
+  <!-- Subtle brand watermark on right aesthetic side -->
+  <text x="1450" y="320" font-family="'Playfair Display', Georgia, serif" font-size="24" font-style="italic" fill="#DFC79B" text-anchor="middle" letter-spacing="5" opacity="0.65">
+    COUTURE BRIDAL
+  </text>
+  <text x="1450" y="350" font-family="'Montserrat', sans-serif" font-size="13" font-weight="400" fill="#FFFFFF" text-anchor="middle" letter-spacing="3" opacity="0.5">
+    ARTISTRY & ELEGANCE
+  </text>
+</svg>

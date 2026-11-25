@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1200" width="800" height="1200" fill="none">
+  <defs>
+    <linearGradient id="bgGradM" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1524"/>
+      <stop offset="40%" stop-color="#2B1A36"/>
+      <stop offset="75%" stop-color="#3A2449"/>
+      <stop offset="100%" stop-color="#140B1A"/>
+    </linearGradient>
+    <radialGradient id="goldGlowM" cx="50%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#FFD54F" stop-opacity="0.4"/>
+      <stop offset="60%" stop-color="#2B1A36" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.7"/>
+    </radialGradient>
+    <linearGradient id="goldLineM" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C5A46D" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#DFC79B" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#C5A46D" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Base -->
+  <rect width="800" height="1200" fill="url(#bgGradM)"/>
+  <rect width="800" height="1200" fill="url(#goldGlowM)"/>
+
+  <!-- Decorative geometric luxury lines for portrait -->
+  <g opacity="0.22">
+    <circle cx="400" cy="420" r="260" stroke="#C5A46D" stroke-width="1.5" fill="none"/>
+    <circle cx="400" cy="420" r="200" stroke="#FFFFFF" stroke-width="0.8" stroke-dasharray="6 4" fill="none"/>
+    <circle cx="400" cy="420" r="140" stroke="#DFC79B" stroke-width="1" fill="none"/>
+    <polygon points="400,200 620,420 400,640 180,420" stroke="#C5A46D" stroke-width="0.8" fill="none"/>
+  </g>
+
+  <!-- Luxury Silhouette Arch -->
+  <path d="M 200,800 L 200,320 A 200,200 0 0,1 600,320 L 600,800 Z" fill="#3A2449" opacity="0.25" stroke="url(#goldLineM)" stroke-width="1.5"/>
+  <circle cx="400" cy="320" r="90" fill="none" stroke="#C5A46D" stroke-width="1.2" opacity="0.35"/>
+
+  <!-- Subtle brand watermark -->
+  <text x="400" y="410" font-family="'Playfair Display', Georgia, serif" font-size="24" font-style="italic" fill="#DFC79B" text-anchor="middle" letter-spacing="4" opacity="0.65">
+    COUTURE BRIDAL
+  </text>
+  <text x="400" y="445" font-family="'Montserrat', sans-serif" font-size="14" font-weight="400" fill="#FFFFFF" text-anchor="middle" letter-spacing="3" opacity="0.5">
+    ARTISTRY & ELEGANCE
+  </text>
+</svg>

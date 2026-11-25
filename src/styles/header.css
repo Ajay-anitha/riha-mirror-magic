@@ -20,19 +20,29 @@
   height: 72px;
 }
 
-/* Brand & Logo */
+/* Brand & Logo Group */
+.header-brand-wrap {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
 .brand-logo-link {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
 .brand-logo-img {
   width: 44px;
   height: 44px;
-  object-fit: contain;
+  min-width: 44px;
+  object-fit: cover;
   border-radius: var(--radius-full);
+  display: block;
+  flex-shrink: 0;
 }
 
 .brand-text-block {
@@ -132,17 +142,23 @@
     font-size: 0.65rem;
   }
 
-  .desktop-nav {
-    display: none;
+  /* Navigation remains visible in a single horizontal line across all screen sizes */
+  .desktop-nav,
+  .header-main-nav {
+    display: flex !important;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0.85rem;
   }
 
   .mobile-menu-btn {
-    display: flex;
+    display: none !important;
   }
 
-  /* Overlay */
+  /* Overlay - strictly hidden unless active, prevents unwanted layer during scroll/drag */
   .mobile-nav-overlay {
-    display: block;
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -150,12 +166,15 @@
     bottom: 0;
     background-color: rgba(45, 47, 53, 0.4);
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
     z-index: 1001;
   }
 
   .mobile-nav-overlay.open {
+    display: block;
+    visibility: visible;
     opacity: 1;
     pointer-events: auto;
   }
@@ -252,30 +271,135 @@
 @media (max-width: 600px) {
   .header-container {
     height: 56px;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
+    padding-left: 8px;
+    padding-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.35rem;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .header-brand-wrap {
+    flex-shrink: 0;
+    min-width: 0;
+  }
+
+  .brand-logo-link {
+    gap: 0.35rem;
+    display: flex;
+    align-items: center;
   }
 
   .brand-logo-img {
     width: 32px;
     height: 32px;
+    min-width: 32px;
+    flex-shrink: 0;
   }
 
   .brand-title {
-    font-size: 1.12rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1.05;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    white-space: nowrap;
+  }
+
+  .brand-word-rest {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--dark-silver);
   }
 
   .brand-tagline {
-    font-size: 0.58rem;
+    display: none;
+  }
+
+  /* All 4 navigation labels directly visible in a single horizontal line */
+  .desktop-nav,
+  .header-main-nav {
+    display: flex !important;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0.35rem;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    font-size: 0.74rem;
+    font-weight: 600;
+    padding: 0.35rem 0.3rem;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    flex-shrink: 0;
+    color: var(--dark-silver);
+    border-radius: 4px;
+    line-height: 1.1;
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--champagne-gold);
+  }
+
+  .nav-link.active {
+    color: var(--champagne-gold);
+    background-color: rgba(197, 164, 109, 0.12);
+    font-weight: 700;
+  }
+
+  .nav-link.active::after {
+    display: none;
   }
 
   .mobile-menu-btn {
-    width: 38px;
-    height: 38px;
+    display: none !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .header-container {
+    padding-left: 4px;
+    padding-right: 4px;
+    gap: 0.2rem;
   }
 
-  .mobile-menu-btn svg {
-    width: 22px;
-    height: 22px;
+  .brand-logo-link {
+    gap: 0.25rem;
+  }
+
+  .brand-logo-img {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    flex-shrink: 0;
+  }
+
+  .brand-title {
+    font-size: 0.78rem;
+  }
+
+  .brand-word-rest {
+    font-size: 0.55rem;
+  }
+
+  .desktop-nav,
+  .header-main-nav {
+    gap: 0.18rem;
+  }
+
+  .nav-link {
+    font-size: 0.67rem;
+    padding: 0.28rem 0.18rem;
   }
 }
