@@ -1,0 +1,37 @@
+[
+  {
+    "id": "stf_01",
+    "name": "Revathi S.",
+    "role": "Senior Beautician & Skin Specialist",
+    "phone": "+91 98401 22331",
+    "status": "ACTIVE"
+  },
+  {
+    "id": "stf_02",
+    "name": "Meenakshi K.",
+    "role": "Master Bridal Makeup Artist",
+    "phone": "+91 98402 33442",
+    "status": "ACTIVE"
+  },
+  {
+    "id": "stf_03",
+    "name": "Selvi M.",
+    "role": "Senior Hair Stylist",
+    "phone": "+91 98403 44553",
+    "status": "ACTIVE"
+  },
+  {
+    "id": "stf_04",
+    "name": "Anandhi R.",
+    "role": "Master Tailor & Embroidery Specialist",
+    "phone": "+91 98404 55664",
+    "status": "ACTIVE"
+  },
+  {
+    "id": "stf_05",
+    "name": "Divya P.",
+    "role": "Junior Beautician & Nail Artist",
+    "phone": "+91 98405 66775",
+    "status": "ACTIVE"
+  }
+]

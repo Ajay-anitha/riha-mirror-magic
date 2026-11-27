@@ -15,7 +15,7 @@
 }
 
 .service-detail-main-section {
-  padding: 1.5rem 0 3rem;
+  padding: 1rem 0 2rem;
   width: 100%;
   box-sizing: border-box;
 }
@@ -33,7 +33,7 @@
 
 @media (max-width: 600px) {
   .service-detail-main-section {
-    padding: 0.85rem 0 2rem;
+    padding: 0.65rem 0 1.5rem;
   }
   .service-detail-main-section .container {
     padding-left: 10px;
@@ -60,8 +60,8 @@
   background-color: #FFFFFF;
   border: 1.5px solid var(--border-violet-soft);
   border-radius: 12px;
-  padding: 1.75rem 2rem;
-  margin-bottom: 1.25rem;
+  padding: 1.15rem 1.5rem;
+  margin-bottom: 0.85rem;
   box-shadow: 0 4px 16px rgba(80, 84, 92, 0.05);
   box-sizing: border-box;
   width: 100%;
@@ -81,8 +81,8 @@
   .service-hero-overview-card,
   .service-flow-section {
     border-radius: 10px;
-    padding: 1.2rem 1rem;
-    margin-bottom: 0.85rem;
+    padding: 0.85rem 0.85rem;
+    margin-bottom: 0.6rem;
     border-width: 1px;
     text-align: left;
   }
@@ -167,21 +167,21 @@
 
 /* Service Title: Straight Left Alignment */
 .service-detail-title {
-  font-size: 2.2rem;
+  font-size: 1.85rem;
   font-weight: 700;
   color: var(--dark-silver-heading);
   font-family: var(--font-heading);
   line-height: 1.2;
-  margin: 0.35rem 0 1rem 0;
+  margin: 0.2rem 0 0.65rem 0;
   text-align: left;
   letter-spacing: -0.01em;
 }
 
 @media (max-width: 600px) {
   .service-detail-title {
-    font-size: 1.45rem;
+    font-size: 1.35rem;
     line-height: 1.25;
-    margin: 0.25rem 0 0.85rem 0;
+    margin: 0.15rem 0 0.5rem 0;
     text-align: left; /* Straight alignment */
     word-break: normal;
     overflow-wrap: break-word;
@@ -198,7 +198,9 @@
   background-color: #FAF5FF;
   border-radius: 8px;
   overflow: hidden;
-  margin: 0 auto 1.25rem auto;
+  margin: 0 auto 0.85rem auto;
+  margin-left: auto;
+  margin-right: auto;
   padding: 0;
   box-sizing: border-box;
   box-shadow: 0 2px 10px rgba(80, 84, 92, 0.06);
@@ -222,7 +224,7 @@
     max-width: 100%;
     aspect-ratio: 16 / 9;
     max-height: 200px;
-    margin: 0 auto 0.85rem auto;
+    margin: 0 auto 0.65rem auto;
     border-radius: 6px;
   }
   .service-rectangular-photo {
@@ -361,22 +363,22 @@
 }
 
 /* --------------------------------------------------------------------------
-   Boxes 2, 3, 4, 5: Headings, Descriptions & Checklists (Straight Alignment)
+   Boxes 2, 3, 4, 5: Headings, Descriptions & Checklists (Straight Alignment with Reduced Gaps)
    -------------------------------------------------------------------------- */
 .detail-section-heading {
-  font-size: 1.45rem;
+  font-size: 1.28rem;
   font-weight: 700;
   color: var(--dark-silver-heading);
   font-family: var(--font-heading);
-  margin: 0 0 0.85rem 0;
+  margin: 0 0 0.4rem 0;
   text-align: left; /* Straight alignment */
   letter-spacing: -0.01em;
 }
 
 @media (max-width: 600px) {
   .detail-section-heading {
-    font-size: 1.25rem;
-    margin-bottom: 0.65rem;
+    font-size: 1.15rem;
+    margin-bottom: 0.32rem;
     text-align: left; /* Straight alignment */
   }
 }
@@ -384,9 +386,9 @@
 .detail-full-description,
 .enquiry-desc,
 .booking-desc {
-  font-size: 1.02rem;
+  font-size: 0.98rem;
   color: var(--dark-silver);
-  line-height: 1.8;
+  line-height: 1.52;
   margin: 0;
   font-weight: 500;
   text-align: left; /* Straight alignment */
@@ -398,18 +400,18 @@
   .detail-full-description,
   .enquiry-desc,
   .booking-desc {
-    font-size: 0.92rem;
-    line-height: 1.65;
+    font-size: 0.88rem;
+    line-height: 1.42;
     text-align: left; /* Straight alignment */
   }
 }
 
-/* Highlights & Benefits Checklist: Straight Alignment */
+/* Highlights & Benefits Checklist: Straight Alignment with Compact Gaps */
 .detail-benefits-checklist {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.45rem;
   padding: 0;
   margin: 0;
   text-align: left;
@@ -418,18 +420,18 @@
 .benefit-checklist-item {
   display: flex;
   align-items: flex-start;
-  gap: 0.85rem;
-  font-size: 0.98rem;
+  gap: 0.65rem;
+  font-size: 0.95rem;
   color: var(--dark-silver-heading);
-  line-height: 1.55;
+  line-height: 1.38;
   font-weight: 600;
   text-align: left;
 }
 
 .benefit-icon-badge {
-  width: 22px;
-  height: 22px;
-  min-width: 22px;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
   border-radius: var(--radius-full);
   background: rgba(197, 164, 109, 0.18);
   border: 1.5px solid var(--champagne-gold);
@@ -438,12 +440,12 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 .benefit-text {
   flex: 1;
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   color: var(--dark-silver-heading);
   font-weight: 600;
   text-align: left;
@@ -453,22 +455,23 @@
 
 @media (max-width: 600px) {
   .detail-benefits-checklist {
-    gap: 0.65rem;
+    gap: 0.35rem;
     width: 100%;
     margin: 0;
   }
   .benefit-checklist-item {
-    gap: 0.65rem;
-    font-size: 0.88rem;
+    gap: 0.5rem;
+    font-size: 0.86rem;
+    line-height: 1.32;
     text-align: left;
   }
   .benefit-icon-badge {
-    width: 20px;
-    height: 20px;
-    min-width: 20px;
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
   }
   .benefit-text {
-    font-size: 0.88rem;
+    font-size: 0.86rem;
     text-align: left;
   }
 }
@@ -477,7 +480,7 @@
    CTA Buttons: Straight Left Alignment in Boxes 4 & 5
    -------------------------------------------------------------------------- */
 .section-cta-btn-wrap {
-  margin-top: 1.25rem;
+  margin-top: 0.75rem;
   text-align: left;
   display: flex;
   justify-content: flex-start; /* Straight left alignment */
@@ -490,10 +493,10 @@
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 700;
-  padding: 0.75rem 1.75rem;
-  min-height: 46px;
+  padding: 0.65rem 1.4rem;
+  min-height: 42px;
   border-radius: 8px;
   box-sizing: border-box;
   text-decoration: none;
@@ -531,7 +534,7 @@
 
 @media (max-width: 600px) {
   .section-cta-btn-wrap {
-    margin-top: 1rem;
+    margin-top: 0.6rem;
     justify-content: flex-start; /* Straight left alignment on mobile */
   }
 
@@ -539,9 +542,9 @@
     width: 100%;
     max-width: 100%;
     justify-content: center;
-    padding: 0.75rem 1rem;
-    font-size: 0.92rem;
-    min-height: 46px;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.88rem;
+    min-height: 40px;
     border-radius: 8px;
     white-space: normal;
     text-align: center;

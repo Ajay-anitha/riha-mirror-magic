@@ -93,34 +93,25 @@ export default function HeroSlider() {
             />
           </picture>
 
-          {/* Accessible Overlay & High-Visibility Content */}
+          {/* Accessible Overlay & High-Visibility Content - Only Explore Services at bottom-left without affecting image */}
           <div className="hero-slide-overlay">
-            <div className="container hero-content-container">
+            {/* Screen-reader and search engine semantic content */}
+            <div className="sr-only">
               <span className="hero-badge">{slide.tag}</span>
               <h2 className="hero-headline">{slide.headline}</h2>
               <p className="hero-subtitle">{slide.subtitle}</p>
+              <a href="https://wa.me/919994612038">WhatsApp Booking</a>
+            </div>
 
-              <div className="hero-cta-group">
-                <Link to="/services" className="btn btn-primary touch-target">
-                  <span className="cta-text-desktop">Explore Services</span>
-                  <span className="cta-text-mobile">Services</span>
+            <div className="container hero-content-container">
+              <div className="hero-cta-group hero-single-cta">
+                <Link to="/services" className="btn btn-primary touch-target hero-explore-btn">
+                  <span>Explore Services</span>
                   <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                     <polyline points="12 5 19 12 12 19"></polyline>
                   </svg>
                 </Link>
-                <a 
-                  href="https://wa.me/919994612038" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="btn btn-outline touch-target"
-                >
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                  </svg>
-                  <span className="cta-text-desktop">WhatsApp Booking</span>
-                  <span className="cta-text-mobile">WhatsApp</span>
-                </a>
               </div>
             </div>
           </div>

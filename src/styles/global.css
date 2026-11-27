@@ -1,32 +1,33 @@
 /* ==========================================================================
    RIHA MIRROR MAGIC - GLOBAL STYLES
    Exact 70:20:10 Colour Proportion:
-   - 70% Premium Light Violet (#F3EDF9)
-   - 20% Dark Silver (#50545C / #2D2F35 for high readability)
-   - 10% Champagne Gold (#C5A46D)
+   Option 2 Palette: Royal Aubergine & Imperial Gold
+   - 70% Dominant: Whisper Lilac Alabaster (#F5F2F9 / #EAE4F3, ref #F3EDF9)
+   - 20% Structure & Text: Obsidian Violet (#1D1722 / #332B3A, ref #50545C / #2D2F35)
+   - 10% Accents & Highlights: Imperial Gold (#D4AF37, ref #C5A46D)
    ========================================================================== */
 
 :root {
-  /* 70% Primary Surface & Background: Premium Violet in Moderate Visible Shade */
-  --bg-light-violet-base: #F3EDF9;
-  --bg-light-violet: #E5D6F2;
+  /* 70% Primary Surface & Background: Whisper Lilac Alabaster (#F5F2F9 / #EAE4F3) */
+  --bg-light-violet-base: #F5F2F9;
+  --bg-light-violet: #EAE4F3;
   --surface-white: #FFFFFF;
-  --surface-soft-violet: #DFC8F0;
+  --surface-soft-violet: #DFD5EC;
   --surface-card: #FFFFFF;
-  --border-violet-soft: #D2BCED;
+  --border-violet-soft: #D3C5E5;
   
-  /* 20% Dark Silver / Typography / Contrast */
-  --dark-silver: #50545C;
-  --dark-silver-heading: #2D2F35;
-  --text-muted: #6E727A;
-  --silver-light: #8E929C;
-  --silver-border: #D5D8DE;
+  /* 20% Obsidian Violet & Rich Velvet Charcoal / Typography / Contrast */
+  --dark-silver: #332B3A;
+  --dark-silver-heading: #1D1722;
+  --text-muted: #6A6074;
+  --silver-light: #8F849B;
+  --silver-border: #D2C7DC;
   
-  /* 10% Champagne Gold Highlights / Accents */
-  --champagne-gold: #C5A46D;
-  --champagne-gold-hover: #B28F54;
-  --champagne-gold-soft: #F9F4EB;
-  --champagne-gold-border: rgba(197, 164, 109, 0.35);
+  /* 10% Imperial Venetian Gold Highlights / Accents */
+  --champagne-gold: #D4AF37;
+  --champagne-gold-hover: #BA9523;
+  --champagne-gold-soft: #FAF5E8;
+  --champagne-gold-border: rgba(212, 175, 55, 0.40);
 
   /* Fonts */
   --font-heading: 'Cormorant Garamond', Georgia, serif;
@@ -40,10 +41,10 @@
   --radius-full: 9999px;
   
   /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(80, 84, 92, 0.06);
-  --shadow-md: 0 6px 20px rgba(80, 84, 92, 0.08);
-  --shadow-lg: 0 12px 32px rgba(80, 84, 92, 0.12);
-  --shadow-gold: 0 4px 16px rgba(197, 164, 109, 0.25);
+  --shadow-sm: 0 2px 8px rgba(29, 23, 34, 0.06);
+  --shadow-md: 0 6px 20px rgba(29, 23, 34, 0.08);
+  --shadow-lg: 0 12px 32px rgba(29, 23, 34, 0.12);
+  --shadow-gold: 0 4px 16px rgba(212, 175, 55, 0.28);
 }
 
 /* Base Reset */

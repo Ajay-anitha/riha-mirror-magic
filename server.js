@@ -25,7 +25,15 @@ const FILES = {
   appointments: path.join(DATA_DIR, 'appointments.json'),
   orders: path.join(DATA_DIR, 'orders.json'),
   reviews: path.join(DATA_DIR, 'reviews.json'),
-  admin: path.join(DATA_DIR, 'admin.json')
+  admin: path.join(DATA_DIR, 'admin.json'),
+  staff: path.join(DATA_DIR, 'staff.json'),
+  attendance: path.join(DATA_DIR, 'attendance.json'),
+  inventory: path.join(DATA_DIR, 'inventory.json'),
+  otherIncome: path.join(DATA_DIR, 'other_income.json'),
+  expenses: path.join(DATA_DIR, 'expenses.json'),
+  stockAdditions: path.join(DATA_DIR, 'stock_additions.json'),
+  salaries: path.join(DATA_DIR, 'salaries.json'),
+  salaryPayments: path.join(DATA_DIR, 'salary_payments.json')
 };
 
 // In-Memory Active Sessions: token -> { userId, role: 'customer'|'admin', expiresAt }
@@ -126,8 +134,13 @@ function authenticate(req, requiredRole = null) {
     return null;
   }
 
-  if (requiredRole && session.role !== requiredRole) {
-    return null;
+  if (requiredRole) {
+    const allowed = Array.isArray(requiredRole) ? [...requiredRole] : [requiredRole];
+    if (allowed.includes('admin') && !allowed.includes('owner')) allowed.push('owner');
+    if (allowed.includes('staff') && !allowed.includes('owner')) allowed.push('owner'); // owner has staff permissions too
+    if (!allowed.includes(session.role)) {
+      return null;
+    }
   }
 
   return session;
@@ -522,38 +535,45 @@ const server = http.createServer(async (req, res) => {
       });
     }
 
-    // 11. ADMIN AUTH: Login
+    // 11. ADMIN AUTH: Login (Supports Owner & Staff)
     if (pathname === '/api/admin/login' && method === 'POST') {
       try {
         const body = await parseJsonBody(req);
         const { username, password } = body;
 
-        const admin = readData(FILES.admin, null);
-        if (!admin) {
+        const rawAdmin = readData(FILES.admin, []);
+        const adminList = Array.isArray(rawAdmin) ? rawAdmin : [rawAdmin];
+        if (!adminList.length) {
           return sendJson(res, 500, { error: 'Admin database not initialized.' });
         }
 
         const userClean = String(username || '').trim().toLowerCase();
         const pwdClean = String(password || '');
 
-        const matchesUser = (admin.username && admin.username.toLowerCase() === userClean) ||
-                            (admin.email && admin.email.toLowerCase() === userClean);
+        const matched = adminList.find(a => {
+          const matchesUser = (a.username && a.username.toLowerCase() === userClean) ||
+                              (a.email && a.email.toLowerCase() === userClean);
+          return matchesUser && a.passwordHash === hashPassword(pwdClean);
+        });
 
-        if (!matchesUser || admin.passwordHash !== hashPassword(pwdClean)) {
+        if (!matched) {
           return sendJson(res, 401, { error: 'Invalid admin credentials.' });
         }
 
+        const role = matched.role || 'owner';
         const adminToken = 'adm_' + crypto.randomBytes(24).toString('hex');
         activeSessions.set(adminToken, {
-          userId: admin.id,
-          role: 'admin',
+          userId: matched.id,
+          role: role,
+          name: matched.name,
+          email: matched.email,
           expiresAt: Date.now() + 24 * 3600 * 1000 // 24 hours
         });
 
         return sendJson(res, 200, {
           success: true,
           adminToken,
-          admin: { name: admin.name, email: admin.email, role: 'admin' }
+          admin: { id: matched.id, name: matched.name, email: matched.email, role: role }
         });
       } catch (err) {
         return sendJson(res, 500, { error: err.message });
@@ -707,6 +727,958 @@ const server = http.createServer(async (req, res) => {
         writeData(FILES.orders, curOrd);
 
         return sendJson(res, 200, { success: true, message: 'Sync complete' });
+      } catch (err) {
+        return sendJson(res, 500, { error: err.message });
+      }
+    }
+
+    // 17. ADMIN DASHBOARD: Consolidated Dynamic Metrics, Alerts & Attendance
+    if (pathname === '/api/admin/dashboard' && method === 'GET') {
+      const session = authenticate(req, ['admin', 'owner', 'staff']);
+      if (!session) return sendJson(res, 403, { error: 'Access denied. Admin privileges required.' });
+
+      const dateQuery = parsedUrl.searchParams.get('date') || '2026-11-25';
+      const allAppts = readData(FILES.appointments, []);
+      const allOrders = readData(FILES.orders, []);
+      const allInventory = readData(FILES.inventory, []);
+      const allStaff = readData(FILES.staff, []);
+      const allAttendance = readData(FILES.attendance, {});
+
+      // 1. Today's Appointments (date matching dateQuery)
+      const todayAppointmentsList = allAppts.filter(a => a.date === dateQuery && a.status !== 'REJECTED' && a.status !== 'CANCELLED');
+      const todayAppointmentsCount = todayAppointmentsList.length;
+
+      // 2. Active Tailoring Orders
+      const activeTailoringList = allOrders.filter(o => {
+        const isTailoring = o.type === 'tailoring' || (o.garmentType && o.garmentType.length > 0);
+        const isActiveStatus = ['STITCHING', 'CUTTING', 'PATTERN_MAKING', 'TRIAL_PENDING', 'PROCESSING', 'PENDING'].includes((o.status || '').toUpperCase());
+        return isTailoring && isActiveStatus;
+      });
+      const activeTailoringCount = activeTailoringList.length;
+
+      // 3. Customers Served Today: Count only completed customer visits, no double counting
+      const completedTodayList = allAppts.filter(a => a.date === dateQuery && (a.status || '').toUpperCase() === 'COMPLETED');
+      // Set of distinct customer IDs or visit references
+      const uniqueServedCustomers = new Set();
+      completedTodayList.forEach(a => {
+        const uniqueKey = a.customerId || a.customerPhone || a.bookingRef || a.id;
+        uniqueServedCustomers.add(uniqueKey);
+      });
+      const customersServedTodayCount = uniqueServedCustomers.size;
+
+      // 4. Pending Payments: Unpaid and partially paid customer balances
+      const pendingPaymentOrders = allOrders.filter(o => {
+        const status = (o.paymentStatus || '').toUpperCase();
+        const hasBalance = Number(o.pendingBalance || 0) > 0;
+        return status === 'PARTIAL' || status === 'UNPAID' || hasBalance;
+      });
+      const pendingPaymentAppts = allAppts.filter(a => {
+        const status = (a.paymentStatus || '').toUpperCase();
+        const hasBalance = Number(a.pendingBalance || 0) > 0;
+        return status === 'PENDING' || status === 'PARTIAL' || hasBalance;
+      });
+
+      const totalPendingBalance = [...pendingPaymentOrders, ...pendingPaymentAppts].reduce((sum, item) => {
+        return sum + Number(item.pendingBalance || 0);
+      }, 0);
+      const pendingAccountsCount = pendingPaymentOrders.length + pendingPaymentAppts.length;
+
+      // 5. Staff Attendance Summary (Owner Only!)
+      let attendanceSummary = null;
+      if (session.role === 'owner' || session.role === 'admin') {
+        const dateRecord = allAttendance[dateQuery];
+        if (dateRecord && Array.isArray(dateRecord.records) && dateRecord.records.length > 0) {
+          let present = 0;
+          let leave = 0;
+          let halfDay = 0;
+          dateRecord.records.forEach(r => {
+            const st = (r.status || '').toUpperCase();
+            if (st === 'PRESENT') present++;
+            else if (st === 'LEAVE') leave++;
+            else if (st === 'HALF_DAY') halfDay++;
+          });
+          attendanceSummary = {
+            date: dateQuery,
+            marked: true,
+            present,
+            leave,
+            halfDay,
+            totalStaff: allStaff.length || dateRecord.records.length,
+            records: dateRecord.records
+          };
+        } else {
+          attendanceSummary = {
+            date: dateQuery,
+            marked: false,
+            present: 0,
+            leave: 0,
+            halfDay: 0,
+            totalStaff: allStaff.length,
+            records: []
+          };
+        }
+      } else {
+        // Staff role: Attendance access denied
+        attendanceSummary = {
+          restricted: true,
+          error: 'Owner access required'
+        };
+      }
+
+      // 6. Important Alerts (Automatically Prioritized)
+      const alerts = [];
+
+      // A. Overdue Tailoring Tasks (Priority 1 - Critical)
+      activeTailoringList.forEach(t => {
+        if (t.dueDate && t.dueDate < dateQuery) {
+          alerts.push({
+            id: `alert_tlr_overdue_${t.id}`,
+            priority: 1,
+            category: 'tailoring',
+            severity: 'DANGER',
+            title: `Overdue Tailoring: ${t.customerName}`,
+            description: `${t.garmentType} delivery was due on ${t.dueDate}`,
+            targetUrl: '/admin/tailoring',
+            dueDate: t.dueDate
+          });
+        } else if (t.dueDate === dateQuery) {
+          alerts.push({
+            id: `alert_tlr_today_${t.id}`,
+            priority: 2,
+            category: 'tailoring',
+            severity: 'WARNING',
+            title: `Due Today: ${t.customerName}`,
+            description: `${t.garmentType} trial/delivery scheduled for today ${t.dueTime || 'by evening'}`,
+            targetUrl: '/admin/tailoring',
+            dueDate: t.dueDate
+          });
+        }
+      });
+
+      // B. Upcoming Appointments Today (Priority 2/3)
+      todayAppointmentsList.forEach(a => {
+        if (a.status === 'CONFIRMED') {
+          alerts.push({
+            id: `alert_apt_upcoming_${a.id}`,
+            priority: 3,
+            category: 'appointment',
+            severity: 'INFO',
+            title: `Upcoming: ${a.customerName} (${a.time})`,
+            description: `${a.serviceName} scheduled at ${a.time}`,
+            targetUrl: '/admin/appointments',
+            time: a.time
+          });
+        }
+      });
+
+      // C. Overdue Payment Follow-ups
+      pendingPaymentOrders.forEach(p => {
+        if (p.paymentDueDate && p.paymentDueDate <= dateQuery) {
+          alerts.push({
+            id: `alert_pay_${p.id}`,
+            priority: 2,
+            category: 'payment',
+            severity: 'WARNING',
+            title: `Payment Follow-up: ₹${p.pendingBalance} from ${p.customerName}`,
+            description: `Balance overdue since ${p.paymentDueDate} for ${p.garmentType || 'order'}`,
+            targetUrl: '/admin/payments',
+            balance: p.pendingBalance
+          });
+        }
+      });
+
+      // D. Low-Stock & Out-of-Stock Products
+      allInventory.forEach(inv => {
+        if (inv.stock === 0) {
+          alerts.push({
+            id: `alert_inv_zero_${inv.id}`,
+            priority: 1,
+            category: 'inventory',
+            severity: 'DANGER',
+            title: `Out of Stock: ${inv.name}`,
+            description: `Inventory depleted (0 units remaining). Restock immediately.`,
+            targetUrl: '/admin/inventory',
+            stock: 0
+          });
+        } else if (inv.stock <= inv.minStock) {
+          alerts.push({
+            id: `alert_inv_low_${inv.id}`,
+            priority: 2,
+            category: 'inventory',
+            severity: 'WARNING',
+            title: `Low Stock: ${inv.name}`,
+            description: `Only ${inv.stock} units remaining (Minimum threshold: ${inv.minStock})`,
+            targetUrl: '/admin/inventory',
+            stock: inv.stock
+          });
+        }
+      });
+
+      // Sort alerts: Priority 1 first, then 2, then 3
+      alerts.sort((a, b) => a.priority - b.priority);
+
+      return sendJson(res, 200, {
+        success: true,
+        date: dateQuery,
+        metrics: {
+          todayAppointmentsCount,
+          activeTailoringCount,
+          customersServedTodayCount,
+          pendingPaymentsCount: pendingAccountsCount,
+          totalPendingBalance
+        },
+        attendance: attendanceSummary,
+        alerts
+      });
+    }
+
+    // 18. ADMIN: Staff Attendance Endpoint (Owner Only!)
+    if (pathname === '/api/admin/attendance' && method === 'GET') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can record, edit or view staff attendance.' });
+      }
+
+      const dateQuery = parsedUrl.searchParams.get('date') || '2026-11-25';
+      const allAttendance = readData(FILES.attendance, {});
+      const allStaff = readData(FILES.staff, []);
+      const record = allAttendance[dateQuery] || null;
+
+      return sendJson(res, 200, {
+        date: dateQuery,
+        marked: !!record,
+        record,
+        staff: allStaff
+      });
+    }
+
+    if (pathname === '/api/admin/attendance' && method === 'POST') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can record, edit or view staff attendance.' });
+      }
+
+      try {
+        const body = await parseJsonBody(req);
+        const { date, records } = body;
+        if (!date || !Array.isArray(records)) {
+          return sendJson(res, 400, { error: 'Invalid attendance submission payload.' });
+        }
+
+        const allAttendance = readData(FILES.attendance, {});
+        const deduped = [];
+        const seen = new Set();
+        records.forEach((r) => {
+          if (!r || !r.staffId || seen.has(r.staffId)) return;
+          seen.add(r.staffId);
+          deduped.push(r);
+        });
+
+        allAttendance[date] = {
+          date,
+          markedBy: session.name || 'Salon Owner',
+          markedAt: new Date().toISOString(),
+          records: deduped
+        };
+        writeData(FILES.attendance, allAttendance);
+
+        return sendJson(res, 200, { success: true, message: `Attendance for ${date} recorded successfully.`, record: allAttendance[date] });
+      } catch (err) {
+        return sendJson(res, 500, { error: err.message });
+      }
+    }
+
+    if (pathname === '/api/admin/attendance' && method === 'PUT') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can edit staff attendance.' });
+      }
+      try {
+        const body = await parseJsonBody(req);
+        const { date, staffId, staffName, status, checkIn, checkOut } = body;
+        if (!date || !staffId || !status) {
+          return sendJson(res, 400, { error: 'Date, staffId, and status are required.' });
+        }
+        const allAttendance = readData(FILES.attendance, {});
+        const existingDay = allAttendance[date] || { date, markedBy: session.name || 'Salon Owner', records: [] };
+        const records = Array.isArray(existingDay.records) ? [...existingDay.records] : [];
+        const idx = records.findIndex((r) => r.staffId === staffId);
+        const updatedRec = {
+          staffId,
+          staffName: staffName || (idx !== -1 ? records[idx].staffName : ''),
+          status: String(status).toUpperCase(),
+          checkIn: checkIn ?? (idx !== -1 ? records[idx].checkIn : null),
+          checkOut: checkOut ?? (idx !== -1 ? records[idx].checkOut : null)
+        };
+        if (idx !== -1) records[idx] = updatedRec;
+        else records.push(updatedRec);
+
+        allAttendance[date] = {
+          ...existingDay,
+          date,
+          markedAt: new Date().toISOString(),
+          records
+        };
+        writeData(FILES.attendance, allAttendance);
+        return sendJson(res, 200, { success: true, record: allAttendance[date] });
+      } catch (err) {
+        return sendJson(res, 500, { error: err.message });
+      }
+    }
+
+    if (pathname === '/api/admin/attendance' && method === 'DELETE') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can delete staff attendance.' });
+      }
+      try {
+        const dateParam = parsedUrl.searchParams.get('date');
+        const staffIdParam = parsedUrl.searchParams.get('staffId');
+        if (!dateParam || !staffIdParam) {
+          return sendJson(res, 400, { error: 'Date and staffId are required.' });
+        }
+        const allAttendance = readData(FILES.attendance, {});
+        if (allAttendance[dateParam] && Array.isArray(allAttendance[dateParam].records)) {
+          allAttendance[dateParam].records = allAttendance[dateParam].records.filter((r) => r.staffId !== staffIdParam);
+          allAttendance[dateParam].markedAt = new Date().toISOString();
+          writeData(FILES.attendance, allAttendance);
+        }
+        return sendJson(res, 200, { success: true });
+      } catch (err) {
+        return sendJson(res, 500, { error: err.message });
+      }
+    }
+
+    // 19. ADMIN: Staff Members Directory (GET for admin/staff; POST/PUT/DELETE Owner-Only)
+    if (pathname === '/api/admin/staff' && method === 'GET') {
+      const session = authenticate(req, ['owner', 'admin', 'staff']);
+      if (!session) return sendJson(res, 403, { error: 'Access denied.' });
+      const staff = readData(FILES.staff, []);
+      return sendJson(res, 200, { staff });
+    }
+
+    if (pathname === '/api/admin/staff' && method === 'POST') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can add staff records.' });
+      }
+      try {
+        const body = await parseJsonBody(req);
+        const name = String(body.name || '').trim();
+        const phone = String(body.phone || body.contactNumber || '').trim();
+        const role = String(body.role || '').trim();
+        const joiningDate = String(body.joiningDate || '').trim();
+        const status = String(body.status || 'ACTIVE').trim().toUpperCase();
+        if (!name || !phone || !role) {
+          return sendJson(res, 400, { error: 'Staff Name, Contact Number, and Role are required.' });
+        }
+        const staff = readData(FILES.staff, []);
+        const newMember = {
+          id: body.id || `stf_${Date.now()}_${crypto.randomBytes(3).toString('hex')}`,
+          name,
+          phone,
+          role,
+          joiningDate,
+          status,
+          createdAt: new Date().toISOString()
+        };
+        staff.push(newMember);
+        writeData(FILES.staff, staff);
+        return sendJson(res, 201, { success: true, record: newMember, staff });
+      } catch (err) {
+        return sendJson(res, 500, { error: err.message });
+      }
+    }
+
+    if (pathname === '/api/admin/staff' && method === 'PUT') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can edit staff records.' });
+      }
+      try {
+        const body = await parseJsonBody(req);
+        const staff = readData(FILES.staff, []);
+        const idx = staff.findIndex((s) => s.id === body.id);
+        if (idx === -1) return sendJson(res, 404, { error: 'Staff record not found.' });
+        staff[idx] = {
+          ...staff[idx],
+          name: String(body.name ?? staff[idx].name).trim(),
+          phone: String(body.phone ?? body.contactNumber ?? staff[idx].phone).trim(),
+          role: String(body.role ?? staff[idx].role).trim(),
+          joiningDate: String(body.joiningDate ?? staff[idx].joiningDate ?? '').trim(),
+          status: String(body.status ?? staff[idx].status ?? 'ACTIVE').trim().toUpperCase(),
+          updatedAt: new Date().toISOString()
+        };
+        writeData(FILES.staff, staff);
+        return sendJson(res, 200, { success: true, record: staff[idx], staff });
+      } catch (err) {
+        return sendJson(res, 500, { error: err.message });
+      }
+    }
+
+    if (pathname === '/api/admin/staff' && method === 'DELETE') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can delete staff records.' });
+      }
+      try {
+        const targetId = parsedUrl.searchParams.get('id');
+        if (!targetId) return sendJson(res, 400, { error: 'Staff ID is required.' });
+        const staff = readData(FILES.staff, []);
+        const filtered = staff.filter((s) => s.id !== targetId);
+        writeData(FILES.staff, filtered);
+        return sendJson(res, 200, { success: true, staff: filtered });
+      } catch (err) {
+        return sendJson(res, 500, { error: err.message });
+      }
+    }
+
+    // 20. ADMIN: Inventory Management
+    if (pathname === '/api/admin/inventory' && method === 'GET') {
+      const session = authenticate(req, ['owner', 'admin', 'staff']);
+      if (!session) return sendJson(res, 403, { error: 'Access denied.' });
+      const inventory = readData(FILES.inventory, []);
+      return sendJson(res, 200, { inventory });
+    }
+
+    // 21. ADMIN: Tailoring Orders
+    if (pathname === '/api/admin/tailoring' && method === 'GET') {
+      const session = authenticate(req, ['owner', 'admin', 'staff']);
+      if (!session) return sendJson(res, 403, { error: 'Access denied.' });
+      const allOrders = readData(FILES.orders, []);
+      const tailoring = allOrders.filter(o => o.type === 'tailoring' || o.garmentType);
+      return sendJson(res, 200, { tailoring });
+    }
+
+    // 22. ADMIN: Payments Overview
+    if (pathname === '/api/admin/payments' && method === 'GET') {
+      const session = authenticate(req, ['owner', 'admin', 'staff']);
+      if (!session) return sendJson(res, 403, { error: 'Access denied.' });
+      const allOrders = readData(FILES.orders, []);
+      const allAppts = readData(FILES.appointments, []);
+
+      const pendingOrders = allOrders.filter(o => Number(o.pendingBalance || 0) > 0 || o.paymentStatus === 'PARTIAL' || o.paymentStatus === 'UNPAID');
+      const pendingAppts = allAppts.filter(a => Number(a.pendingBalance || 0) > 0 || a.paymentStatus === 'PENDING' || a.paymentStatus === 'PARTIAL');
+
+      return sendJson(res, 200, { pendingOrders, pendingAppts });
+    }
+
+    // 23. ADMIN: Financial Management -> Income (Owner Only!)
+    if (pathname === '/api/admin/finance/income' && method === 'GET') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can view or manage financial income.' });
+      }
+      const otherIncome = readData(FILES.otherIncome, []);
+      return sendJson(res, 200, { otherIncome });
+    }
+
+    if (pathname === '/api/admin/finance/income' && method === 'POST') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can record additional income.' });
+      }
+      try {
+        const body = await parseJsonBody(req);
+        const source = String(body.source || body.title || '').trim();
+        const amount = Number(body.amount);
+        const date = String(body.date || '').trim();
+        const paymentMethod = String(body.method || 'Cash').trim() || 'Cash';
+        const notes = String(body.notes || '').trim();
+
+        if (!source) {
+          return sendJson(res, 400, { error: 'Income source is required.' });
+        }
+        if (isNaN(amount) || amount <= 0) {
+          return sendJson(res, 400, { error: 'Amount must be greater than zero.' });
+        }
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+          return sendJson(res, 400, { error: 'Valid date (YYYY-MM-DD) is required.' });
+        }
+
+        const list = readData(FILES.otherIncome, []);
+        const newRecord = {
+          id: body.id || `inc_${Date.now()}_${crypto.randomBytes(3).toString('hex')}`,
+          source,
+          amount,
+          date,
+          method: paymentMethod,
+          notes,
+          recordedBy: session.name || 'Salon Owner',
+          createdAt: new Date().toISOString()
+        };
+        list.push(newRecord);
+        writeData(FILES.otherIncome, list);
+        return sendJson(res, 201, { success: true, record: newRecord, otherIncome: list });
+      } catch (err) {
+        return sendJson(res, 500, { error: err.message });
+      }
+    }
+
+    if (pathname === '/api/admin/finance/income' && method === 'PUT') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can edit income records.' });
+      }
+      try {
+        const body = await parseJsonBody(req);
+        const targetId = body.id;
+        if (!targetId) {
+          return sendJson(res, 400, { error: 'Income record ID is required.' });
+        }
+        const list = readData(FILES.otherIncome, []);
+        const idx = list.findIndex((rec) => rec.id === targetId);
+        if (idx === -1) {
+          return sendJson(res, 404, { error: 'Income record not found.' });
+        }
+        const source = String(body.source ?? list[idx].source ?? '').trim();
+        const amount = Number(body.amount ?? list[idx].amount);
+        const date = String(body.date ?? list[idx].date ?? '').trim();
+        const paymentMethod = String(body.method ?? list[idx].method ?? 'Cash').trim() || 'Cash';
+        const notes = String(body.notes ?? list[idx].notes ?? '').trim();
+
+        if (!source || isNaN(amount) || amount <= 0 || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+          return sendJson(res, 400, { error: 'Valid source, amount (> 0), and date (YYYY-MM-DD) are required.' });
+        }
+
+        list[idx] = {
+          ...list[idx],
+          source,
+          amount,
+          date,
+          method: paymentMethod,
+          notes,
+          updatedAt: new Date().toISOString()
+        };
+        writeData(FILES.otherIncome, list);
+        return sendJson(res, 200, { success: true, record: list[idx], otherIncome: list });
+      } catch (err) {
+        return sendJson(res, 500, { error: err.message });
+      }
+    }
+
+    if (pathname === '/api/admin/finance/income' && method === 'DELETE') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can delete income records.' });
+      }
+      try {
+        const idParam = parsedUrl.searchParams.get('id');
+        let targetId = idParam;
+        if (!targetId) {
+          const body = await parseJsonBody(req);
+          targetId = body.id;
+        }
+        if (!targetId) {
+          return sendJson(res, 400, { error: 'Income record ID is required.' });
+        }
+        const list = readData(FILES.otherIncome, []);
+        const filtered = list.filter((rec) => rec.id !== targetId);
+        writeData(FILES.otherIncome, filtered);
+        return sendJson(res, 200, { success: true, otherIncome: filtered });
+      } catch (err) {
+        return sendJson(res, 500, { error: err.message });
+      }
+    }
+
+    // 24. ADMIN: Financial Management -> Expenses (Owner Only!)
+    if (pathname === '/api/admin/finance/expenses' && method === 'GET') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can view or manage expenses.' });
+      }
+      const expenses = readData(FILES.expenses, []);
+      return sendJson(res, 200, { expenses });
+    }
+
+    if (pathname === '/api/admin/finance/expenses' && method === 'POST') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can record expenses.' });
+      }
+      try {
+        const body = await parseJsonBody(req);
+        const category = String(body.category || '').trim();
+        const title = String(body.title || category || '').trim();
+        const amount = Number(body.amount);
+        const date = String(body.date || '').trim();
+        const paymentMethod = String(body.method || 'Cash').trim() || 'Cash';
+        const receiptName = String(body.receiptName || '').trim();
+        const notes = String(body.notes || '').trim();
+
+        if (!category) {
+          return sendJson(res, 400, { error: 'Expense category is required.' });
+        }
+        if (isNaN(amount) || amount <= 0) {
+          return sendJson(res, 400, { error: 'Amount must be greater than zero.' });
+        }
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+          return sendJson(res, 400, { error: 'Valid date (YYYY-MM-DD) is required.' });
+        }
+
+        const list = readData(FILES.expenses, []);
+        const newRecord = {
+          id: body.id || `exp_${Date.now()}_${crypto.randomBytes(3).toString('hex')}`,
+          title,
+          category,
+          amount,
+          date,
+          method: paymentMethod,
+          receiptName,
+          notes,
+          recordedBy: session.name || 'Salon Owner',
+          createdAt: new Date().toISOString()
+        };
+        list.push(newRecord);
+        writeData(FILES.expenses, list);
+        return sendJson(res, 201, { success: true, record: newRecord, expenses: list });
+      } catch (err) {
+        return sendJson(res, 500, { error: err.message });
+      }
+    }
+
+    if (pathname === '/api/admin/finance/expenses' && method === 'PUT') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can edit expense records.' });
+      }
+      try {
+        const body = await parseJsonBody(req);
+        const targetId = body.id;
+        if (!targetId) {
+          return sendJson(res, 400, { error: 'Expense record ID is required.' });
+        }
+        const list = readData(FILES.expenses, []);
+        const idx = list.findIndex((rec) => rec.id === targetId);
+        if (idx === -1) {
+          return sendJson(res, 404, { error: 'Expense record not found.' });
+        }
+        const category = String(body.category ?? list[idx].category ?? '').trim();
+        const title = String(body.title ?? category ?? list[idx].title ?? '').trim();
+        const amount = Number(body.amount ?? list[idx].amount);
+        const date = String(body.date ?? list[idx].date ?? '').trim();
+        const paymentMethod = String(body.method ?? list[idx].method ?? 'Cash').trim() || 'Cash';
+        const receiptName = String(body.receiptName ?? list[idx].receiptName ?? '').trim();
+        const notes = String(body.notes ?? list[idx].notes ?? '').trim();
+
+        if (!category || isNaN(amount) || amount <= 0 || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+          return sendJson(res, 400, { error: 'Valid category, amount (> 0), and date (YYYY-MM-DD) are required.' });
+        }
+
+        list[idx] = {
+          ...list[idx],
+          title,
+          category,
+          amount,
+          date,
+          method: paymentMethod,
+          receiptName,
+          notes,
+          updatedAt: new Date().toISOString()
+        };
+        writeData(FILES.expenses, list);
+        return sendJson(res, 200, { success: true, record: list[idx], expenses: list });
+      } catch (err) {
+        return sendJson(res, 500, { error: err.message });
+      }
+    }
+
+    if (pathname === '/api/admin/finance/expenses' && method === 'DELETE') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can delete expense records.' });
+      }
+      try {
+        const idParam = parsedUrl.searchParams.get('id');
+        let targetId = idParam;
+        if (!targetId) {
+          const body = await parseJsonBody(req);
+          targetId = body.id;
+        }
+        if (!targetId) {
+          return sendJson(res, 400, { error: 'Expense record ID is required.' });
+        }
+        const list = readData(FILES.expenses, []);
+        const filtered = list.filter((rec) => rec.id !== targetId);
+        writeData(FILES.expenses, filtered);
+        return sendJson(res, 200, { success: true, expenses: filtered });
+      } catch (err) {
+        return sendJson(res, 500, { error: err.message });
+      }
+    }
+
+    // 25. ADMIN: Financial Management -> Profit & Loss (Owner Only!)
+    if (pathname === '/api/admin/finance/profit-loss' && method === 'GET') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can view Profit & Loss.' });
+      }
+      const otherIncome = readData(FILES.otherIncome, []);
+      const expenses = readData(FILES.expenses, []);
+      return sendJson(res, 200, { otherIncome, expenses });
+    }
+
+    // 26. ADMIN: Financial Management -> Products & Stock (Owner Only!)
+    if (pathname === '/api/admin/finance/products-stock' && method === 'GET') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can view or manage Products & Stock.' });
+      }
+      const inventory = readData(FILES.inventory, []);
+      const stockAdditions = readData(FILES.stockAdditions, []);
+      return sendJson(res, 200, { inventory, stockAdditions });
+    }
+
+    if (pathname === '/api/admin/finance/products-stock' && method === 'POST') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can add products or stock.' });
+      }
+      try {
+        const body = await parseJsonBody(req);
+        const actionType = body.actionType || 'product';
+        if (actionType === 'stock') {
+          const productId = String(body.productId || '').trim();
+          const quantity = Number(body.quantity);
+          const date = String(body.date || '').trim();
+          if (!productId || isNaN(quantity) || quantity <= 0 || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+            return sendJson(res, 400, { error: 'Valid productId, quantity (> 0), and date are required.' });
+          }
+          const additions = readData(FILES.stockAdditions, []);
+          const newAdd = {
+            id: body.id || `stk_${Date.now()}_${crypto.randomBytes(3).toString('hex')}`,
+            productId,
+            productName: String(body.productName || '').trim(),
+            quantity,
+            date,
+            notes: String(body.notes || '').trim(),
+            createdAt: new Date().toISOString()
+          };
+          additions.push(newAdd);
+          writeData(FILES.stockAdditions, additions);
+          return sendJson(res, 201, { success: true, record: newAdd });
+        } else {
+          const name = String(body.name || '').trim();
+          const category = String(body.category || 'General').trim() || 'General';
+          const initialStock = Math.max(0, Number(body.initialStock ?? body.stock ?? 0) || 0);
+          if (!name) {
+            return sendJson(res, 400, { error: 'Product name is required.' });
+          }
+          const inventory = readData(FILES.inventory, []);
+          const newProd = {
+            id: body.id || `inv_${Date.now()}_${crypto.randomBytes(3).toString('hex')}`,
+            name,
+            category,
+            unitPrice: String(body.unitPrice || '₹0'),
+            initialStock,
+            stock: initialStock,
+            minStock: 5,
+            status: initialStock === 0 ? 'OUT_OF_STOCK' : initialStock < 5 ? 'LOW_STOCK' : 'IN_STOCK',
+            createdAt: new Date().toISOString()
+          };
+          inventory.push(newProd);
+          writeData(FILES.inventory, inventory);
+          return sendJson(res, 201, { success: true, record: newProd });
+        }
+      } catch (err) {
+        return sendJson(res, 500, { error: err.message });
+      }
+    }
+
+    if (pathname === '/api/admin/finance/products-stock' && method === 'PUT') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can edit products or stock.' });
+      }
+      try {
+        const body = await parseJsonBody(req);
+        const actionType = body.actionType || 'product';
+        if (actionType === 'stock') {
+          const additions = readData(FILES.stockAdditions, []);
+          const idx = additions.findIndex((a) => a.id === body.id);
+          if (idx === -1) return sendJson(res, 404, { error: 'Stock record not found.' });
+          additions[idx] = {
+            ...additions[idx],
+            quantity: Number(body.quantity ?? additions[idx].quantity),
+            date: String(body.date ?? additions[idx].date),
+            notes: String(body.notes ?? additions[idx].notes ?? ''),
+            updatedAt: new Date().toISOString()
+          };
+          writeData(FILES.stockAdditions, additions);
+          return sendJson(res, 200, { success: true, record: additions[idx] });
+        } else {
+          const inventory = readData(FILES.inventory, []);
+          const idx = inventory.findIndex((p) => p.id === body.id);
+          if (idx === -1) return sendJson(res, 404, { error: 'Product not found.' });
+          inventory[idx] = {
+            ...inventory[idx],
+            name: String(body.name ?? inventory[idx].name),
+            category: String(body.category ?? inventory[idx].category),
+            unitPrice: String(body.unitPrice ?? inventory[idx].unitPrice),
+            initialStock: Number(body.initialStock ?? inventory[idx].initialStock ?? inventory[idx].stock ?? 0),
+            updatedAt: new Date().toISOString()
+          };
+          writeData(FILES.inventory, inventory);
+          return sendJson(res, 200, { success: true, record: inventory[idx] });
+        }
+      } catch (err) {
+        return sendJson(res, 500, { error: err.message });
+      }
+    }
+
+    if (pathname === '/api/admin/finance/products-stock' && method === 'DELETE') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can delete products or stock.' });
+      }
+      try {
+        const actionType = parsedUrl.searchParams.get('actionType') || 'product';
+        const targetId = parsedUrl.searchParams.get('id');
+        if (!targetId) return sendJson(res, 400, { error: 'Record ID is required.' });
+        if (actionType === 'stock') {
+          const additions = readData(FILES.stockAdditions, []);
+          writeData(FILES.stockAdditions, additions.filter((a) => a.id !== targetId));
+          return sendJson(res, 200, { success: true });
+        } else {
+          const inventory = readData(FILES.inventory, []);
+          writeData(FILES.inventory, inventory.filter((p) => p.id !== targetId));
+          const additions = readData(FILES.stockAdditions, []);
+          writeData(FILES.stockAdditions, additions.filter((a) => a.productId !== targetId));
+          return sendJson(res, 200, { success: true });
+        }
+      } catch (err) {
+        return sendJson(res, 500, { error: err.message });
+      }
+    }
+
+    // 27. ADMIN: Staff Management -> Salary Management (Owner Only!)
+    if (pathname === '/api/admin/staff/salary' && method === 'GET') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can view or manage salaries.' });
+      }
+      const salaries = readData(FILES.salaries, {});
+      const salaryPayments = readData(FILES.salaryPayments, []);
+      return sendJson(res, 200, { salaries, salaryPayments });
+    }
+
+    if (pathname === '/api/admin/staff/salary' && method === 'POST') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can save salary records.' });
+      }
+      try {
+        const body = await parseJsonBody(req);
+        if (body.actionType === 'payment') {
+          const staffId = String(body.staffId || '').trim();
+          const staffName = String(body.staffName || '').trim();
+          const date = String(body.date || '').trim();
+          const amount = Number(body.amount);
+          const paymentMethod = String(body.method || 'Cash').trim() || 'Cash';
+          const notes = String(body.notes || '').trim();
+          if (!staffId || isNaN(amount) || amount <= 0 || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+            return sendJson(res, 400, { error: 'Valid staffId, amount (> 0), and date are required.' });
+          }
+          const payments = readData(FILES.salaryPayments, []);
+          const newPay = {
+            id: body.id || `salpay_${Date.now()}_${crypto.randomBytes(3).toString('hex')}`,
+            staffId,
+            staffName,
+            date,
+            month: body.month || date.slice(0, 7),
+            amount,
+            method: paymentMethod,
+            notes,
+            recordedBy: session.name || 'Salon Owner',
+            createdAt: new Date().toISOString()
+          };
+          payments.push(newPay);
+          writeData(FILES.salaryPayments, payments);
+          return sendJson(res, 201, { success: true, record: newPay });
+        } else {
+          const staffId = String(body.staffId || '').trim();
+          const monthlySalary = Number(body.monthlySalary);
+          if (!staffId || isNaN(monthlySalary) || monthlySalary < 0) {
+            return sendJson(res, 400, { error: 'Valid staffId and monthlySalary (>= 0) are required.' });
+          }
+          const salaries = readData(FILES.salaries, {});
+          salaries[staffId] = {
+            staffId,
+            monthlySalary,
+            updatedAt: new Date().toISOString()
+          };
+          writeData(FILES.salaries, salaries);
+          return sendJson(res, 200, { success: true, record: salaries[staffId] });
+        }
+      } catch (err) {
+        return sendJson(res, 500, { error: err.message });
+      }
+    }
+
+    if (pathname === '/api/admin/staff/salary' && method === 'PUT') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can edit salary records.' });
+      }
+      try {
+        const body = await parseJsonBody(req);
+        if (body.actionType === 'payment') {
+          const payments = readData(FILES.salaryPayments, []);
+          const idx = payments.findIndex((p) => p.id === body.id);
+          if (idx === -1) return sendJson(res, 404, { error: 'Salary payment not found.' });
+          const nextDate = String(body.date ?? payments[idx].date);
+          payments[idx] = {
+            ...payments[idx],
+            staffId: String(body.staffId ?? payments[idx].staffId),
+            staffName: String(body.staffName ?? payments[idx].staffName),
+            date: nextDate,
+            month: body.month || nextDate.slice(0, 7),
+            amount: Number(body.amount ?? payments[idx].amount),
+            method: String(body.method ?? payments[idx].method),
+            notes: String(body.notes ?? payments[idx].notes ?? ''),
+            updatedAt: new Date().toISOString()
+          };
+          writeData(FILES.salaryPayments, payments);
+          return sendJson(res, 200, { success: true, record: payments[idx] });
+        } else {
+          const staffId = String(body.staffId || '').trim();
+          const monthlySalary = Number(body.monthlySalary);
+          if (!staffId || isNaN(monthlySalary) || monthlySalary < 0) {
+            return sendJson(res, 400, { error: 'Valid staffId and monthlySalary are required.' });
+          }
+          const salaries = readData(FILES.salaries, {});
+          salaries[staffId] = {
+            staffId,
+            monthlySalary,
+            updatedAt: new Date().toISOString()
+          };
+          writeData(FILES.salaries, salaries);
+          return sendJson(res, 200, { success: true, record: salaries[staffId] });
+        }
+      } catch (err) {
+        return sendJson(res, 500, { error: err.message });
+      }
+    }
+
+    if (pathname === '/api/admin/staff/salary' && method === 'DELETE') {
+      const session = authenticate(req, ['owner', 'admin']);
+      if (!session) {
+        return sendJson(res, 403, { error: 'Access denied. Only the Owner can delete salary records.' });
+      }
+      try {
+        const actionType = parsedUrl.searchParams.get('actionType') || 'salary';
+        const targetId = parsedUrl.searchParams.get('id');
+        if (!targetId) return sendJson(res, 400, { error: 'Record ID is required.' });
+        if (actionType === 'payment') {
+          const payments = readData(FILES.salaryPayments, []);
+          writeData(FILES.salaryPayments, payments.filter((p) => p.id !== targetId));
+          return sendJson(res, 200, { success: true });
+        } else {
+          const salaries = readData(FILES.salaries, {});
+          delete salaries[targetId];
+          writeData(FILES.salaries, salaries);
+          return sendJson(res, 200, { success: true });
+        }
       } catch (err) {
         return sendJson(res, 500, { error: err.message });
       }

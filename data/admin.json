@@ -1,9 +1,20 @@
-{
-  "id": "admin_primary",
-  "email": "admin@rihamirrormagic.com",
-  "username": "admin",
-  "passwordHash": "bbb9a318155a875c6d40146e594fc63ddea0f6dc4729882756e98767643a23bd",
-  "name": "Salon Administrator",
-  "role": "admin",
-  "createdAt": "2026-11-18T17:58:20.213Z"
-}
+[
+  {
+    "id": "usr_owner_01",
+    "username": "admin",
+    "email": "admin@rihamirrormagic.com",
+    "name": "Salon Owner",
+    "role": "owner",
+    "passwordHash": "498f9ecad32084c838c8d4d6beb782b294ed4712dba955b5bbec5ab0b1845688",
+    "createdAt": "2026-11-18T17:58:20.213Z"
+  },
+  {
+    "id": "usr_staff_01",
+    "username": "staff",
+    "email": "staff@rihamirrormagic.com",
+    "name": "Front Desk Staff",
+    "role": "staff",
+    "passwordHash": "c639ca7322c6e00b73e589cfa6f9bac8aa4c6f6e3b7dd556be7437326dafda04",
+    "createdAt": "2026-11-20T10:00:00.000Z"
+  }
+]

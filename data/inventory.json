@@ -1,0 +1,62 @@
+[
+  {
+    "id": "inv_01",
+    "name": "Golden Radiance Facial Kit",
+    "sku": "RMM-SKN-101",
+    "category": "Skin Care",
+    "stock": 0,
+    "minStock": 5,
+    "unitPrice": "₹1,250",
+    "status": "OUT_OF_STOCK"
+  },
+  {
+    "id": "inv_02",
+    "name": "Herbal Hair Nourishing Spa Oil (200ml)",
+    "sku": "RMM-HAR-204",
+    "category": "Hair Care",
+    "stock": 2,
+    "minStock": 6,
+    "unitPrice": "₹550",
+    "status": "LOW_STOCK"
+  },
+  {
+    "id": "inv_03",
+    "name": "Bridal Waterproof Kohl Kajal",
+    "sku": "RMM-MKP-302",
+    "category": "Bridal Makeup",
+    "stock": 1,
+    "minStock": 5,
+    "unitPrice": "₹380",
+    "status": "LOW_STOCK"
+  },
+  {
+    "id": "inv_04",
+    "name": "Pure Rose Water Toner (250ml)",
+    "sku": "RMM-SKN-108",
+    "category": "Skin Care",
+    "stock": 12,
+    "minStock": 4,
+    "unitPrice": "₹420",
+    "status": "IN_STOCK"
+  },
+  {
+    "id": "inv_05",
+    "name": "Silk Embroidery Thread Set (24 Colors)",
+    "sku": "RMM-TLR-401",
+    "category": "Tailoring",
+    "stock": 18,
+    "minStock": 8,
+    "unitPrice": "₹850",
+    "status": "IN_STOCK"
+  },
+  {
+    "id": "inv_06",
+    "name": "Organic Saree Fall Rolls (Pack of 10)",
+    "sku": "RMM-TLR-405",
+    "category": "Tailoring",
+    "stock": 25,
+    "minStock": 10,
+    "unitPrice": "₹600",
+    "status": "IN_STOCK"
+  }
+]

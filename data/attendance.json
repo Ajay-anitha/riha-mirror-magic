@@ -1,0 +1,86 @@
+{
+  "2026-11-25": {
+    "date": "2026-11-25",
+    "markedBy": "Salon Owner",
+    "markedAt": "2026-11-25T09:30:00.000Z",
+    "records": [
+      {
+        "staffId": "stf_01",
+        "staffName": "Revathi S.",
+        "status": "PRESENT",
+        "checkIn": "09:20 AM",
+        "notes": ""
+      },
+      {
+        "staffId": "stf_02",
+        "staffName": "Meenakshi K.",
+        "status": "PRESENT",
+        "checkIn": "09:15 AM",
+        "notes": ""
+      },
+      {
+        "staffId": "stf_03",
+        "staffName": "Selvi M.",
+        "status": "PRESENT",
+        "checkIn": "09:30 AM",
+        "notes": ""
+      },
+      {
+        "staffId": "stf_04",
+        "staffName": "Anandhi R.",
+        "status": "HALF_DAY",
+        "checkIn": "09:45 AM",
+        "notes": "Leaving at 02:00 PM for family event"
+      },
+      {
+        "staffId": "stf_05",
+        "staffName": "Divya P.",
+        "status": "LEAVE",
+        "checkIn": null,
+        "notes": "Medical leave approved"
+      }
+    ]
+  },
+  "2026-11-24": {
+    "date": "2026-11-24",
+    "markedBy": "Salon Owner",
+    "markedAt": "2026-11-24T09:15:00.000Z",
+    "records": [
+      {
+        "staffId": "stf_01",
+        "staffName": "Revathi S.",
+        "status": "PRESENT",
+        "checkIn": "09:10 AM",
+        "notes": ""
+      },
+      {
+        "staffId": "stf_02",
+        "staffName": "Meenakshi K.",
+        "status": "PRESENT",
+        "checkIn": "09:20 AM",
+        "notes": ""
+      },
+      {
+        "staffId": "stf_03",
+        "staffName": "Selvi M.",
+        "status": "PRESENT",
+        "checkIn": "09:15 AM",
+        "notes": ""
+      },
+      {
+        "staffId": "stf_04",
+        "staffName": "Anandhi R.",
+        "status": "PRESENT",
+        "checkIn": "09:30 AM",
+        "notes": ""
+      },
+      {
+        "staffId": "stf_05",
+        "staffName": "Divya P.",
+        "status": "PRESENT",
+        "checkIn": "09:25 AM",
+        "notes": ""
+      }
+    ]
+  }
+}
